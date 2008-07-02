@@ -22,9 +22,9 @@ namespace UI
 
             private void InitializeComponents()
             {
-                frmMain = new MainForm();
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
+                frmMain = new MainForm();
                 Application.Run(frmMain);
             }
 
