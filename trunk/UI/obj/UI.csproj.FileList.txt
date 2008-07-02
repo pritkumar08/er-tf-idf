@@ -1,0 +1,5 @@
+bin\Debug\UI.dll
+bin\Debug\UI.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\UI.dll
+obj\Debug\UI.pdb

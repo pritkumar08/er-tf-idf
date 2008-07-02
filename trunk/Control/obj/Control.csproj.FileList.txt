@@ -1,0 +1,10 @@
+obj\Debug\ResolveAssemblyReference.cache
+bin\Debug\Control.pdb
+obj\Debug\Control.pdb
+bin\Debug\Model.dll
+bin\Debug\UI.dll
+bin\Debug\Model.pdb
+bin\Debug\UI.pdb
+bin\Debug\Control.exe
+obj\Debug\Control.exe
+bin\Debug\ModelDatabase.mdb
