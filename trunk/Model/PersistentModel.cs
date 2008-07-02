@@ -34,10 +34,49 @@ namespace Model
 
         #region PersistentModel : Methods
 
-            public void InsertWord(String word, String path, int locationID, double weight)
-            {
-            }
+            #region PersistentModel : Public Methods
 
+                public void InsertWord(String word, String path, int locationID, double weight)
+                {
+
+                }
+
+                void InsertFullWordDescription(String word, String path, double tf, double idf)
+                {
+
+                }
+
+                Double GetTFByWordAndFile(String word, String path)
+                {
+
+                }
+
+                Double GetIDFByWordAndFile(String word, String path)
+                {
+
+                }
+
+            #endregion
+
+            #region PersistentModel : Private Methods
+
+                private void FillGeneralTable(string connectionString, String tableName, ref Dataset ds)
+                {
+
+                }
+
+                private void FillDataSet(ref DataSet ds)
+                {
+
+                }
+
+                private void UpdateGeneralTable(string connectionString, String tableName, ref Dataset ds)
+                {
+
+                }
+
+            #endregion
+    
         #endregion
 
     }
