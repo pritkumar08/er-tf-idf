@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Model
 {
-    internal interface IPersistentModel
+    public interface IPersistentModel
     {
         void InsertWord(String word, String path, int locationID, double weight);
 
