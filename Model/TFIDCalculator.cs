@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Model
 {
-    class TFIDCalculator
+    public static class TFIDCalculator
     {
+        
     }
 }
