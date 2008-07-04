@@ -4,20 +4,18 @@ using System.Text;
 
 namespace Model
 {
-    class Header : DocumentItem
+    public class Header : DocumentItem
     {
         
         #region Header : Members & Consts
-
-            private String title;
 
         #endregion
 
         #region Header : Initialization
 
-            public Header(String title)
+            public Header(string title)
             {
-                this.title = title;
+                this.Text = title;
             }
 
         #endregion
@@ -35,6 +33,21 @@ namespace Model
         #endregion
 
         #region Header : Methods
+
+        public override bool Contains(string word)
+        {
+            return this.Text.Contains(word);
+        }
+
+        public override List<Word> getWords()
+        {
+            List<Word> words = new List<Word>();
+            foreach (string s in this.Text.Split(new char[]{' '}))
+            {
+                words.Add(new Word(s,this.Location,this.Weight));
+            }
+            return words;
+        }
 
         #endregion
 

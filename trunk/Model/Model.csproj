@@ -81,6 +81,7 @@
     <Compile Include="TFIDCalculator.cs" />
     <Compile Include="Normalization\TFIDFMeasure.cs" />
     <Compile Include="Normalization\Tokeniser.cs" />
+    <Compile Include="Word.cs" />
     <Compile Include="XMLTranslator.cs" />
   </ItemGroup>
   <ItemGroup>
