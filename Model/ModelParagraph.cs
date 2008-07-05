@@ -59,7 +59,6 @@ namespace Model
                     return this.items;
                 }
             }
-        
         #endregion
 
         #region Paragraph : Events

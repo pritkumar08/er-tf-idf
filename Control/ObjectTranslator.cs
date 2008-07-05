@@ -29,6 +29,11 @@ namespace Control
 
         #region ObjectTranslator : Methods
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
             static internal UI.GUIItem TranslateModelToGUI(Model.ModelItem item)
             {
                 if (item is Model.ModelDocument)
@@ -43,28 +48,59 @@ namespace Control
                 }
                 if (item is Model.ModelParagraph)
                 {
-
+                    Model.ModelParagraph m_par = (Model.ModelParagraph)item;
+                    UI.GUIParagraph g_par = new UI.GUIParagraph
+                        (m_par.ParagraphBody, m_par.ParagraphID, m_par.DocumentItemWeight);
+                    foreach(Model.ModelDocumentItem d_item in m_par.ParagraphItems)
+                    {
+                        g_par.AddNewElementToParagraph
+                            ((UI.GUIDocumentItem)TranslateModelToGUI((Model.ModelDocumentItem)d_item));
+                    }
+                    return g_par;
                 }
                 if (item is Model.ModelHeader)
                 {
-
+                    Model.ModelHeader m_head = (Model.ModelHeader)item;
+                    UI.GUIHeader g_head = new UI.GUIHeader(m_head.HeaderTitle, m_head.DocumentItemWeight);
+                    return g_head;
                 }
                 return null;
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
             static internal Model.ModelItem TranslateGUIToModel(UI.GUIItem item)
             {
                 if (item is UI.GUIDocument)
                 {
-
+                    Model.ModelDocument document = new Model.ModelDocument();
+                    foreach (UI.GUIParagraph par in ((UI.GUIDocument)item).DocumentParagraphs)
+                    {
+                        document.AddParagraph(new Model.ModelParagraph
+                            (par.GUIParagraphBody, par.GUIParagraphID, par.GUIDocumentItemWeight));
+                    }
+                    return document;
                 }
                 if (item is UI.GUIParagraph)
                 {
-
+                    UI.GUIParagraph g_par = (UI.GUIParagraph)item;
+                    Model.ModelParagraph m_par = new Model.ModelParagraph
+                        (g_par.GUIParagraphBody, g_par.GUIParagraphID, g_par.GUIDocumentItemWeight);
+                    foreach (UI.GUIDocumentItem d_item in g_par.GUIParagraphItems)
+                    {
+                        m_par.AddNewElementToParagraph
+                            ((Model.ModelDocumentItem)TranslateGUIToModel((UI.GUIDocumentItem)d_item));
+                    }
+                    return m_par;
                 }
                 if (item is UI.GUIHeader)
                 {
-
+                    UI.GUIHeader g_head = (UI.GUIHeader)item;
+                    Model.ModelHeader m_head = new Model.ModelHeader(g_head.GUIHeaderTitle, g_head.GUIDocumentItemWeight);
+                    return m_head;
                 }
                 return null;
             }
