@@ -12,14 +12,15 @@ namespace UI
     {
         #region "MainForm : Members & Consts"
 
-            #region "MainForm : Members & Consts"
+            #region "MainForm : Members"
                 private string currentFileName = "";
                 private bool IsFileChanged = false;
                 private int paragraphID = 1;
                 private int totalControlsHeight = 5;
+                private GUIDocument document;
             #endregion
 
-            #region 
+            #region "MainForm : Consts"
                 private const int WIDTH_DIFFERENCE = 70;
                 private const int HEIGHT_DIFFERENCE = 30;
             #endregion
@@ -63,11 +64,6 @@ namespace UI
 
         #region "MainForm : EventHandlers"
 
-            private void MainForm_Load(object sender, EventArgs e)
-            {
-
-            }
-
             private void newToolStripButton_Click(object sender, EventArgs e)
             {
                 if (IsFileChanged)
@@ -95,21 +91,6 @@ namespace UI
                 SaveFile("");
             }
 
-            private void cutToolStripButton_Click(object sender, EventArgs e)
-            {
-
-            }
-
-            private void copyToolStripButton_Click(object sender, EventArgs e)
-            {
-
-            }
-
-            private void pasteToolStripButton_Click(object sender, EventArgs e)
-            {
-
-            }
-
             private void tlstpContainer_ContentPanel_Resize(object sender, EventArgs e)
             {
                 pnlMain.Size = new Size(pnlBackground.Width - 2 * WIDTH_DIFFERENCE,
@@ -121,7 +102,7 @@ namespace UI
 
             private void addDocumentParagraphToolStripMenuItem_Click(object sender, EventArgs e)
             {
-                AddParagraph(0,0);
+                AddParagraph(0,0,null);
             }
 
             private void removeDocumentParagraphsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -161,35 +142,15 @@ namespace UI
                 }
             }
 
-            private void addHeaderToolStripMenuItem_Click(object sender, EventArgs e)
-            {
-
-            }
-
-            private void removeHeaderToolStripMenuItem_Click(object sender, EventArgs e)
-            {
-
-            }
-
-            private void addParagraphToolStripMenuItem1_Click(object sender, EventArgs e)
-            {
-
-            }
-
-            private void removeParagraphToolStripMenuItem_Click(object sender, EventArgs e)
-            {
-
-            }
-
             private Object[] ParagraphHandler(cntParagraph.CntParagraphActions action, Object[] parameter)
             {
                 switch (action)
                 {
                     case cntParagraph.CntParagraphActions.Add_Header:
-                        AddHeader((int)parameter[0], (int)parameter[1]);
+                        AddHeader((int)parameter[0], (int)parameter[1], null);
                         break;
                     case cntParagraph.CntParagraphActions.Add_Paragraph:
-                        AddParagraph((int)parameter[0], (int)parameter[1]);
+                        AddParagraph((int)parameter[0], (int)parameter[1], null);
                         break;
                     case cntParagraph.CntParagraphActions.Remove_Header:
                         break;
@@ -245,17 +206,24 @@ namespace UI
                 if (res == DialogResult.OK)
                 {
                     currentFileName = openFileDialog1.FileName;
-                    OnRequestForInformation(MainFormActions.Open_Document, new Object[] { currentFileName });
+                    Object[] objects =
+                        OnRequestForInformation(MainFormActions.Open_Document, new Object[] { currentFileName });
+                    document = (GUIDocument)objects[0];
+                    totalControlsHeight = 10;
+                    InitializeDocumentComponents(document);
                 }
             }
 
-            private void AddParagraph(int left,int id)
+            private void AddParagraph(int left, int id, GUIParagraph par)
             {
-                cntParagraph paragraph = new cntParagraph(paragraphID,id);
+                cntParagraph paragraph = null;
+                if (par == null)
+                    paragraph = new cntParagraph(paragraphID, id);
+                else
+                    paragraph = new cntParagraph(par,id);
                 paragraph.CntParagraphEvent += new cntParagraph.CntParagraphEventHandler(ParagraphHandler);
                 paragraph.Width = pnlMain.Width - left - 40 ;
                 paragraph.Location = new Point(left + 20, totalControlsHeight);
-                //paragraph.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top;
                 pnlMain.Controls.Add(paragraph);
                 if (pnlMain.Height <totalControlsHeight + 2 * paragraph.Height)
                     pnlMain.Height += paragraph.Height;
@@ -266,9 +234,13 @@ namespace UI
                 IsFileChanged = true;
             }
 
-            private void AddHeader(int left,int id)
+            private void AddHeader(int left, int id, GUIHeader head)
             {
-                cntHeader header = new cntHeader(id);
+                cntHeader header = null;
+                if (head == null)
+                    header = new cntHeader(id);
+                else
+                    header = new cntHeader(head, id);
                 header.Width = pnlMain.Width - left - 40;
                 header.Location = new Point(left + 20, totalControlsHeight);
                 pnlMain.Controls.Add(header);
@@ -316,6 +288,31 @@ namespace UI
                 }
             }
 
+
+            private void InitializeDocumentComponents(GUIDocument document)
+            {
+                foreach (GUIParagraph par in document.DocumentParagraphs)
+                {
+                    InitializeParagraphComponent(0, par);
+                }
+            }
+
+            private void InitializeParagraphComponent(int left, GUIParagraph par)
+            {
+                foreach (GUIDocumentItem item in par.GUIParagraphItems)
+                {
+                    left += 20;
+                    if (item is GUIParagraph)
+                    {
+                        AddParagraph(left, par.GUIParagraphID, (GUIParagraph)item);
+                        InitializeParagraphComponent(0, par);
+                    }
+                    if (item is GUIHeader)
+                    {
+                        AddHeader(left, par.GUIParagraphID, (GUIHeader)item);
+                    }
+                }
+            }
 
         #endregion
     }

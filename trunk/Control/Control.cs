@@ -51,8 +51,9 @@ namespace Control
                 {
                     case UIManager.GUIAction.Open_Text_File :
                         Model.ModelDocument document = model.OpenDocument((string)parameters[0]);
-                        return new Object[] { };
+                        return new Object[] {ObjectTranslator.TranslateModelToGUI(document)};
                     case UIManager.GUIAction.Save_Text_File :
+                        model.SaveDocument((string)parameters[0], (Model.ModelDocument)ObjectTranslator.TranslateGUIToModel((UI.GUIDocument)parameters[1]));
                         break;
                     default :
                         return null;
