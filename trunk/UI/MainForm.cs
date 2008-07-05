@@ -41,7 +41,8 @@ namespace UI
             public enum MainFormActions
             {
                 Open_Document = 0,
-                Save_Document = 1
+                Save_Document = 1,
+                Insert_File_To_Database = 2
             };
 
         #endregion
@@ -118,6 +119,7 @@ namespace UI
                             if (((cntHeader)cnt).RemoveMe)
                             {
                                 pnlMain.Controls.Remove(cnt);
+                                totalControlsHeight -= (cnt.Height + 10);
                                 cnt.Dispose();
                                 j++;
                             }
@@ -128,6 +130,7 @@ namespace UI
                             if (par.RemoveMe)
                             {
                                 pnlMain.Controls.Remove(cnt);
+                                totalControlsHeight -= (par.Height + 10);
                                 RemoveChildrenCotrols(par.ControlParagraph.GUIParagraphID,ref j);
                                 cnt.Dispose();
                                 j++;
@@ -196,6 +199,8 @@ namespace UI
                     if (res == DialogResult.OK)
                     {
                         currentFileName = saveFileDialog1.FileName;
+                        OnRequestForInformation
+                            (MainFormActions.Save_Document, new Object[] {currentFileName, document});
                     }
                 }
             }
@@ -264,6 +269,7 @@ namespace UI
                             if (header.ParentID == id)
                             {
                                 pnlMain.Controls.Remove(cnt);
+                                totalControlsHeight -= (header.Height + 10);
                                 cnt.Dispose();
                                 j++;
                             }
@@ -274,6 +280,7 @@ namespace UI
                             if (par.ParentID == id)
                             {
                                 pnlMain.Controls.Remove(cnt);
+                                totalControlsHeight -= (par.Height + 10);
                                 RemoveChildrenCotrols(par.ControlParagraph.GUIParagraphID,ref j);
                                 cnt.Dispose();
                                 j++;

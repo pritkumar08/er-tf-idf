@@ -36,7 +36,8 @@ namespace UI
             public enum GUIAction
             {
                 Open_Text_File = 0,
-                Save_Text_File = 1
+                Save_Text_File = 1,
+                Insert_Text_File_To_Database = 2
             };
        
         #endregion
@@ -69,6 +70,8 @@ namespace UI
                         return OnGetInformation(GUIAction.Open_Text_File, parameters);
                     case MainForm.MainFormActions.Save_Document:
                         return OnGetInformation(GUIAction.Save_Text_File, parameters);
+                    case MainForm.MainFormActions.Insert_File_To_Database:
+                        return OnGetInformation(GUIAction.Insert_Text_File_To_Database, parameters);
                     default :
                         return null;
                 }
