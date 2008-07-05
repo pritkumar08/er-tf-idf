@@ -75,6 +75,8 @@ namespace UI
             this.tlstpbtnRemove = new System.Windows.Forms.ToolStripButton();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.tlstpTextComparer = new System.Windows.Forms.ToolStrip();
+            this.tlstpbtnInsertFile = new System.Windows.Forms.ToolStripButton();
             this.tlstpContainer.BottomToolStripPanel.SuspendLayout();
             this.tlstpContainer.ContentPanel.SuspendLayout();
             this.tlstpContainer.TopToolStripPanel.SuspendLayout();
@@ -83,6 +85,7 @@ namespace UI
             this.menuStrip1.SuspendLayout();
             this.tlstpMain.SuspendLayout();
             this.tlstpDocument.SuspendLayout();
+            this.tlstpTextComparer.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlstpContainer
@@ -97,7 +100,7 @@ namespace UI
             this.tlstpContainer.ContentPanel.BackColor = System.Drawing.Color.DarkGray;
             this.tlstpContainer.ContentPanel.Controls.Add(this.pnlBackground);
             this.tlstpContainer.ContentPanel.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.tlstpContainer.ContentPanel.Size = new System.Drawing.Size(481, 307);
+            this.tlstpContainer.ContentPanel.Size = new System.Drawing.Size(481, 282);
             this.tlstpContainer.ContentPanel.Resize += new System.EventHandler(this.tlstpContainer_ContentPanel_Resize);
             this.tlstpContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlstpContainer.Location = new System.Drawing.Point(0, 0);
@@ -108,9 +111,10 @@ namespace UI
             // 
             // tlstpContainer.TopToolStripPanel
             // 
+            this.tlstpContainer.TopToolStripPanel.Controls.Add(this.tlstpDocument);
             this.tlstpContainer.TopToolStripPanel.Controls.Add(this.menuStrip1);
             this.tlstpContainer.TopToolStripPanel.Controls.Add(this.tlstpMain);
-            this.tlstpContainer.TopToolStripPanel.Controls.Add(this.tlstpDocument);
+            this.tlstpContainer.TopToolStripPanel.Controls.Add(this.tlstpTextComparer);
             // 
             // stsstpMain
             // 
@@ -129,7 +133,7 @@ namespace UI
             this.pnlBackground.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlBackground.Location = new System.Drawing.Point(0, 0);
             this.pnlBackground.Name = "pnlBackground";
-            this.pnlBackground.Size = new System.Drawing.Size(481, 307);
+            this.pnlBackground.Size = new System.Drawing.Size(481, 282);
             this.pnlBackground.TabIndex = 1;
             // 
             // pnlMain
@@ -466,7 +470,7 @@ namespace UI
             this.tlstpDocument.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tlsbtnAddParagraph,
             this.tlstpbtnRemove});
-            this.tlstpDocument.Location = new System.Drawing.Point(188, 24);
+            this.tlstpDocument.Location = new System.Drawing.Point(189, 24);
             this.tlstpDocument.Name = "tlstpDocument";
             this.tlstpDocument.Size = new System.Drawing.Size(58, 25);
             this.tlstpDocument.TabIndex = 1;
@@ -495,11 +499,34 @@ namespace UI
             // 
             // saveFileDialog1
             // 
-            this.saveFileDialog1.Filter = "\"Text Comparer Files(*.erp)\"|*.erp\"";
+            this.saveFileDialog1.DefaultExt = "erp";
+            this.saveFileDialog1.Filter = "Text Comparer Files(*.erp)|*.erp";
+            this.saveFileDialog1.RestoreDirectory = true;
+            this.saveFileDialog1.Title = "Where do you want to save the file?";
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.Filter = "\"Text Comparer Files(*.erp)\"|*.erp\"";
+            // 
+            // tlstpTextComparer
+            // 
+            this.tlstpTextComparer.Dock = System.Windows.Forms.DockStyle.None;
+            this.tlstpTextComparer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tlstpbtnInsertFile});
+            this.tlstpTextComparer.Location = new System.Drawing.Point(3, 49);
+            this.tlstpTextComparer.Name = "tlstpTextComparer";
+            this.tlstpTextComparer.Size = new System.Drawing.Size(66, 25);
+            this.tlstpTextComparer.TabIndex = 2;
+            // 
+            // tlstpbtnInsertFile
+            // 
+            this.tlstpbtnInsertFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tlstpbtnInsertFile.Image = ((System.Drawing.Image)(resources.GetObject("tlstpbtnInsertFile.Image")));
+            this.tlstpbtnInsertFile.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tlstpbtnInsertFile.Name = "tlstpbtnInsertFile";
+            this.tlstpbtnInsertFile.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.tlstpbtnInsertFile.Size = new System.Drawing.Size(23, 22);
+            this.tlstpbtnInsertFile.Text = "Insert File To Database";
             // 
             // MainForm
             // 
@@ -526,6 +553,8 @@ namespace UI
             this.tlstpMain.PerformLayout();
             this.tlstpDocument.ResumeLayout(false);
             this.tlstpDocument.PerformLayout();
+            this.tlstpTextComparer.ResumeLayout(false);
+            this.tlstpTextComparer.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -578,5 +607,7 @@ namespace UI
         private System.Windows.Forms.ToolStrip tlstpDocument;
         private System.Windows.Forms.ToolStripButton tlsbtnAddParagraph;
         private System.Windows.Forms.ToolStripButton tlstpbtnRemove;
+        private System.Windows.Forms.ToolStrip tlstpTextComparer;
+        private System.Windows.Forms.ToolStripButton tlstpbtnInsertFile;
     }
 }

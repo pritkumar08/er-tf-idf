@@ -55,6 +55,9 @@ namespace Control
                     case UIManager.GUIAction.Save_Text_File :
                         model.SaveDocument((string)parameters[0], (Model.ModelDocument)ObjectTranslator.TranslateGUIToModel((UI.GUIDocument)parameters[1]));
                         break;
+                    case UIManager.GUIAction.Insert_Text_File_To_Database : 
+                        model.InsertNewDocumentToDatabase((string)parameters[0],(Model.ModelDocument)ObjectTranslator.TranslateGUIToModel((UI.GUIDocument)parameters[0]));
+                        break;
                     default :
                         return null;
                 }
