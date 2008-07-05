@@ -53,13 +53,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Document.cs" />
-    <Compile Include="DocumentItem.cs" />
-    <Compile Include="Header.cs" />
+    <Compile Include="ModelDocument.cs" />
+    <Compile Include="ModelDocumentItem.cs" />
+    <Compile Include="ModelHeader.cs" />
     <Compile Include="IPersistentModel.cs" />
+    <Compile Include="ModelItem.cs" />
     <Compile Include="ModelManager.cs" />
     <Compile Include="Normalization\NGram.cs" />
-    <Compile Include="Paragraph.cs" />
+    <Compile Include="ModelParagraph.cs" />
     <Compile Include="PersistentDataSet.cs">
       <DependentUpon>PersistentDataSet.xsd</DependentUpon>
       <SubType>Component</SubType>

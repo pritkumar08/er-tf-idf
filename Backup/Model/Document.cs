@@ -4,13 +4,13 @@ using System.Text;
 
 namespace Model
 {
-    public class Document
+    class Document
     {
 
         #region Document : Members & Consts
 
-        private Dictionary<int, Paragraph> paragraphs;
-
+            private Dictionary<int, Paragraph> paragraphs;
+            
         #endregion
 
         #region Document : Initialization
@@ -23,8 +23,6 @@ namespace Model
         #endregion
 
         #region Document : Properties
-            
-        internal Dictionary<int, Paragraph> Paragraphs{ get; set; }
 
         #endregion
 
