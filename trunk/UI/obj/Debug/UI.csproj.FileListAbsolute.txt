@@ -1,0 +1,10 @@
+C:\Documents and Settings\Elad\Desktop\er-tf-idf\UI\bin\Debug\UI.dll
+C:\Documents and Settings\Elad\Desktop\er-tf-idf\UI\bin\Debug\UI.pdb
+C:\Documents and Settings\Elad\Desktop\er-tf-idf\UI\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Elad\Desktop\er-tf-idf\UI\obj\Debug\UI.dll
+C:\Documents and Settings\Elad\Desktop\er-tf-idf\UI\obj\Debug\UI.pdb
+C:\Documents and Settings\Elad\Desktop\er-tf-idf\UI\obj\Debug\UI.MainForm.resources
+C:\Documents and Settings\Elad\Desktop\er-tf-idf\UI\obj\Debug\UI.csproj.GenerateResource.Cache
+C:\Documents and Settings\Elad\Desktop\er-tf-idf\UI\obj\Debug\UI.cntParagraph.resources
+C:\Documents and Settings\Elad\Desktop\er-tf-idf\UI\obj\Debug\UI.cntHeader.resources
+C:\Documents and Settings\Elad\Desktop\er-tf-idf\UI\obj\Debug\UI.Properties.Resources.resources

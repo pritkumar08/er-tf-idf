@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="TextComparer">
+</Property><Property Name="Solution File" Value="C:\Documents and Settings\Elad\Desktop\er-tf-idf\TextComparer.sln">
+</Property><Property Name="User Options File" Value="C:\Documents and Settings\Elad\Desktop\er-tf-idf\TextComparer.suo">
+</Property><Property Name="Date" Value="יום שישי 04 יולי 2008">
+</Property><Property Name="Time" Value="10:45">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="TextComparer.sln" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\TextComparer.sln">
+</Event><Event ErrorLevel="0" Project="" Source="TextComparer.suo" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\TextComparer.suo">
+</Event><Event ErrorLevel="0" Project="Model" Source="Model\Model.csproj" Description="Project file successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\Model\Model.csproj">
+</Event><Event ErrorLevel="0" Project="Model" Source="Model\Document.cs" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\Model\Document.cs">
+</Event><Event ErrorLevel="0" Project="Model" Source="Model\DocumentItem.cs" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\Model\DocumentItem.cs">
+</Event><Event ErrorLevel="0" Project="Model" Source="Model\Header.cs" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\Model\Header.cs">
+</Event><Event ErrorLevel="0" Project="Model" Source="Model\IPersistentModel.cs" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\Model\IPersistentModel.cs">
+</Event><Event ErrorLevel="0" Project="Model" Source="Model\ModelManager.cs" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\Model\ModelManager.cs">
+</Event><Event ErrorLevel="0" Project="Model" Source="Model\Normalization\NGram.cs" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\Model\Normalization\NGram.cs">
+</Event><Event ErrorLevel="0" Project="Model" Source="Model\Paragraph.cs" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\Model\Paragraph.cs">
+</Event><Event ErrorLevel="0" Project="Model" Source="Model\PersistentDataSet.cs" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\Model\PersistentDataSet.cs">
+</Event><Event ErrorLevel="0" Project="Model" Source="Model\PersistentDataSet.Designer.cs" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\Model\PersistentDataSet.Designer.cs">
+</Event><Event ErrorLevel="0" Project="Model" Source="Model\PersistentModel.cs" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\Model\PersistentModel.cs">
+</Event><Event ErrorLevel="0" Project="Model" Source="Model\Normalization\PorterStemmer.cs" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\Model\Normalization\PorterStemmer.cs">
+</Event><Event ErrorLevel="0" Project="Model" Source="Model\Properties\AssemblyInfo.cs" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\Model\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="Model" Source="Model\Properties\Settings.Designer.cs" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\Model\Properties\Settings.Designer.cs">
+</Event><Event ErrorLevel="0" Project="Model" Source="Model\Normalization\StopWordsHandler.cs" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\Model\Normalization\StopWordsHandler.cs">
+</Event><Event ErrorLevel="0" Project="Model" Source="Model\TFIDCalculator.cs" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\Model\TFIDCalculator.cs">
+</Event><Event ErrorLevel="0" Project="Model" Source="Model\Normalization\TFIDFMeasure.cs" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\Model\Normalization\TFIDFMeasure.cs">
+</Event><Event ErrorLevel="0" Project="Model" Source="Model\Normalization\Tokeniser.cs" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\Model\Normalization\Tokeniser.cs">
+</Event><Event ErrorLevel="0" Project="Model" Source="Model\XMLTranslator.cs" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\Model\XMLTranslator.cs">
+</Event><Event ErrorLevel="0" Project="Model" Source="Model\app.config" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\Model\app.config">
+</Event><Event ErrorLevel="0" Project="Model" Source="Model\PersistentDataSet.xsc" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\Model\PersistentDataSet.xsc">
+</Event><Event ErrorLevel="0" Project="Model" Source="Model\PersistentDataSet.xsd" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\Model\PersistentDataSet.xsd">
+</Event><Event ErrorLevel="0" Project="Model" Source="Model\PersistentDataSet.xss" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\Model\PersistentDataSet.xss">
+</Event><Event ErrorLevel="0" Project="Model" Source="Model\Properties\Settings.settings" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\Model\Properties\Settings.settings">
+</Event><Event ErrorLevel="0" Project="Model" Source="Model\ModelDatabase.mdb" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\Model\ModelDatabase.mdb">
+</Event><Event ErrorLevel="0" Project="Model" Source="Model\Model.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Model" Source="Model\Model.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Control" Source="Control\Control.csproj" Description="Project file successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\Control\Control.csproj">
+</Event><Event ErrorLevel="0" Project="Control" Source="Control\Control.cs" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\Control\Control.cs">
+</Event><Event ErrorLevel="0" Project="Control" Source="Control\clsMain.cs" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\Control\clsMain.cs">
+</Event><Event ErrorLevel="0" Project="Control" Source="Control\Properties\AssemblyInfo.cs" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\Control\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="Control" Source="Control\XMLDTD.txt" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\Control\XMLDTD.txt">
+</Event><Event ErrorLevel="0" Project="Control" Source="Control\Control.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Control" Source="Control\Control.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="UI" Source="UI\UI.csproj" Description="Project file successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\UI\UI.csproj">
+</Event><Event ErrorLevel="0" Project="UI" Source="UI\MainForm.cs" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\UI\MainForm.cs">
+</Event><Event ErrorLevel="0" Project="UI" Source="UI\MainForm.Designer.cs" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\UI\MainForm.Designer.cs">
+</Event><Event ErrorLevel="0" Project="UI" Source="UI\UIManager.cs" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\UI\UIManager.cs">
+</Event><Event ErrorLevel="0" Project="UI" Source="UI\Properties\AssemblyInfo.cs" Description="File successfully backed up as C:\Documents and Settings\Elad\Desktop\er-tf-idf\Backup\UI\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="UI" Source="UI\UI.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="UI" Source="UI\UI.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="TextComparer.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="TextComparer.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Model" Source="Model\Model.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="Control" Source="Control\Control.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="UI" Source="UI\UI.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>
