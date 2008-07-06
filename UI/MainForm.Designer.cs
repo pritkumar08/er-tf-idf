@@ -70,12 +70,11 @@ namespace UI
             this.copyToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tlstpDocument = new System.Windows.Forms.ToolStrip();
-            this.tlsbtnAddParagraph = new System.Windows.Forms.ToolStripButton();
-            this.tlstpbtnRemove = new System.Windows.Forms.ToolStripButton();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.tlstpTextComparer = new System.Windows.Forms.ToolStrip();
+            this.tlsbtnAddParagraph = new System.Windows.Forms.ToolStripButton();
+            this.tlstpbtnRemove = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.tlstpbtnInsertFile = new System.Windows.Forms.ToolStripButton();
             this.tlstpContainer.BottomToolStripPanel.SuspendLayout();
             this.tlstpContainer.ContentPanel.SuspendLayout();
@@ -84,8 +83,6 @@ namespace UI
             this.pnlBackground.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tlstpMain.SuspendLayout();
-            this.tlstpDocument.SuspendLayout();
-            this.tlstpTextComparer.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlstpContainer
@@ -100,7 +97,7 @@ namespace UI
             this.tlstpContainer.ContentPanel.BackColor = System.Drawing.Color.DarkGray;
             this.tlstpContainer.ContentPanel.Controls.Add(this.pnlBackground);
             this.tlstpContainer.ContentPanel.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.tlstpContainer.ContentPanel.Size = new System.Drawing.Size(481, 282);
+            this.tlstpContainer.ContentPanel.Size = new System.Drawing.Size(481, 307);
             this.tlstpContainer.ContentPanel.Resize += new System.EventHandler(this.tlstpContainer_ContentPanel_Resize);
             this.tlstpContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlstpContainer.Location = new System.Drawing.Point(0, 0);
@@ -111,10 +108,8 @@ namespace UI
             // 
             // tlstpContainer.TopToolStripPanel
             // 
-            this.tlstpContainer.TopToolStripPanel.Controls.Add(this.tlstpDocument);
             this.tlstpContainer.TopToolStripPanel.Controls.Add(this.menuStrip1);
             this.tlstpContainer.TopToolStripPanel.Controls.Add(this.tlstpMain);
-            this.tlstpContainer.TopToolStripPanel.Controls.Add(this.tlstpTextComparer);
             // 
             // stsstpMain
             // 
@@ -133,7 +128,7 @@ namespace UI
             this.pnlBackground.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlBackground.Location = new System.Drawing.Point(0, 0);
             this.pnlBackground.Name = "pnlBackground";
-            this.pnlBackground.Size = new System.Drawing.Size(481, 282);
+            this.pnlBackground.Size = new System.Drawing.Size(481, 307);
             this.pnlBackground.TabIndex = 1;
             // 
             // pnlMain
@@ -304,7 +299,6 @@ namespace UI
             this.addDocumentParagraphToolStripMenuItem.Name = "addDocumentParagraphToolStripMenuItem";
             this.addDocumentParagraphToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.addDocumentParagraphToolStripMenuItem.Text = "Add Document Paragraph";
-            this.addDocumentParagraphToolStripMenuItem.Click += new System.EventHandler(this.addDocumentParagraphToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -318,7 +312,6 @@ namespace UI
             this.removeDocumentItemsToolStripMenuItem.Name = "removeDocumentItemsToolStripMenuItem";
             this.removeDocumentItemsToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.removeDocumentItemsToolStripMenuItem.Text = "Remove Document Items...";
-            this.removeDocumentItemsToolStripMenuItem.Click += new System.EventHandler(this.removeDocumentParagraphsToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -380,11 +373,16 @@ namespace UI
             this.cutToolStripButton,
             this.copyToolStripButton,
             this.pasteToolStripButton,
-            this.toolStripSeparator1});
+            this.toolStripSeparator1,
+            this.tlsbtnAddParagraph,
+            this.tlstpbtnRemove,
+            this.toolStripSeparator5,
+            this.tlstpbtnInsertFile});
             this.tlstpMain.Location = new System.Drawing.Point(3, 24);
             this.tlstpMain.Name = "tlstpMain";
             this.tlstpMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.tlstpMain.Size = new System.Drawing.Size(185, 25);
+            this.tlstpMain.Size = new System.Drawing.Size(291, 25);
+            this.tlstpMain.Stretch = true;
             this.tlstpMain.TabIndex = 0;
             this.tlstpMain.Text = "ToolStripMain";
             // 
@@ -464,39 +462,6 @@ namespace UI
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // tlstpDocument
-            // 
-            this.tlstpDocument.Dock = System.Windows.Forms.DockStyle.None;
-            this.tlstpDocument.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tlsbtnAddParagraph,
-            this.tlstpbtnRemove});
-            this.tlstpDocument.Location = new System.Drawing.Point(189, 24);
-            this.tlstpDocument.Name = "tlstpDocument";
-            this.tlstpDocument.Size = new System.Drawing.Size(58, 25);
-            this.tlstpDocument.TabIndex = 1;
-            // 
-            // tlsbtnAddParagraph
-            // 
-            this.tlsbtnAddParagraph.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tlsbtnAddParagraph.Enabled = false;
-            this.tlsbtnAddParagraph.Image = ((System.Drawing.Image)(resources.GetObject("tlsbtnAddParagraph.Image")));
-            this.tlsbtnAddParagraph.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tlsbtnAddParagraph.Name = "tlsbtnAddParagraph";
-            this.tlsbtnAddParagraph.Size = new System.Drawing.Size(23, 22);
-            this.tlsbtnAddParagraph.ToolTipText = "Add Document Paragraph";
-            this.tlsbtnAddParagraph.Click += new System.EventHandler(this.addDocumentParagraphToolStripMenuItem_Click);
-            // 
-            // tlstpbtnRemove
-            // 
-            this.tlstpbtnRemove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tlstpbtnRemove.Enabled = false;
-            this.tlstpbtnRemove.Image = ((System.Drawing.Image)(resources.GetObject("tlstpbtnRemove.Image")));
-            this.tlstpbtnRemove.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tlstpbtnRemove.Name = "tlstpbtnRemove";
-            this.tlstpbtnRemove.Size = new System.Drawing.Size(23, 22);
-            this.tlstpbtnRemove.ToolTipText = "Remove Documents Items";
-            this.tlstpbtnRemove.Click += new System.EventHandler(this.removeDocumentParagraphsToolStripMenuItem_Click);
-            // 
             // saveFileDialog1
             // 
             this.saveFileDialog1.DefaultExt = "erp";
@@ -508,15 +473,32 @@ namespace UI
             // 
             this.openFileDialog1.Filter = "\"Text Comparer Files(*.erp)\"|*.erp\"";
             // 
-            // tlstpTextComparer
+            // tlsbtnAddParagraph
             // 
-            this.tlstpTextComparer.Dock = System.Windows.Forms.DockStyle.None;
-            this.tlstpTextComparer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tlstpbtnInsertFile});
-            this.tlstpTextComparer.Location = new System.Drawing.Point(3, 49);
-            this.tlstpTextComparer.Name = "tlstpTextComparer";
-            this.tlstpTextComparer.Size = new System.Drawing.Size(66, 25);
-            this.tlstpTextComparer.TabIndex = 2;
+            this.tlsbtnAddParagraph.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tlsbtnAddParagraph.Enabled = false;
+            this.tlsbtnAddParagraph.Image = ((System.Drawing.Image)(resources.GetObject("tlsbtnAddParagraph.Image")));
+            this.tlsbtnAddParagraph.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tlsbtnAddParagraph.Name = "tlsbtnAddParagraph";
+            this.tlsbtnAddParagraph.Size = new System.Drawing.Size(23, 22);
+            this.tlsbtnAddParagraph.ToolTipText = "Add Document Paragraph";
+            this.tlsbtnAddParagraph.Click += new System.EventHandler(this.tlsbtnAddParagraph_Click);
+            // 
+            // tlstpbtnRemove
+            // 
+            this.tlstpbtnRemove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tlstpbtnRemove.Enabled = false;
+            this.tlstpbtnRemove.Image = ((System.Drawing.Image)(resources.GetObject("tlstpbtnRemove.Image")));
+            this.tlstpbtnRemove.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tlstpbtnRemove.Name = "tlstpbtnRemove";
+            this.tlstpbtnRemove.Size = new System.Drawing.Size(23, 22);
+            this.tlstpbtnRemove.ToolTipText = "Remove Documents Items";
+            this.tlstpbtnRemove.Click += new System.EventHandler(this.tlstpbtnRemove_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
             // 
             // tlstpbtnInsertFile
             // 
@@ -527,6 +509,7 @@ namespace UI
             this.tlstpbtnInsertFile.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.tlstpbtnInsertFile.Size = new System.Drawing.Size(23, 22);
             this.tlstpbtnInsertFile.Text = "Insert File To Database";
+            this.tlstpbtnInsertFile.Click += new System.EventHandler(this.tlstpbtnInsertFile_Click);
             // 
             // MainForm
             // 
@@ -551,10 +534,6 @@ namespace UI
             this.menuStrip1.PerformLayout();
             this.tlstpMain.ResumeLayout(false);
             this.tlstpMain.PerformLayout();
-            this.tlstpDocument.ResumeLayout(false);
-            this.tlstpDocument.PerformLayout();
-            this.tlstpTextComparer.ResumeLayout(false);
-            this.tlstpTextComparer.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -604,10 +583,9 @@ namespace UI
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Panel pnlBackground;
-        private System.Windows.Forms.ToolStrip tlstpDocument;
         private System.Windows.Forms.ToolStripButton tlsbtnAddParagraph;
         private System.Windows.Forms.ToolStripButton tlstpbtnRemove;
-        private System.Windows.Forms.ToolStrip tlstpTextComparer;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripButton tlstpbtnInsertFile;
     }
 }
