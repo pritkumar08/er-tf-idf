@@ -94,24 +94,24 @@ namespace UI
 
             private void tlstpContainer_ContentPanel_Resize(object sender, EventArgs e)
             {
-                pnlMain.Size = new Size(pnlBackground.Width - 2 * WIDTH_DIFFERENCE,
-                                        pnlMain.Height);
-                pnlMain.Location = new Point(this.Left + WIDTH_DIFFERENCE,
-                                             this.Top + HEIGHT_DIFFERENCE + 5);
+                //pnlMain.Size = new Size(pnlBackground.Width - 2 * WIDTH_DIFFERENCE,
+                //                        pnlMain.Height);
+                //pnlMain.Location = new Point(this.Left + WIDTH_DIFFERENCE,
+                //                             this.Top + HEIGHT_DIFFERENCE + 5);
 
             }
 
-            private void addDocumentParagraphToolStripMenuItem_Click(object sender, EventArgs e)
+
+            private void tlsbtnAddParagraph_Click(object sender, EventArgs e)
             {
-                AddParagraph(0,0,null);
+                AddParagraph(0, 0, null);
             }
 
-            private void removeDocumentParagraphsToolStripMenuItem_Click(object sender, EventArgs e)
+            private void tlstpbtnRemove_Click(object sender, EventArgs e)
             {
                 try
                 {
-                    int j = 0;
-                    for (int i = 0; i<pnlMain.Controls.Count-j; i++)
+                    for (int i = 0; i < pnlMain.Controls.Count; i++)
                     {
                         Control cnt = pnlMain.Controls[i];
                         if (cnt is cntHeader)
@@ -121,7 +121,8 @@ namespace UI
                                 pnlMain.Controls.Remove(cnt);
                                 totalControlsHeight -= (cnt.Height + 10);
                                 cnt.Dispose();
-                                j++;
+                                i --;
+                                SetComponentsHeight(i, cnt.Height);
                             }
                         }
                         if (cnt is cntParagraph)
@@ -131,17 +132,41 @@ namespace UI
                             {
                                 pnlMain.Controls.Remove(cnt);
                                 totalControlsHeight -= (par.Height + 10);
-                                RemoveChildrenCotrols(par.ControlParagraph.GUIParagraphID,ref j);
+                                i--;
+                                SetComponentsHeight(i, par.Height);
+                                RemoveChildrenCotrols(par.ControlParagraph.GUIParagraphID, ref i);
                                 cnt.Dispose();
-                                j++;
                             }
                         }
                     }
                 }
-                catch(Exception exp)
+                catch 
                 {
-                    if (exp.ToString().Length > 0)
-                        return;
+                }
+            }
+
+            private void tlstpbtnInsertFile_Click(object sender, EventArgs e)
+            {
+                try
+                {
+
+                    if (IsFileChanged)
+                    {
+                        DialogResult res =
+                            MessageBox.Show("Do you wish to save the changes before inserting it to the database", "Text Comparer", MessageBoxButtons.YesNoCancel);
+                        if (res == DialogResult.Yes)
+                            SaveFile(currentFileName);
+                        if (res == DialogResult.Cancel)
+                            return;
+                        OnRequestForInformation(MainFormActions.Insert_File_To_Database, new Object[] { currentFileName, document });
+                        MessageBox.Show("The file was inserted into the database. "
+                                        + "From now on in order to insert the fileToolStripMenuItem once again you must save it on "
+                                        + "a different name", "Text Comparer", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("An error occoured during the file insertion","Text Comparer",MessageBoxButtons.OK,MessageBoxIcon.Error); 
                 }
             }
 
@@ -256,11 +281,11 @@ namespace UI
             }
 
 
-            private void RemoveChildrenCotrols(int id, ref int j)
+            private void RemoveChildrenCotrols(int id, ref int i)
             {
                 try
                 {
-                    for (int i = 0; i < pnlMain.Controls.Count - j; i++) 
+                    for (int x = i ; x < pnlMain.Controls.Count; x++) 
                     {
                         Control cnt = pnlMain.Controls[i];
                         if (cnt is cntHeader)
@@ -271,7 +296,8 @@ namespace UI
                                 pnlMain.Controls.Remove(cnt);
                                 totalControlsHeight -= (header.Height + 10);
                                 cnt.Dispose();
-                                j++;
+                                x--;
+                                SetComponentsHeight(x, header.Height);
                             }
                         }
                         if (cnt is cntParagraph)
@@ -281,17 +307,16 @@ namespace UI
                             {
                                 pnlMain.Controls.Remove(cnt);
                                 totalControlsHeight -= (par.Height + 10);
-                                RemoveChildrenCotrols(par.ControlParagraph.GUIParagraphID,ref j);
+                                x--;
+                                SetComponentsHeight(i,cnt.Height);
+                                RemoveChildrenCotrols(par.ControlParagraph.GUIParagraphID,ref x);
                                 cnt.Dispose();
-                                j++;
                             }
                         }
                     }
                 }
-                catch (Exception exp)
+                catch
                 {
-                    if (exp.ToString().Length > 0)
-                        return;
                 }
             }
 
@@ -318,6 +343,16 @@ namespace UI
                     {
                         AddHeader(left, par.GUIParagraphID, (GUIHeader)item);
                     }
+                }
+            }
+
+            private void SetComponentsHeight(int i, int height)
+            {
+                for (int x = i + 1; x < pnlMain.Controls.Count; x++)
+                {
+                    pnlMain.Controls[x].Top -= (height + 10);
+                    if (pnlMain.Height - height > this.Height)
+                        pnlMain.Height -= (height + 10);
                 }
             }
 
