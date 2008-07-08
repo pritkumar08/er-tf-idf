@@ -9,32 +9,18 @@ namespace Model
         
         #region Header : Members & Consts
 
-            private String title;
-
         #endregion
 
         #region Header : Initialization
 
-            public ModelHeader(String title,double weight):base(weight)
+        public ModelHeader(string title, double weight)
+            : base(title,weight)
             {
-                this.title = title;
             }
 
         #endregion
 
         #region Header : Properties
-
-            public String HeaderTitle
-            {
-                get
-                {
-                    return this.title;
-                }
-                set
-                {
-                    this.title = value;
-                }
-            }
 
         #endregion
 

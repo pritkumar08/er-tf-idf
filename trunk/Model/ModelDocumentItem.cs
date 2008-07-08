@@ -4,37 +4,28 @@ using System.Text;
 
 namespace Model
 {
-    public class ModelDocumentItem : ModelItem
+    abstract public class ModelDocumentItem : ModelItem
     {
           
         #region DocumentItem : Members & Consts
-
-            protected double weight; 
 
         #endregion
 
         #region DocumentItem : Initialization
 
-            public ModelDocumentItem(double weight)
+            public ModelDocumentItem(string title,double weight)
             {
-                this.weight = weight;
+                this.Text = title;
+                this.Weight = weight;
             }
 
         #endregion
 
         #region DocumentItem : Properties
 
-            public double DocumentItemWeight
-            {
-                get
-                {
-                    return this.weight;
-                }
-                set
-                {
-                    this.weight = value;
-                }
-            }
+            public string Text { get; set; }
+            public int Location { get; set; }
+            public double Weight { get; set; }
 
         #endregion
 
@@ -47,6 +38,22 @@ namespace Model
         #endregion
 
         #region DocumentItem : Methods
+
+            public virtual bool Contains(string word)
+            {
+                return this.Text.Contains(word);
+            }
+
+            public virtual List<Word> getWords()
+            {
+                List<Word> words = new List<Word>();
+
+                foreach (string s in this.Text.Split(new char[] { ' ' }))
+                {
+                    words.Add(new Word(s, this.Location, this.Weight));
+                }
+                return words;
+            }
 
         #endregion
 
