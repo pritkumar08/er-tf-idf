@@ -1,7 +1,7 @@
-C:\Documents and Settings\Elad\Desktop\er-tf-idf\Model\obj\Debug\ResolveAssemblyReference.cache
-C:\Documents and Settings\Elad\Desktop\er-tf-idf\Model\obj\Debug\Model.dll
-C:\Documents and Settings\Elad\Desktop\er-tf-idf\Model\obj\Debug\Model.pdb
-C:\Documents and Settings\Elad\Desktop\er-tf-idf\Model\bin\Debug\ModelDatabase.mdb
-C:\Documents and Settings\Elad\Desktop\er-tf-idf\Model\bin\Debug\Model.dll.config
-C:\Documents and Settings\Elad\Desktop\er-tf-idf\Model\bin\Debug\Model.dll
-C:\Documents and Settings\Elad\Desktop\er-tf-idf\Model\bin\Debug\Model.pdb
+D:\Project in advanced programming\Model\obj\Debug\ResolveAssemblyReference.cache
+D:\Project in advanced programming\Model\obj\Debug\Model.dll
+D:\Project in advanced programming\Model\obj\Debug\Model.pdb
+D:\Project in advanced programming\Model\bin\Debug\ModelDatabase.mdb
+D:\Project in advanced programming\Model\bin\Debug\Model.dll.config
+D:\Project in advanced programming\Model\bin\Debug\Model.dll
+D:\Project in advanced programming\Model\bin\Debug\Model.pdb

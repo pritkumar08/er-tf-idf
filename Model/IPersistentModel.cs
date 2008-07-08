@@ -30,7 +30,7 @@ namespace Model
         /// <param name="word"></param>
         /// <param name="path"></param>
         /// <returns></returns>
-        Double GetTFByWordAndFile(String word, String path);
+        double GetTFByWordAndFile(String word, String path);
 
         /// <summary>
         /// 
@@ -38,6 +38,20 @@ namespace Model
         /// <param name="word"></param>
         /// <param name="path"></param>
         /// <returns></returns>
-        Double GetIDFByWordAndFile(String word, String path);
+        double GetIDFByWordAndFile(String word, String path);
+
+        // returns the total weight of word in the file describes in path
+        double GetTotalWeight(string word, string path);
+
+        // returns the total weight of all the words in the file describes in path
+        double GetTotalWeights(string path);
+
+        // returns the number of files contains word
+        int CountFilesContains(string word);
+
+        // return the number of files in the DB
+        int FilesCount();
+
+        List<Word> GetInversionList();
     }
 }

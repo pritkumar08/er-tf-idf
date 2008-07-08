@@ -1,56 +1,93 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Stemming;
 
 namespace Model
 {
     public class ModelManager
     {
+        #region ModelManager: Members & Consts
+
         private IPersistentModel persistent_model;
+        private StemmerInterface si;
+
+        #endregion
+
+        #region ModelManager : Initialization
 
         public ModelManager()
         {
             persistent_model = new PersistentModel();
+            si = new PorterStemmer();
         }
 
+        #endregion
+
+        #region ModelManager : Methods
+
         public void InsertDocument(string path)
-        {
-            Document d = XMLTranslator.ReadFromXML(path);
-            foreach(Paragraph p in d.Paragraphs.Values)
+        {            
+            ModelDocument d = XMLTranslator.ReadFromXML(path);
+            foreach(ModelParagraph p in d.Paragraphs)
             {
                 foreach(Word word in p.getWords())
                 {
-                    persistent_model.InsertWord(normalize(word.Text), path, 
-                        word.LocationID, word.Weight);
+                    string norm_word = normalize(word.Text);
+                    if(!string.IsNullOrEmpty(norm_word)) 
+                        persistent_model.InsertNewWord(norm_word, path, 
+                            word.LocationID, word.Weight);
                 }                
-            }
+            }            
         }
 
-        private string normalize(string p)
+        public List<Word> GetInversionList()
         {
-            return p;
+            return persistent_model.GetInversionList();
+            //table_Type1 X table_Type2
         }
 
-        public double tf_idf(string word,string path)
+        public double tf_idf(string word, string path)
         {
-            return 0;
             // --- Calculating tf(word,path)
+            double n_word_in_path = persistent_model.GetTotalWeight(word, path);
             //n(word,path) = 
             //SELECT SUM(weight) FROM ?? WHERE word=word,file_path=path 
             //GROUP BY word,file_path
+
+            double n_all_in_path = persistent_model.GetTotalWeights(path);
             //n(all,path) = 
             //SELECT SUM(weight) FROM ?? GROUP BY word,file_path
+
+            double tf_word = n_word_in_path / n_all_in_path;
             //tf(word,path) = n(word,path)/n(all,path)
 
             // --- Calculating idf(word)
+            int x = persistent_model.CountFilesContains(word);
             //int x = SELECT COUNT(file_path) FROM ?? WHERE word=word,file_path=path,weight>0 
             //GROUP BY file_path
+            int m = persistent_model.FilesCount();
             //int m = SELECT COUNT(file_path) FROM ?? 
             //GROUP BY file_path
+            double idf_word = Math.Log((double)m / x);
             //idf(word) = log(m/x)
 
-            // return tf(word,path)*idf(word)
+            return tf_word * idf_word;
         }
 
+        #region ModelManager : Private Methods
+
+        // if !StopList.contains(word) returns a normalized form of word 
+        // else returns empty string
+        private string normalize(string word)
+        {
+            if (ServiceRanking.StopWordsHandler.IsStopword(word))
+                return String.Empty;
+            return si.stemTerm(word);
+        }
+
+        #endregion
+
+        #endregion
     }
 }

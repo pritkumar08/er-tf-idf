@@ -64,7 +64,7 @@ namespace Model
                     XmlTextWriter writer = new XmlTextWriter(path, null);
                     writer.WriteStartDocument();
                     writer.WriteStartElement("Document");
-                    AddWritenParagraphNodes(ref writer, doc.DocumentParagraphs);
+                    AddWritenParagraphNodes(ref writer, doc.Paragraphs);
                     writer.WriteEndElement();
                     writer.WriteEndDocument();
                 }
@@ -106,21 +106,23 @@ namespace Model
             {
                 foreach (ModelDocumentItem item in items)
                 {
+                    string text = item.Text;
+                    string weight = item.Weight.ToString();
                     if (item is ModelParagraph)
                     {
                         ModelParagraph par = (ModelParagraph)item;
                         writer.WriteStartElement("Paragraph");
-                        writer.WriteString(par.ParagraphBody);
-                        writer.WriteAttributeString("pid", par.ParagraphID.ToString());
-                        writer.WriteAttributeString("weight", par.DocumentItemWeight.ToString());
-                        AddWritenParagraphNodes(ref writer, par.ParagraphItems);
+                        writer.WriteString(text);
+                        writer.WriteAttributeString("pid", par.pid.ToString());
+                        writer.WriteAttributeString("weight", weight);
+                        AddWritenParagraphNodes(ref writer, par.Items);
                         writer.WriteEndElement();
                     }
+
                     if (item is ModelHeader)
                     {
-                        ModelHeader header = (ModelHeader)item;
-                        writer.WriteElementString("header", header.HeaderTitle);
-                        writer.WriteAttributeString("weight", header.DocumentItemWeight.ToString());
+                        writer.WriteElementString("header", text);
+                        writer.WriteAttributeString("weight", weight);
                         writer.WriteEndElement();
                     }
                 }

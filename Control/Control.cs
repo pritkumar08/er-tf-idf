@@ -21,7 +21,7 @@ namespace Control
             public Control()
             {
                 model = new ModelManager();
-                model.ModelEvent += new ModelManager.ModelEventHandler(ModelEventHandler);
+                //model.ModelEvent += new ModelManager.ModelEventHandler(ModelEventHandler);
 
                 ui = new UIManager();
                 ui.GUIEvent += new UIManager.GUIEventHandler(GUIEventHandler);
@@ -47,20 +47,20 @@ namespace Control
             /// <returns></returns>
             public Object[] GUIEventHandler(UIManager.GUIAction action, Object[] parameters)
             {
-                switch (action)
-                {
-                    case UIManager.GUIAction.Open_Text_File :
-                        Model.ModelDocument document = model.OpenDocument((string)parameters[0]);
-                        return new Object[] {ObjectTranslator.TranslateModelToGUI(document)};
-                    case UIManager.GUIAction.Save_Text_File :
-                        model.SaveDocument((string)parameters[0], (Model.ModelDocument)ObjectTranslator.TranslateGUIToModel((UI.GUIDocument)parameters[1]));
-                        break;
-                    case UIManager.GUIAction.Insert_Text_File_To_Database : 
-                        model.InsertNewDocumentToDatabase((string)parameters[0],(Model.ModelDocument)ObjectTranslator.TranslateGUIToModel((UI.GUIDocument)parameters[0]));
-                        break;
-                    default :
-                        return null;
-                }
+                //switch (action)
+                //{
+                //    case UIManager.GUIAction.Open_Text_File :
+                //        Model.ModelDocument document = model.OpenDocument((string)parameters[0]);
+                //        return new Object[] {ObjectTranslator.TranslateModelToGUI(document)};
+                //    case UIManager.GUIAction.Save_Text_File :
+                //        model.SaveDocument((string)parameters[0], (Model.ModelDocument)ObjectTranslator.TranslateGUIToModel((UI.GUIDocument)parameters[1]));
+                //        break;
+                //    case UIManager.GUIAction.Insert_Text_File_To_Database : 
+                //        model.InsertNewDocumentToDatabase((string)parameters[0],(Model.ModelDocument)ObjectTranslator.TranslateGUIToModel((UI.GUIDocument)parameters[0]));
+                //        break;
+                //    default :
+                //        return null;
+                //}
                 return null;
             }
             
@@ -70,14 +70,14 @@ namespace Control
             /// <param name="action"></param>
             /// <param name="parameters"></param>
             /// <returns></returns>
-            public Object[] ModelEventHandler(ModelManager.ModelActions action, Object[] parameters)
-            {
-                switch (action)
-                {
-                    default :
-                        return null;
-                }
-            }
+            //public Object[] ModelEventHandler(ModelManager.ModelActions action, Object[] parameters)
+            //{
+            //    switch (action)
+            //    {
+            //        default :
+            //            return null;
+            //    }
+            //}
 
         #endregion
 

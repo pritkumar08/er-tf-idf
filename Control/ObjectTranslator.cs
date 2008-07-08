@@ -39,10 +39,10 @@ namespace Control
                 if (item is Model.ModelDocument)
                 {
                     UI.GUIDocument document = new UI.GUIDocument();
-                    foreach (Model.ModelParagraph par in ((Model.ModelDocument)item).DocumentParagraphs)
+                    foreach (Model.ModelParagraph par in ((Model.ModelDocument)item).Paragraphs)
                     {
                         document.AddParagraph(new UI.GUIParagraph
-                            (par.ParagraphBody,par.ParagraphID,par.DocumentItemWeight));
+                            (par.Text,par.pid,par.Weight));
                     }
                     return document;
                 }
@@ -50,8 +50,8 @@ namespace Control
                 {
                     Model.ModelParagraph m_par = (Model.ModelParagraph)item;
                     UI.GUIParagraph g_par = new UI.GUIParagraph
-                        (m_par.ParagraphBody, m_par.ParagraphID, m_par.DocumentItemWeight);
-                    foreach(Model.ModelDocumentItem d_item in m_par.ParagraphItems)
+                        (m_par.Text, m_par.pid, m_par.Weight);
+                    foreach(Model.ModelDocumentItem d_item in m_par.Items)
                     {
                         g_par.AddNewElementToParagraph
                             ((UI.GUIDocumentItem)TranslateModelToGUI((Model.ModelDocumentItem)d_item));
@@ -61,7 +61,7 @@ namespace Control
                 if (item is Model.ModelHeader)
                 {
                     Model.ModelHeader m_head = (Model.ModelHeader)item;
-                    UI.GUIHeader g_head = new UI.GUIHeader(m_head.HeaderTitle, m_head.DocumentItemWeight);
+                    UI.GUIHeader g_head = new UI.GUIHeader(m_head.Text, m_head.Weight);
                     return g_head;
                 }
                 return null;

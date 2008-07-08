@@ -1,10 +1,10 @@
-C:\Documents and Settings\Elad\Desktop\er-tf-idf\Control\obj\Debug\Control.exe
-C:\Documents and Settings\Elad\Desktop\er-tf-idf\Control\obj\Debug\Control.pdb
-C:\Documents and Settings\Elad\Desktop\er-tf-idf\Control\bin\Debug\ModelDatabase.mdb
-C:\Documents and Settings\Elad\Desktop\er-tf-idf\Control\bin\Debug\Control.exe
-C:\Documents and Settings\Elad\Desktop\er-tf-idf\Control\bin\Debug\Control.pdb
-C:\Documents and Settings\Elad\Desktop\er-tf-idf\Control\bin\Debug\Model.dll
-C:\Documents and Settings\Elad\Desktop\er-tf-idf\Control\bin\Debug\UI.dll
-C:\Documents and Settings\Elad\Desktop\er-tf-idf\Control\bin\Debug\Model.pdb
-C:\Documents and Settings\Elad\Desktop\er-tf-idf\Control\bin\Debug\UI.pdb
-C:\Documents and Settings\Elad\Desktop\er-tf-idf\Control\obj\Debug\ResolveAssemblyReference.cache
+D:\Project in advanced programming\Control\obj\Debug\Control.exe
+D:\Project in advanced programming\Control\obj\Debug\Control.pdb
+D:\Project in advanced programming\Control\bin\Debug\ModelDatabase.mdb
+D:\Project in advanced programming\Control\bin\Debug\Control.exe
+D:\Project in advanced programming\Control\bin\Debug\Control.pdb
+D:\Project in advanced programming\Control\bin\Debug\Model.dll
+D:\Project in advanced programming\Control\bin\Debug\UI.dll
+D:\Project in advanced programming\Control\bin\Debug\Model.pdb
+D:\Project in advanced programming\Control\bin\Debug\UI.pdb
+D:\Project in advanced programming\Control\obj\Debug\ResolveAssemblyReference.cache
