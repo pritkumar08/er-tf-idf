@@ -8,6 +8,10 @@ namespace Model
     {
         
         #region Paragraph : Members & Consts
+        
+            private LinkedList<ModelDocumentItem> items = null;
+
+            private int pid = 0;  
 
         #endregion
 
@@ -16,17 +20,29 @@ namespace Model
             public ModelParagraph(String body,int id,double weight):base(body,weight)
             {
                 pid = id;
-                Items = new LinkedList<ModelDocumentItem>();
+                items = new LinkedList<ModelDocumentItem>();
             }
 
         #endregion
 
         #region Paragraph : Properties
 
-            public int pid { get; set; }
+            public LinkedList<ModelDocumentItem> Items
+            {
+                get
+                {
+                    return this.items;
+                }
+            }
 
-            public LinkedList<ModelDocumentItem> Items{ get; set; }
-            
+            public int Pid
+            {
+                get
+                {
+                    return this.pid;
+                }
+            }
+
         #endregion
 
         #region Paragraph : Events

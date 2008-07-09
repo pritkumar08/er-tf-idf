@@ -9,20 +9,28 @@ namespace Model
 
         #region Document : Members & Consts
 
+            private LinkedList<ModelDocumentItem> paragraphs = null;
+
         #endregion
 
         #region Document : Initialization
 
             public ModelDocument()
             {
-                Paragraphs = new LinkedList<ModelDocumentItem>();
+                paragraphs = new LinkedList<ModelDocumentItem>();
             }
 
         #endregion
 
         #region Document : Properties
-
-            public LinkedList<ModelDocumentItem> Paragraphs{get; set; }
+        
+            public LinkedList<ModelDocumentItem> Paragraphs
+            {
+                get
+                {
+                    return this.paragraphs;
+                }
+            }
 
         #endregion
 
@@ -38,17 +46,17 @@ namespace Model
 
             public void AddParagraph(ModelParagraph par)
             {
-                if (!(Paragraphs.Contains(par)))
+                if (!(paragraphs.Contains(par)))
                 {
-                    Paragraphs.AddLast(par);
+                    paragraphs.AddLast(par);
                 }
             }
 
             public void RemoveParagraph(ModelParagraph par)
             {
-                if (Paragraphs.Contains(par))
+                if (paragraphs.Contains(par))
                 {
-                    Paragraphs.Remove(par);
+                    paragraphs.Remove(par);
                 }
             }
 
