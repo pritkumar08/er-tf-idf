@@ -206,6 +206,34 @@ namespace UI
                 return null;
             }
 
+
+            private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+            {
+                AboutForm about = new AboutForm();
+                about.ShowDialog();
+            }
+
+            private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+            {
+                DialogResult res = MessageBox.Show("Are you sure you want to exit the application?", "Text Comparer", MessageBoxButtons.YesNoCancel);
+                if (res == DialogResult.Yes)
+                {
+                    if (IsFileChanged)
+                    {
+                        res = MessageBox.Show("You made some changes, would you like to save it?", "Text Comparer", MessageBoxButtons.YesNoCancel);
+                        if (res == DialogResult.Yes)
+                        {
+                            SaveFile("");
+                        }
+                        if (res == DialogResult.Cancel)
+                        {
+                            return;
+                        }
+                    }
+                    Application.Exit();
+                }
+
+            }
         #endregion
 
         #region "MainForm : Methods"
@@ -223,6 +251,7 @@ namespace UI
                 tlsbtnAddParagraph.Enabled = true;
                 totalControlsHeight = 5;
                 IsFileChanged = false;
+                paragraphID = 1;
             }
 
             private void SaveFile(string fileName)
@@ -387,13 +416,13 @@ namespace UI
 
             private void InitializeDocumentComponents(GUIDocument doc)
             {
-                pnlMain.Controls.Clear();
-                totalControlsHeight = 5;
+                OpenNewDocument();
                 foreach (GUIParagraph par in doc.DocumentParagraphs)
                 {
                     AddParagraph(0, 0, par);
                     AddParagraphToScreenFromDocument(0, 0, par);
                 }
+                pnlMain.Visible = true;
             }
 
             private void AddParagraphToScreenFromDocument(int left, int parentId, GUIParagraph par)
