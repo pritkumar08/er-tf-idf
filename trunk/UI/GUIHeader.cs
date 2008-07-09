@@ -9,33 +9,18 @@ namespace UI
          
         #region GUIHeader : Members & Consts
 
-            private String title;
-
         #endregion
 
         #region GUIHeader : Initialization
 
             public GUIHeader(String title, double weight)
-                : base(weight)
+                : base(title, weight)
             {
-                this.title = title;
             }
 
         #endregion
 
         #region GUIHeader : Properties
-
-            public String GUIHeaderTitle
-            {
-                get
-                {
-                    return this.title;
-                }
-                set
-                {
-                    this.title = value;
-                }
-            }
 
         #endregion
 

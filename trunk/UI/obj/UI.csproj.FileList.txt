@@ -3,3 +3,8 @@ bin\Debug\UI.pdb
 obj\Debug\ResolveAssemblyReference.cache
 obj\Debug\UI.dll
 obj\Debug\UI.pdb
+obj\Debug\UI.cntHeader.resources
+obj\Debug\UI.cntParagraph.resources
+obj\Debug\UI.MainForm.resources
+obj\Debug\UI.Properties.Resources.resources
+obj\Debug\UI.csproj.GenerateResource.Cache

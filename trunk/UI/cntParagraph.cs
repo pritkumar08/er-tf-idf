@@ -54,7 +54,11 @@ namespace UI
                 get
                 {
                     if (this.paragraph != null)
-                        return this.paragraph;
+                    {
+                        this.paragraph.GUIDocumentItemText = richTextBody.Text;
+                        this.paragraph.GUIDocumentItemWeight = Double.Parse(numudWeight.Value.ToString());
+                        return paragraph;
+                    }
                     return null;
                 }
             }
@@ -103,7 +107,7 @@ namespace UI
                 if (paragraph != null)
                 {
                     lblID.Text = paragraph.GUIParagraphID.ToString();
-                    richTextBody.Text = paragraph.GUIParagraphBody;
+                    richTextBody.Text = paragraph.GUIDocumentItemText;
                     numudWeight.Value = decimal.Parse(paragraph.GUIDocumentItemWeight.ToString());
                 }
             }

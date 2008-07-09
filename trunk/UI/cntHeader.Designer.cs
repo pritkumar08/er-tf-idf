@@ -31,7 +31,6 @@
             this.numudWeight = new System.Windows.Forms.NumericUpDown();
             this.lblHeaderWeight = new System.Windows.Forms.Label();
             this.richTextBody = new System.Windows.Forms.RichTextBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.lblHeader = new System.Windows.Forms.Label();
             this.chkbxHeaderRemove = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numudWeight)).BeginInit();
@@ -71,24 +70,12 @@
             this.richTextBody.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBody.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.richTextBody.Location = new System.Drawing.Point(64, 42);
+            this.richTextBody.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.richTextBody.Location = new System.Drawing.Point(16, 41);
             this.richTextBody.Name = "richTextBody";
-            this.richTextBody.Size = new System.Drawing.Size(595, 44);
+            this.richTextBody.Size = new System.Drawing.Size(643, 44);
             this.richTextBody.TabIndex = 8;
             this.richTextBody.Text = "";
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.richTextBox1.Location = new System.Drawing.Point(16, 41);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(643, 44);
-            this.richTextBox1.TabIndex = 8;
-            this.richTextBox1.Text = "";
             // 
             // lblHeader
             // 
@@ -120,7 +107,6 @@
             this.Controls.Add(this.numudWeight);
             this.Controls.Add(this.lblHeaderWeight);
             this.Controls.Add(this.lblHeader);
-            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.richTextBody);
             this.Name = "cntHeader";
             this.Size = new System.Drawing.Size(678, 131);
@@ -136,7 +122,6 @@
         private System.Windows.Forms.NumericUpDown numudWeight;
         private System.Windows.Forms.Label lblHeaderWeight;
         private System.Windows.Forms.RichTextBox richTextBody;
-        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Label lblHeader;
         private System.Windows.Forms.CheckBox chkbxHeaderRemove;
     }
