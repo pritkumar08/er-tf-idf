@@ -9,7 +9,6 @@ namespace UI
  
         #region GUIParagraph : Members & Consts
             
-            private string body;
             private int id;
             private LinkedList<GUIDocumentItem> items;
 
@@ -18,9 +17,8 @@ namespace UI
         #region GUIParagraph : Initialization
 
             public GUIParagraph(String body, int id, double weight)
-                : base(weight)
+                : base(body, weight)
             {
-                this.body = body;
                 this.id = id;
                 this.items = new LinkedList<GUIDocumentItem>();
             }
@@ -28,18 +26,6 @@ namespace UI
         #endregion
 
         #region GUIParagraph : Properties
-
-            public string GUIParagraphBody
-            {
-                get
-                {
-                    return this.body;
-                }
-                set
-                {
-                    this.body = value;
-                }
-            }
 
             public int GUIParagraphID
             {

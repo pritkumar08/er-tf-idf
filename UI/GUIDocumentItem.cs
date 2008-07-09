@@ -9,20 +9,35 @@ namespace UI
 
         #region GUIDocumentItem : Members & Consts
 
-            protected double weight; 
+            protected string text = "";
+
+            protected double weight = 0.0; 
 
         #endregion
 
         #region GUIDocumentItem : Initialization
 
-            public GUIDocumentItem(double weight)
+            public GUIDocumentItem(string text, double weight)
             {
+                this.text = text;
                 this.weight = weight;
             }
 
         #endregion
 
         #region GUIDocumentItem : Properties
+
+            public string GUIDocumentItemText
+            {
+                get
+                {
+                    return this.text;
+                }
+                set
+                {
+                    this.text = value;
+                }
+            }
 
             public double GUIDocumentItemWeight
             {

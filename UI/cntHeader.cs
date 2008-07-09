@@ -41,12 +41,16 @@ namespace UI
 
         #region cntHeader : Properties
 
-            internal GUIHeader ControlParagraph
+            internal GUIHeader ControlHeader
             {
                 get
                 {
                     if (this.header != null)
+                    {
+                        this.header.GUIDocumentItemText = richTextBody.Text;
+                        this.header.GUIDocumentItemWeight = Double.Parse(numudWeight.Value.ToString());
                         return this.header;
+                    }
                     return null;
                 }
             }
@@ -79,7 +83,7 @@ namespace UI
             {
                 if (header != null)
                 {
-                    richTextBody.Text = header.GUIHeaderTitle;
+                    richTextBody.Text = header.GUIDocumentItemText;
                     numudWeight.Value = decimal.Parse(header.GUIDocumentItemWeight.ToString());
                 }
             }

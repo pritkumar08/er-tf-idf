@@ -24,9 +24,6 @@ namespace UI
             {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                frmMain = new MainForm();
-                frmMain.MainFormEvent += new MainForm.MainFormEventHandler(MainFormEventHandler);
-                Application.Run(frmMain);
             }
 
         #endregion
@@ -79,7 +76,14 @@ namespace UI
         #endregion
 
         #region UIManager : Methods
-        
+            
+            public void LoadGUIApplication()
+            {
+                frmMain = new MainForm();
+                frmMain.MainFormEvent += new MainForm.MainFormEventHandler(MainFormEventHandler);
+                Application.Run(frmMain);
+            }
+
         #endregion
     }
 }
