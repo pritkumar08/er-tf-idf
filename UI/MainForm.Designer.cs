@@ -29,10 +29,7 @@ namespace UI
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.tlstpContainer = new System.Windows.Forms.ToolStripContainer();
             this.stsstpMain = new System.Windows.Forms.StatusStrip();
-            this.pnlBackground = new System.Windows.Forms.Panel();
-            this.pnlMain = new System.Windows.Forms.Panel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,7 +45,6 @@ namespace UI
             this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.documentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addDocumentParagraphToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
@@ -76,74 +72,21 @@ namespace UI
             this.tlstpbtnInsertFile = new System.Windows.Forms.ToolStripButton();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.tlstpContainer.BottomToolStripPanel.SuspendLayout();
-            this.tlstpContainer.ContentPanel.SuspendLayout();
-            this.tlstpContainer.TopToolStripPanel.SuspendLayout();
-            this.tlstpContainer.SuspendLayout();
-            this.pnlBackground.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tlstpMain.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tlstpContainer
-            // 
-            // 
-            // tlstpContainer.BottomToolStripPanel
-            // 
-            this.tlstpContainer.BottomToolStripPanel.Controls.Add(this.stsstpMain);
-            // 
-            // tlstpContainer.ContentPanel
-            // 
-            this.tlstpContainer.ContentPanel.BackColor = System.Drawing.Color.DarkGray;
-            this.tlstpContainer.ContentPanel.Controls.Add(this.pnlBackground);
-            this.tlstpContainer.ContentPanel.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.tlstpContainer.ContentPanel.Size = new System.Drawing.Size(481, 307);
-            this.tlstpContainer.ContentPanel.Resize += new System.EventHandler(this.tlstpContainer_ContentPanel_Resize);
-            this.tlstpContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlstpContainer.Location = new System.Drawing.Point(0, 0);
-            this.tlstpContainer.Name = "tlstpContainer";
-            this.tlstpContainer.Size = new System.Drawing.Size(481, 378);
-            this.tlstpContainer.TabIndex = 0;
-            this.tlstpContainer.Text = "toolStripContainer1";
-            // 
-            // tlstpContainer.TopToolStripPanel
-            // 
-            this.tlstpContainer.TopToolStripPanel.Controls.Add(this.menuStrip1);
-            this.tlstpContainer.TopToolStripPanel.Controls.Add(this.tlstpMain);
-            // 
             // stsstpMain
             // 
-            this.stsstpMain.Dock = System.Windows.Forms.DockStyle.None;
-            this.stsstpMain.Location = new System.Drawing.Point(0, 0);
+            this.stsstpMain.Location = new System.Drawing.Point(0, 356);
             this.stsstpMain.Name = "stsstpMain";
             this.stsstpMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.stsstpMain.Size = new System.Drawing.Size(481, 22);
             this.stsstpMain.TabIndex = 0;
             this.stsstpMain.Text = "statusStrip1";
             // 
-            // pnlBackground
-            // 
-            this.pnlBackground.AutoScroll = true;
-            this.pnlBackground.Controls.Add(this.pnlMain);
-            this.pnlBackground.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlBackground.Location = new System.Drawing.Point(0, 0);
-            this.pnlBackground.Name = "pnlBackground";
-            this.pnlBackground.Size = new System.Drawing.Size(481, 307);
-            this.pnlBackground.TabIndex = 1;
-            // 
-            // pnlMain
-            // 
-            this.pnlMain.BackColor = System.Drawing.Color.White;
-            this.pnlMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlMain.Location = new System.Drawing.Point(22, 18);
-            this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(447, 254);
-            this.pnlMain.TabIndex = 0;
-            this.pnlMain.Visible = false;
-            // 
             // menuStrip1
             // 
-            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
@@ -244,8 +187,7 @@ namespace UI
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cutToolStripMenuItem,
             this.copyToolStripMenuItem,
-            this.pasteToolStripMenuItem,
-            this.toolStripSeparator6});
+            this.pasteToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.editToolStripMenuItem.Text = "&Edit";
@@ -256,7 +198,7 @@ namespace UI
             this.cutToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
             this.cutToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.cutToolStripMenuItem.Text = "Cu&t";
             // 
             // copyToolStripMenuItem
@@ -265,7 +207,7 @@ namespace UI
             this.copyToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
             this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.copyToolStripMenuItem.Text = "&Copy";
             // 
             // pasteToolStripMenuItem
@@ -274,13 +216,8 @@ namespace UI
             this.pasteToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
             this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.pasteToolStripMenuItem.Text = "&Paste";
-            // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(149, 6);
             // 
             // documentToolStripMenuItem
             // 
@@ -300,6 +237,7 @@ namespace UI
             this.addDocumentParagraphToolStripMenuItem.Name = "addDocumentParagraphToolStripMenuItem";
             this.addDocumentParagraphToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.addDocumentParagraphToolStripMenuItem.Text = "Add Document Paragraph";
+            this.addDocumentParagraphToolStripMenuItem.Click += new System.EventHandler(this.tlsbtnAddParagraph_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -313,6 +251,7 @@ namespace UI
             this.removeDocumentItemsToolStripMenuItem.Name = "removeDocumentItemsToolStripMenuItem";
             this.removeDocumentItemsToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.removeDocumentItemsToolStripMenuItem.Text = "Remove Document Items...";
+            this.removeDocumentItemsToolStripMenuItem.Click += new System.EventHandler(this.tlstpbtnRemove_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -327,13 +266,13 @@ namespace UI
             // 
             this.customizeToolStripMenuItem.Name = "customizeToolStripMenuItem";
             this.customizeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.customizeToolStripMenuItem.Text = "&Customize";
+            this.customizeToolStripMenuItem.Text = "&Customize...";
             // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.optionsToolStripMenuItem.Text = "&Options";
+            this.optionsToolStripMenuItem.Text = "&Options...";
             // 
             // helpToolStripMenuItem
             // 
@@ -348,24 +287,23 @@ namespace UI
             // contentsToolStripMenuItem
             // 
             this.contentsToolStripMenuItem.Name = "contentsToolStripMenuItem";
-            this.contentsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.contentsToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.contentsToolStripMenuItem.Text = "&Contents";
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(115, 6);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.aboutToolStripMenuItem.Text = "&About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // tlstpMain
             // 
-            this.tlstpMain.Dock = System.Windows.Forms.DockStyle.None;
             this.tlstpMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolStripButton,
             this.openToolStripButton,
@@ -520,31 +458,26 @@ namespace UI
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(481, 378);
-            this.Controls.Add(this.tlstpContainer);
+            this.Controls.Add(this.stsstpMain);
+            this.Controls.Add(this.tlstpMain);
+            this.Controls.Add(this.menuStrip1);
+            this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainForm";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.tlstpContainer.BottomToolStripPanel.ResumeLayout(false);
-            this.tlstpContainer.BottomToolStripPanel.PerformLayout();
-            this.tlstpContainer.ContentPanel.ResumeLayout(false);
-            this.tlstpContainer.TopToolStripPanel.ResumeLayout(false);
-            this.tlstpContainer.TopToolStripPanel.PerformLayout();
-            this.tlstpContainer.ResumeLayout(false);
-            this.tlstpContainer.PerformLayout();
-            this.pnlBackground.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tlstpMain.ResumeLayout(false);
             this.tlstpMain.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ToolStripContainer tlstpContainer;
         private System.Windows.Forms.ToolStrip tlstpMain;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
@@ -561,7 +494,6 @@ namespace UI
         private System.Windows.Forms.ToolStripMenuItem cutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem customizeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
@@ -583,10 +515,8 @@ namespace UI
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem removeDocumentItemsToolStripMenuItem;
         private System.Windows.Forms.StatusStrip stsstpMain;
-        private System.Windows.Forms.Panel pnlMain;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Panel pnlBackground;
         private System.Windows.Forms.ToolStripButton tlsbtnAddParagraph;
         private System.Windows.Forms.ToolStripButton tlstpbtnRemove;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;

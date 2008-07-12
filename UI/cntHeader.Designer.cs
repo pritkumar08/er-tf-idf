@@ -38,7 +38,7 @@
             // 
             // numudWeight
             // 
-            this.numudWeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.numudWeight.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.numudWeight.DecimalPlaces = 5;
             this.numudWeight.Increment = new decimal(new int[] {
             1,
@@ -57,7 +57,7 @@
             // 
             // lblHeaderWeight
             // 
-            this.lblHeaderWeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblHeaderWeight.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblHeaderWeight.AutoSize = true;
             this.lblHeaderWeight.Location = new System.Drawing.Point(466, 15);
             this.lblHeaderWeight.Name = "lblHeaderWeight";
@@ -67,9 +67,7 @@
             // 
             // richTextBody
             // 
-            this.richTextBody.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBody.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.richTextBody.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.richTextBody.Location = new System.Drawing.Point(16, 41);
             this.richTextBody.Name = "richTextBody";
@@ -79,6 +77,7 @@
             // 
             // lblHeader
             // 
+            this.lblHeader.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblHeader.AutoSize = true;
             this.lblHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.lblHeader.Location = new System.Drawing.Point(13, 14);
@@ -89,7 +88,7 @@
             // 
             // chkbxHeaderRemove
             // 
-            this.chkbxHeaderRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkbxHeaderRemove.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.chkbxHeaderRemove.AutoSize = true;
             this.chkbxHeaderRemove.Location = new System.Drawing.Point(16, 101);
             this.chkbxHeaderRemove.Name = "chkbxHeaderRemove";
@@ -111,6 +110,7 @@
             this.Name = "cntHeader";
             this.Size = new System.Drawing.Size(678, 131);
             this.Load += new System.EventHandler(this.cntHeader_Load);
+            this.Resize += new System.EventHandler(this.cntHeader_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.numudWeight)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

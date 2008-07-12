@@ -69,6 +69,9 @@ namespace UI
                         return OnGetInformation(GUIAction.Save_Text_File, parameters);
                     case MainForm.MainFormActions.Insert_File_To_Database:
                         return OnGetInformation(GUIAction.Insert_Text_File_To_Database, parameters);
+                    case MainForm.MainFormActions.Exit_Application:
+                        Application.Exit();
+                        return null;
                     default :
                         return null;
                 }

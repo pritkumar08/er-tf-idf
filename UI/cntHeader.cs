@@ -88,6 +88,13 @@ namespace UI
                 }
             }
 
+            private void cntHeader_Resize(object sender, EventArgs e)
+            {
+                richTextBody.Width = this.Width - 15;
+                numudWeight.Left = this.Width - numudWeight.Width - 15;
+                lblHeaderWeight.Left = numudWeight.Left - lblHeaderWeight.Width - 15;
+            }
+
         #endregion
 
         #region cntHeader : Methods

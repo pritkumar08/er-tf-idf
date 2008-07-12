@@ -122,7 +122,14 @@ namespace UI
                 OnMakingAction(CntParagraphActions.Add_Paragraph, new Object[] {this.Left, this.paragraph.GUIParagraphID});
             }
 
-
+            private void cntParagraph_Resize(object sender, EventArgs e)
+            {
+                richTextBody.Width = this.Width - 70;
+                btnAddParagraph.Left = this.Width - btnAddParagraph.Width - 15;
+                numudWeight.Left = this.Width - numudWeight.Width - 15;
+                btnAddHeader.Left = btnAddParagraph.Left - btnAddHeader.Width - 15;
+                lblParagraphWeight.Left = numudWeight.Left - lblParagraphWeight.Width - 15;
+            }
         #endregion
 
         #region cntParagraph : Methods
