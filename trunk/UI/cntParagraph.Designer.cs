@@ -41,9 +41,7 @@
             // 
             // richTextBody
             // 
-            this.richTextBody.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBody.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.richTextBody.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.richTextBody.Location = new System.Drawing.Point(19, 38);
             this.richTextBody.Name = "richTextBody";
@@ -53,6 +51,7 @@
             // 
             // lblParagraphID
             // 
+            this.lblParagraphID.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblParagraphID.AutoSize = true;
             this.lblParagraphID.Location = new System.Drawing.Point(16, 9);
             this.lblParagraphID.Name = "lblParagraphID";
@@ -62,7 +61,7 @@
             // 
             // btnAddHeader
             // 
-            this.btnAddHeader.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddHeader.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnAddHeader.Location = new System.Drawing.Point(436, 158);
             this.btnAddHeader.Name = "btnAddHeader";
             this.btnAddHeader.Size = new System.Drawing.Size(96, 23);
@@ -73,7 +72,7 @@
             // 
             // btnAddParagraph
             // 
-            this.btnAddParagraph.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddParagraph.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnAddParagraph.Location = new System.Drawing.Point(538, 158);
             this.btnAddParagraph.Name = "btnAddParagraph";
             this.btnAddParagraph.Size = new System.Drawing.Size(88, 23);
@@ -84,6 +83,7 @@
             // 
             // lblID
             // 
+            this.lblID.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblID.AutoSize = true;
             this.lblID.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.lblID.Location = new System.Drawing.Point(95, 9);
@@ -94,7 +94,7 @@
             // 
             // lblParagraphWeight
             // 
-            this.lblParagraphWeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblParagraphWeight.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblParagraphWeight.AutoSize = true;
             this.lblParagraphWeight.Location = new System.Drawing.Point(433, 9);
             this.lblParagraphWeight.Name = "lblParagraphWeight";
@@ -104,7 +104,7 @@
             // 
             // numudWeight
             // 
-            this.numudWeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.numudWeight.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.numudWeight.DecimalPlaces = 5;
             this.numudWeight.Increment = new decimal(new int[] {
             1,
@@ -123,7 +123,7 @@
             // 
             // chckRemove
             // 
-            this.chckRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chckRemove.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.chckRemove.AutoSize = true;
             this.chckRemove.Location = new System.Drawing.Point(19, 164);
             this.chckRemove.Name = "chckRemove";
@@ -149,6 +149,7 @@
             this.Name = "cntParagraph";
             this.Size = new System.Drawing.Size(640, 188);
             this.Load += new System.EventHandler(this.cntParagraph_Load);
+            this.Resize += new System.EventHandler(this.cntParagraph_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.numudWeight)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
