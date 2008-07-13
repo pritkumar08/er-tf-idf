@@ -53,6 +53,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="erpDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>erpDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="ModelDocument.cs" />
     <Compile Include="ModelDocumentItem.cs" />
     <Compile Include="ModelHeader.cs" />
@@ -87,6 +92,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="erpDataSet.xsc">
+      <DependentUpon>erpDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="erpDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>erpDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="erpDataSet.xss">
+      <DependentUpon>erpDataSet.xsd</DependentUpon>
+    </None>
     <None Include="PersistentDataSet.xsc">
       <DependentUpon>PersistentDataSet.xsd</DependentUpon>
     </None>
@@ -104,7 +120,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ModelDatabase.mdb">
+    <Content Include="erp.mdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ModelDatabase-old.mdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

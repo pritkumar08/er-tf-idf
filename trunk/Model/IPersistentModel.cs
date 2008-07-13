@@ -13,7 +13,7 @@ namespace Model
         /// <param name="path"></param>
         /// <param name="locationID"></param>
         /// <param name="weight"></param>
-        void InsertNewWord(String word, String path, int locationID, double weight);
+        void InsertWord(String word, String path, int locationID, double weight);
 
         /// <summary>
         /// 
@@ -22,7 +22,7 @@ namespace Model
         /// <param name="path"></param>
         /// <param name="tf"></param>
         /// <param name="idf"></param>
-        void InsertFullWordDescription(String word, String path, double tf, double idf);
+        void InsertWordTFIDF(String word, String path, double tf, double idf);
 
         /// <summary>
         /// 
@@ -53,5 +53,11 @@ namespace Model
         int FilesCount();
 
         List<Word> GetInversionList();
+
+        #region TestMethods
+
+        bool WordAndFileExistTest(string word, string path, string tableName, out object[] result);
+
+        #endregion
     }
 }
