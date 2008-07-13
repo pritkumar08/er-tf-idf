@@ -12,23 +12,81 @@ namespace Model
 
         #region PersistentModel : Members & Consts
 
-        private OleDbConnection connection;
+        private static PersistentModel instance = null;
+
+        private static OleDbConnection connection;
         //private OleDbDataAdapter adapter;
         //private PersistentDataSet dataset;
 
+        private const String connectionString_old =
+            "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\\Project in advanced programming\\Model\\ModelDatabase.mdb";
         private const String connectionString =
-            "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\ModelDatabase.mdb";
-
+        "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\\Project in advanced programming\\Model\\erp.mdb";
         private static string ALL = "";
+
+        private static string WEIGHTS_TABLE_PREFIX = "Weights_";
+        private static string TF_IDF_TABLE_PREFIX = "TFIDF_";
+        
         #endregion
 
         #region PersistentModel : Initialization
 
-        public PersistentModel()
+        protected PersistentModel()
+        {
+            //createTables();
+        }
+
+        private void createTables()
+        {
+            createWeightTables();
+            createTFIDFTables();
+        }
+
+        private void createTFIDFTables()
+        {
+            string query_suffix = " (Word VARCHAR(50),FileName VARCHAR(100)," +
+            "tf DECIMAL,idf DECIMAL)";
+            createTablesOfType(
+                Enum.GetNames(typeof(TF_IDF_Segments)),
+                TF_IDF_TABLE_PREFIX, query_suffix);
+        }
+
+        private void createWeightTables()
+        {
+            string query_suffix = " (Word VARCHAR(50),FileName VARCHAR(100),"+
+            "Location INT,Weight DECIMAL,wCount INT)";
+            createTablesOfType(
+                Enum.GetNames(typeof(WEIGHTS_Segments)), 
+                WEIGHTS_TABLE_PREFIX, query_suffix);
+        }
+
+        private void createTablesOfType(string[] tableNames,string commmonNamePrefix ,string fieldsDef)
+        {
+            string query_prefix = "CREATE TABLE ";
+            foreach (string tableName in tableNames)
+                ExecuteNonQuery(
+                    query_prefix + commmonNamePrefix + tableName + fieldsDef);
+        }
+
+        public static PersistentModel getInstance()
         {
             connection = new OleDbConnection(connectionString);
+            try
+            {
+                if (!connection.State.Equals(ConnectionState.Open))
+                    connection.Open();
+            }
+            catch (Exception e)
+            {
+                throw new PersistentModelException(e.Message);
+            }
             //adapter = new OleDbDataAdapter();
             //dataset = new PersistentDataSet();
+            if (instance == null)
+            {
+                instance = new PersistentModel();
+            }
+            return instance;
         }
 
         #endregion
@@ -47,6 +105,7 @@ namespace Model
             T_Z = 5,
             None = 6
         }
+
         private enum WEIGHTS_Segments
         {
             A = 0,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z
@@ -69,53 +128,30 @@ namespace Model
 
         #region PersistentModel : Public Methods
 
-        public void InsertNewWord(String word, String path, int locationID, double weight)
+        public void InsertWord(String word, String path, int locationID, double weight)
         {
             try
             {
-                char firstLetter = word.ToUpper().ToCharArray()[0];
-                string query = "INSERT INTO " + firstLetter
-                               + "_LETTER (Word,FileName,Place,Weight) VALUES ('"
-                               + word.ToUpper() + "','" + path + "',"
-                               + locationID + "," + weight + ")";
-
-                ExecuteNonQuery(query);
+                string tableName = getTableName(word,typeof(WEIGHTS_Segments));
+                object[] result = new object[5];
+                if (WordAndFileExist(word, path, tableName,out result))
+                {
+                    UpdateWordWeight(tableName, word, path, locationID, weight,(int)result[4]+1);
+                    return;
+                }
+                InsertWordWeight(tableName, word, path, locationID, weight);
             }
             catch (Exception exp)
             {
                 throw exp;
             }
-        }
+        }     
 
-        public void InsertFullWordDescription(String word, String path, double tf, double idf)
+        public void InsertWordTFIDF(String word, String path, double tf, double idf)
         {
-            char firstLetter = word.ToUpper().ToCharArray()[0];
-            String tableName = "";
-            TF_IDF_Segments letterSegment = LetterToSegments(firstLetter);
-            switch (letterSegment)
-            {
-                case TF_IDF_Segments.A_D:
-                    tableName = "A-D_total";
-                    break;
-                case TF_IDF_Segments.E_G:
-                    tableName = "E-G_total";
-                    break;
-                case TF_IDF_Segments.H_L:
-                    tableName = "H-L_total";
-                    break;
-                case TF_IDF_Segments.M_O:
-                    tableName = "M-O_total";
-                    break;
-                case TF_IDF_Segments.P_S:
-                    tableName = "P-S_total";
-                    break;
-                case TF_IDF_Segments.T_Z:
-                    tableName = "T-Z_total";
-                    break;
-                case TF_IDF_Segments.None:
-                    return;
-            }
-            if (WordAndFileExist(word, path, tableName))
+            string tableName = getTableName(word, typeof(TF_IDF_Segments));
+            object[] result;
+            if (WordAndFileExist(word, path, tableName,out result))
             {
                 UpdateWordTFIDF(tableName, word, path, tf, idf);
                 return;
@@ -125,12 +161,12 @@ namespace Model
 
         public Double GetTFByWordAndFile(String word, String path)
         {
-            return new Double();
+            return (Double)getFieldByWordAndFile("tf",word,path);
         }
 
         public Double GetIDFByWordAndFile(String word, String path)
         {
-            return new Double();
+            return (Double)getFieldByWordAndFile("idf",word,path);
         }
 
         public double GetTotalWeight(string word, string path)
@@ -143,29 +179,15 @@ namespace Model
             return getWeight(ALL,path);
         }
 
-
         public int CountFilesContains(string word)
         {
-            int fcount = 0;
-            string where_suffix = 
-                word.Equals(ALL)?"":"WHERE Word = '"+ word + "'AND Weight > 0";
-            foreach (string tableName in Enum.GetNames(typeof(WEIGHTS_Segments)))
-            {
-                string query = "SELECT COUNT(DISTINCT FileName) FROM" +
-                    tableName + where_suffix;
-                OleDbDataReader reader = ExecuteSelectionQuery(query);
-                while (reader.Read())
-                {
-                    fcount += reader.GetInt32(0);
-                }
-            }
-            return fcount;
+            return getFilesCount(word);
         }
 
         public int FilesCount()
         {
-            return 0;
-        }
+            return getFilesCount(ALL);
+        }      
 
         public List<Word> GetInversionList()
         {
@@ -207,32 +229,79 @@ namespace Model
             }
         }
 
-        private bool WordAndFileExist(string word, string path, string tableName)
+        private bool WordAndFileExist(string word, string path, string tableName,
+            out object[] result)
         {
+            result = null;
             try
             {
-
-                String query = "SELECT * FROM " + tableName + " WHERE Word = '"
-                               + word + "' AND FileName = '" + path + "'";
+                string query = "SELECT * FROM " + tableName;
+                    //+ " WHERE Word = '"
+                      //         + word + "' AND FileName = '" + path + "'";
                 OleDbDataReader reader = ExecuteSelectionQuery(query);
-                return reader.HasRows;
+                if (reader.HasRows)
+                {
+                    result = new object[reader.FieldCount];
+                    reader.NextResult();
+                    reader.Read();
+                    //reader.GetValues(result);
+                    result[0] = reader.GetString(0);
+                    return true;
+                }
+                return false;
             }
             catch (Exception exp)
             {
                 throw exp;
             }
         }
+        
+        private void InsertWordWeight(string tableName, string word, string path, int locationID, double weight)
+        {
+            string query = "INSERT INTO " + tableName
+               + " (Word,FileName,Location,Weight,wCount) VALUES ('"
+               + word.ToUpper() + "','" + path + "',"
+               + locationID + "," + weight + ","+ 1 +")";
+            ExecuteNonQuery(query);
+        }
+
+        private void UpdateWordWeight(string tableName, string word, string path, 
+            int locationID, double weight,int counter)
+        {
+            string query = "UPDATE " + tableName +
+                    "SET Weight = " + weight + ",Counter = " + counter +
+                    " WHERE Word = '" + word + "',AND FileName = '" + path + "'";
+            ExecuteNonQuery(query);
+        }
 
         private void InsertWordTFIDF(string tableName, string word, string path, double tf, double idf)
         {
-            String query = "INSERT INTO " + tableName + " (Word,FileName,tf,idf) VALUES"
-                           + "('" + word + "','" + path + "',"
+            string query = "INSERT INTO " + tableName + " (Word,FileName,tf,idf)" + 
+                " VALUES"  + "('" + word + "','" + path + "',"
                            + tf + "," + idf + ")";
+            ExecuteNonQuery(query);
         }
 
         private void UpdateWordTFIDF(string tableName, string word, string path, double tf, double idf)
         {
-            throw new NotImplementedException();
+            string query = "UPDATE " + tableName + 
+                    "SET tf = " + tf + ",idf = " + idf +
+                    " WHERE Word = '" + word + "',AND FileName = '" + path + "'" ;
+            ExecuteNonQuery(query);
+        }
+
+        private object getFieldByWordAndFile(string field, string word, string path)
+        {
+            object retVal = null;
+            string tableName = getTableName(word, typeof(TF_IDF_Segments));
+            string query = "SELECT " + field + " FROM" + tableName
+                        + "WHERE FileName = '" + path + "' AND Word = '" + word + "'";
+            OleDbDataReader reader = ExecuteSelectionQuery(query);
+            while (reader.Read())
+            {
+                retVal = reader.GetValue(0);
+            }
+            return retVal;
         }
 
         private double getWeight(string word, string path)
@@ -261,7 +330,26 @@ namespace Model
             }
         }
 
-        private TF_IDF_Segments LetterToSegments(char letter)
+        private int getFilesCount(string word)
+        {
+            int fcount = 0;
+            string where_suffix =
+                word.Equals(ALL) ? "" : "WHERE Word = '" + word + "'AND Weight > 0";
+
+            foreach (string tableName in Enum.GetNames(typeof(WEIGHTS_Segments)))
+            {
+                string query = "SELECT COUNT(DISTINCT FileName) FROM" +
+                    tableName + where_suffix;
+                OleDbDataReader reader = ExecuteSelectionQuery(query);
+                while (reader.Read())
+                {
+                    fcount += reader.GetInt32(0);
+                }
+            }
+            return fcount;
+        }
+
+        private static TF_IDF_Segments LetterToSegments(char letter)
         {
             switch (letter)
             {
@@ -322,22 +410,46 @@ namespace Model
             }
         }
 
+        private static string getTableName(string word, Type tType)
+        {
+            if (tType.Equals(typeof(WEIGHTS_Segments)))
+                return WEIGHTS_TABLE_PREFIX + word.ToUpper().ToCharArray()[0];
+            if (tType.Equals(typeof(TF_IDF_Segments)))
+                return TF_IDF_TABLE_PREFIX + LetterToSegments(word.ToCharArray()[0]);
+            return "";
+        }
+
+        //private static string TF_IDF_SegmentsToString(TF_IDF_Segments s)
+        //{
+        //    if (s.Equals(TF_IDF_Segments.None))
+        //    {
+        //        throw new PersistentModelException("no matching table found");
+        //    }
+        //    string str = s.ToString();
+        //    str.Replace('_', '-');
+        //    return str + "_total";
+        //}
         #endregion
+
+        #endregion
+
+        #region TestMethods
+
+        public bool WordAndFileExistTest(string word, string path, string tableName, out object[] result)
+        {
+            return this.WordAndFileExist(word, path, tableName, out result);
+        }
 
         #endregion
     }
 
+    public class PersistentModelException : Exception
+    {
+        public PersistentModelException(string err)
+            : base(err)
+        {
+        }
+    }
+
 }
 
-//switch (firstLetter)
-//{
-//    case 'A':
-//        dv = new DataView(dataset.A_Letter);
-//        PersistentDataSet.A_LetterRow aNewRow =
-//                dataset.A_Letter.NewA_LetterRow;
-//        aNewRow.Word = word;
-//        aNewRow.FileName = path;
-//        aNewRow.Place = locationID;
-//        aNewRow.Weight = weight;
-//        dv.AddNew();
-//        break;
