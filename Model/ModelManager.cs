@@ -41,8 +41,6 @@ namespace Model
             }            
         }
 
-
-
         public List<Word> GetInversionList()
         {
             return persistent_model.GetInversionList();
@@ -91,5 +89,15 @@ namespace Model
         #endregion
 
         #endregion
+
+        public ModelDocument OpenDocument(string p)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SaveDocument(string p, ModelDocument modelDocument)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

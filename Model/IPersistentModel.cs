@@ -54,10 +54,19 @@ namespace Model
 
         List<Word> GetInversionList();
 
+        void CleanDB();
+
         #region TestMethods
 
         bool WordAndFileExistTest(string word, string path, string tableName, out object[] result);
 
+        void UpdateWordWeightTest(string tableName, string word, string path, int locationID, double weight, int counter);
+
+        string GetWeightsTableNameTest(string word);
+
         #endregion
+
+
+        
     }
 }

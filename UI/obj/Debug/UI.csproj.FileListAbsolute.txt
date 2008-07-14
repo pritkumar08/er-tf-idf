@@ -8,3 +8,5 @@ D:\Project in advanced programming\UI\obj\Debug\UI.cntParagraph.resources
 D:\Project in advanced programming\UI\obj\Debug\UI.MainForm.resources
 D:\Project in advanced programming\UI\obj\Debug\UI.Properties.Resources.resources
 D:\Project in advanced programming\UI\obj\Debug\UI.csproj.GenerateResource.Cache
+D:\Project in advanced programming\UI\obj\Debug\UI.AboutForm.resources
+D:\Project in advanced programming\UI\obj\Debug\UI.DocumentForm.resources
