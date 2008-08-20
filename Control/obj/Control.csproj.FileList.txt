@@ -7,4 +7,5 @@ bin\Debug\Model.pdb
 bin\Debug\UI.pdb
 bin\Debug\Control.exe
 obj\Debug\Control.exe
-bin\Debug\ModelDatabase.mdb
+bin\Debug\erp.mdb
+bin\Debug\ModelDatabase-old.mdb

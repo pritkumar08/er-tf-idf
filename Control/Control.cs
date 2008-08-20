@@ -48,14 +48,18 @@ namespace Control
             /// <returns></returns>
             public Object[] GUIEventHandler(UIManager.GUIAction action, Object[] parameters)
             {
+                Model.ModelDocument document = null;
                 switch (action)
                 {
                     case UIManager.GUIAction.Open_Text_File:
-                        Model.ModelDocument document = model.OpenDocument((string)parameters[0]);
+                         document = model.OpenDocument((string)parameters[0]);
                         return new Object[] { ObjectTranslator.TranslateModelToGUI(document) };
                     case UIManager.GUIAction.Save_Text_File:
                         model.SaveDocument((string)parameters[0], (Model.ModelDocument)ObjectTranslator.TranslateGUIToModel((UI.GUIDocument)parameters[1]));
                         break;
+                    case UIManager.GUIAction.Import_Text_File:
+                        document = model.ImportDocument((string)parameters[0]);
+                        return new Object[] { ObjectTranslator.TranslateModelToGUI(document) };
                     //case UIManager.GUIAction.Insert_Text_File_To_Database:
                     //    model.InsertNewDocumentToDatabase((string)parameters[0], (Model.ModelDocument)ObjectTranslator.TranslateGUIToModel((UI.GUIDocument)parameters[0]));
                     //    break;

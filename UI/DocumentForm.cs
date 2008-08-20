@@ -50,7 +50,8 @@ namespace UI
             public enum DocumentFormActions
             {
                 Document_Focus = 0,
-                Save_File = 1
+                Save_File = 1,
+                Document_Close = 2
             };
 
         #endregion
@@ -128,17 +129,18 @@ namespace UI
                 }
             }
 
-            private void DocumentForm_Paint(object sender, PaintEventArgs e)
+            private void DocumentForm_Activated(object sender, EventArgs e)
             {
                 OnRequestForInformation(DocumentFormActions.Document_Focus,
+                                                       new Object[] { this.Tag });
+            }
+
+            private void DocumentForm_FormClosed(object sender, FormClosedEventArgs e)
+            {
+                OnRequestForInformation(DocumentFormActions.Document_Close,
                                         new Object[] { this.Tag });
             }
 
-            private void DocumentForm_DragDrop(object sender, DragEventArgs e)
-            {
-                OnRequestForInformation(DocumentFormActions.Document_Focus,
-                                        new Object[] { this.Tag });
-            }
 
 
         #endregion
@@ -240,9 +242,9 @@ namespace UI
             {
                 try
                 {
-                    for (int x = i; x < pnlMain.Controls.Count; x++)
+                    for (int x = i + 1; x < pnlMain.Controls.Count; x++)
                     {
-                        Control cnt = pnlMain.Controls[i];
+                        Control cnt = pnlMain.Controls[x];
                         if (cnt is cntHeader)
                         {
                             cntHeader header = (cntHeader)cnt;
@@ -405,7 +407,6 @@ namespace UI
             }
 
         #endregion
-
             
     }
 }

@@ -34,7 +34,8 @@ namespace UI
             {
                 Open_Text_File = 0,
                 Save_Text_File = 1,
-                Insert_Text_File_To_Database = 2
+                Insert_Text_File_To_Database = 2,
+                Import_Text_File = 3
             };
        
         #endregion
@@ -69,6 +70,8 @@ namespace UI
                         return OnGetInformation(GUIAction.Save_Text_File, parameters);
                     case MainForm.MainFormActions.Insert_File_To_Database:
                         return OnGetInformation(GUIAction.Insert_Text_File_To_Database, parameters);
+                    case MainForm.MainFormActions.Import_Document :
+                        return OnGetInformation(GUIAction.Import_Text_File, parameters);
                     case MainForm.MainFormActions.Exit_Application:
                         Application.Exit();
                         return null;
