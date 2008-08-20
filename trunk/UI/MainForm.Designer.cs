@@ -72,6 +72,7 @@ namespace UI
             this.tlstpbtnInsertFile = new System.Windows.Forms.ToolStripButton();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tlstpMain.SuspendLayout();
             this.SuspendLayout();
@@ -104,6 +105,7 @@ namespace UI
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolStripMenuItem,
             this.openToolStripMenuItem,
+            this.importToolStripMenuItem,
             this.toolStripSeparator2,
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
@@ -265,13 +267,13 @@ namespace UI
             // customizeToolStripMenuItem
             // 
             this.customizeToolStripMenuItem.Name = "customizeToolStripMenuItem";
-            this.customizeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.customizeToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.customizeToolStripMenuItem.Text = "&Customize...";
             // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.optionsToolStripMenuItem.Text = "&Options...";
             // 
             // helpToolStripMenuItem
@@ -453,6 +455,13 @@ namespace UI
             this.openFileDialog1.Filter = "Text Comparer Files(*.erp)|*.erp";
             this.openFileDialog1.RestoreDirectory = true;
             // 
+            // importToolStripMenuItem
+            // 
+            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.importToolStripMenuItem.Text = "&Import...";
+            this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -521,5 +530,6 @@ namespace UI
         private System.Windows.Forms.ToolStripButton tlstpbtnRemove;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripButton tlstpbtnInsertFile;
+        private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
     }
 }

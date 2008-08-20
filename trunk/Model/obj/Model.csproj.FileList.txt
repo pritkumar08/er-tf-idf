@@ -3,5 +3,6 @@ bin\Debug\Model.dll
 bin\Debug\Model.pdb
 obj\Debug\Model.dll
 obj\Debug\Model.pdb
-bin\Debug\ModelDatabase.mdb
 bin\Debug\Model.dll.config
+bin\Debug\erp.mdb
+bin\Debug\ModelDatabase-old.mdb

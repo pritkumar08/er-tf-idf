@@ -52,11 +52,11 @@
             this.Name = "DocumentForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Document : ";
-            this.Load += new System.EventHandler(this.DocumentForm_Load);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.DocumentForm_Paint);
-            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.DocumentForm_DragDrop);
-            this.MdiChildActivate += new System.EventHandler(this.DocumentForm_Load);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DocumentForm_FormClosed);
             this.Resize += new System.EventHandler(this.DocumentForm_Resize);
+            this.Activated += new System.EventHandler(this.DocumentForm_Activated);
+            this.MdiChildActivate += new System.EventHandler(this.DocumentForm_Load);
+            this.Load += new System.EventHandler(this.DocumentForm_Load);
             this.ResumeLayout(false);
 
         }

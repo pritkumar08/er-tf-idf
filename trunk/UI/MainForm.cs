@@ -44,7 +44,8 @@ namespace UI
                 Open_Document = 0,
                 Save_Document = 1,
                 Insert_File_To_Database = 2,
-                Exit_Application = 3
+                Import_Document = 3,
+                Exit_Application = 4
             };
 
         #endregion
@@ -82,6 +83,21 @@ namespace UI
                 SaveFile("");
             }
 
+
+            private void importToolStripMenuItem_Click(object sender, EventArgs e)
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    int num = 1213644 + i;
+                    string file = "C:\\Documents and Settings\\Elad\\Desktop\\tt" + num.ToString() + ".erp";
+                    Object[] objects =
+                        OnRequestForInformation(MainFormActions.Import_Document, new Object[] { "http://www.imdb.com/title/tt" + num.ToString() + "/" });
+                    OnRequestForInformation
+                                (MainFormActions.Save_Document, new Object[] { file, (GUIDocument)objects[0] });
+                }
+                //CreateNewDocumentForm((GUIDocument)objects[0], "imdb"); 
+            }
+            
             private void tlsbtnAddParagraph_Click(object sender, EventArgs e)
             {
                 GetDocumentForm(currentDocument).AddParagraph(0, 0, null);
@@ -129,6 +145,9 @@ namespace UI
                         return null;
                     case DocumentForm.DocumentFormActions.Save_File:
                         SaveFile((string)parameters[0]);
+                        return null;
+                    case DocumentForm.DocumentFormActions.Document_Close:
+                        RemoveFile((int)parameters[0]);
                         return null;
                     default :
                         return null;
@@ -183,6 +202,18 @@ namespace UI
                 }
             }
 
+            private void RemoveFile(int tag)
+            {
+                foreach (DocumentForm doc in documents)
+                {
+                    if (tag == (int)doc.Tag)
+                    {
+                        documents.Remove(doc);
+                        return;
+                    }
+                }
+            }
+
             private void SetCurrentDocument(int documentTag)
             {
                 currentDocument = documentTag;
@@ -204,5 +235,6 @@ namespace UI
             }
 
         #endregion
+
     }
 }

@@ -33,8 +33,8 @@ namespace Model
 
         protected PersistentModel()
         {
-            CleanDB();
-            createTables();
+            //CleanDB();
+            //createTables();
         }
 
         private void createTables()
