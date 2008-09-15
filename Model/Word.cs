@@ -4,80 +4,139 @@ using System.Text;
 
 namespace Model
 {
-    public class Word
+    public class RawWord
     {
 
-        #region Word : Members & Consts"
+        #region RawWord : Members & Consts
 
-            public string text = "";
-            public int locationID = 0;
-            public double weight = 0.0;
+        public static char[] DELIMS = { ' ',',','.',';','/','\\','\t','\n','!',
+                                        '|','@','#','(',')','<','>','`','\'','&'};
+        public string text = "";
+        public int locationID = 0;
+        public double weight = 0.0;
 
         #endregion
 
-        #region Word : Initialization"
+        #region RawWord : Initialization
 
-            public Word(string text, int loc, double w)
+        public RawWord()
+        {
+        }
+
+        public RawWord(string text, int loc, double w)
+        {
+            this.text = text;
+            this.locationID = loc;
+            this.weight = w;
+        }
+
+        #endregion
+
+        #region RawWord : Properties
+        public string Text
+        {
+            get
             {
-                this.text = text;
-                this.locationID = loc;
-                this.weight = w;
+                return this.text;
             }
-
-        #endregion
-
-        #region Word : Enums"
-
-        #endregion
-
-        #region Word : Properties"
-            public string Text 
+            set
             {
-                get
-                {
-                    return this.text;
-                }
-                set
-                {
-                    this.text = value;
-                }
+                this.text = value;
             }
+        }
 
-            public int LocationID
+        public int LocationID
+        {
+            get
             {
-                get
-                {
-                    return this.locationID;
-                }
-                set
-                {
-                    this.locationID = value;
-                }
+                return this.locationID;
             }
-
-            public double Weight
+            set
             {
-                get
-                {
-                    return this.weight;
-                }
-                set
-                {
-                    this.weight = value;
-                }
+                this.locationID = value;
             }
+        }
+
+        public double Weight
+        {
+            get
+            {
+                return this.weight;
+            }
+            set
+            {
+                this.weight = value;
+            }
+        }
         #endregion
 
-        #region Word : Events"
+        // override object.Equals
+        public override bool Equals(object obj)
+        {
 
-        #endregion
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+            RawWord w = obj as RawWord;
+            return text.Equals(w.Text) && locationID.Equals(w.LocationID) && weight.Equals(w.Weight);
+        }
 
-        #region Word : EventHandlers"
+        // override object.GetHashCode
+        public override int GetHashCode()
+        {
+            return text.GetHashCode();
+        }
+        public override string ToString()
+        {
+            return text + "," + locationID + "," + weight;
+        }
+    }
 
-        #endregion
+    public class Location
+    {
+        public string fileName;
+        public int locationID;
+        public double weight;
+        public override string ToString()
+        {
+            return fileName + "," + locationID + "," + weight;
+        }
+    }
 
-        #region Word : Methods"
+    public class ProcessedWord
+    {
+        public string word;
+        public double idf;
+        public List<Location> locations;
+        public override string ToString()
+        {
+            return word + "," + idf;
+        }
+    }
 
-        #endregion
+    public class BagWord
+    {
+        public string word;
+        public double tf_idf;
+        public override string ToString()
+        {
+            return word + "," + tf_idf;
+        }
+        // override object.Equals
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+            return this.word.Equals((obj as BagWord).word);
+        }
+
+        // override object.GetHashCode
+        public override int GetHashCode()
+        {
+            return this.word.GetHashCode();
+        }
     }
 }
