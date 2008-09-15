@@ -11,7 +11,6 @@ namespace Model
 {
     public class ModelManager
     {
-        private static FileStream fs = new FileStream("output", FileMode.Append);
         #region ModelManager: Members & Consts
 
         private IPersistentModel persistent_model;

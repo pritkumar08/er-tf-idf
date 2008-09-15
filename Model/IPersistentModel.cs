@@ -5,7 +5,9 @@ using System.Text;
 namespace Model
 {
     public interface IPersistentModel
-    {
+    {              
+        void CleanDB();
+
         void InsertWord(String word, String path, int locationID, double weight);
         
         [Obsolete("tf is calculated instead of stored")]
@@ -36,8 +38,6 @@ namespace Model
         List<string> getFiles();
         
         List<Location> getWordLocations(string w);
-
-        void CleanDB();
 
         #region TestMethods       
 
