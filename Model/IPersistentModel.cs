@@ -6,38 +6,15 @@ namespace Model
 {
     public interface IPersistentModel
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="word"></param>
-        /// <param name="path"></param>
-        /// <param name="locationID"></param>
-        /// <param name="weight"></param>
         void InsertWord(String word, String path, int locationID, double weight);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="word"></param>
-        /// <param name="path"></param>
-        /// <param name="tf"></param>
-        /// <param name="idf"></param>
-        void InsertWordTFIDF(String word, String path, double tf, double idf);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="word"></param>
-        /// <param name="path"></param>
-        /// <returns></returns>
+        
+        [Obsolete("tf is calculated instead of stored")]
+        void InsertWordTF(String word, String path, double tf);
+        
+        [Obsolete("tf is calculated instead of stored")]
         double GetTFByWordAndFile(String word, String path);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="word"></param>
-        /// <param name="path"></param>
-        /// <returns></returns>
+        [Obsolete("idf is calculated instead of stored")]
         double GetIDFByWordAndFile(String word, String path);
 
         // returns the total weight of word in the file describes in path
@@ -46,19 +23,23 @@ namespace Model
         // returns the total weight of all the words in the file describes in path
         double GetTotalWeights(string path);
 
-        // returns the number of files contains word
+        // returns the number of files contains word with total_weight > 0
         int CountFilesContains(string word);
 
         // return the number of files in the DB
         int FilesCount();
 
-        List<Word> GetInversionList();
+        List<RawWord> getFileWords(string path);
+
+        List<string> getWords();
+        
+        List<string> getFiles();
+        
+        List<Location> getWordLocations(string w);
 
         void CleanDB();
 
-        #region TestMethods
-
-        bool WordAndFileExistTest(string word, string path, string tableName, out object[] result);
+        #region TestMethods       
 
         void UpdateWordWeightTest(string tableName, string word, string path, int locationID, double weight, int counter);
 
@@ -66,7 +47,5 @@ namespace Model
 
         #endregion
 
-
-        
     }
 }

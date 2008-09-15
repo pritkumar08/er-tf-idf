@@ -29,6 +29,7 @@
     <IsWebBootstrapper>true</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -49,6 +50,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -84,10 +88,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Normalization\StopWordsHandler.cs" />
+    <Compile Include="Record.cs" />
     <Compile Include="TFIDCalculator.cs" />
     <Compile Include="Normalization\TFIDFMeasure.cs" />
     <Compile Include="Normalization\Tokeniser.cs" />
     <Compile Include="Word.cs" />
+    <Compile Include="WordsBag.cs" />
     <Compile Include="XMLTranslator.cs" />
   </ItemGroup>
   <ItemGroup>
