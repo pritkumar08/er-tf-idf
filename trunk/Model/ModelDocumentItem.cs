@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 namespace Model
 {
@@ -80,13 +81,14 @@ namespace Model
                 return this.Text.Contains(word);
             }
 
-            public virtual List<Word> getWords()
+            public virtual List<RawWord> getWords()
             {
-                List<Word> words = new List<Word>();
+                List<RawWord> words = new List<RawWord>();
 
-                foreach (string s in this.Text.Split(new char[] { ' ' }))
+                foreach (string s in this.Text.Split(RawWord.DELIMS))
                 {
-                    words.Add(new Word(s, this.Location, this.Weight));
+                    if(!s.Equals(String.Empty))
+                        words.Add(new RawWord(s, this.Location, this.Weight));
                 }
                 return words;
             }

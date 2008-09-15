@@ -60,6 +60,14 @@ namespace Model
                 }
             }
 
+            public List<RawWord> getWords()
+            {
+                List<RawWord> words = new List<RawWord>();
+                foreach (ModelParagraph p in Paragraphs)
+                    words.AddRange(p.getWords());
+                return words;
+            }
+
         #endregion
 
     }

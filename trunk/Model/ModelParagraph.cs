@@ -81,12 +81,12 @@ namespace Model
                 return false;
             }
 
-            public override List<Word> getWords()
+            public override List<RawWord> getWords()
             {
-                List<Word> words = base.getWords();
+                List<RawWord> words = base.getWords();
                 foreach (ModelDocumentItem item in Items)
                 {
-                    words.AddRange(getWords());
+                    words.AddRange(item.getWords());
                 }
                 return words;
             }
