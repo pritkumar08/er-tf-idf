@@ -60,6 +60,9 @@ namespace Control
                     case UIManager.GUIAction.Import_Text_File:
                         document = model.ImportDocument((string)parameters[0]);
                         return new Object[] { ObjectTranslator.TranslateModelToGUI(document) };
+                    case UIManager.GUIAction.Search_Web:
+                        LinkedList<ModelGoogleSearchResult> list = model.SearchWeb((string)parameters[0]);
+                        return new Object[] {TranslateList(list)};
                     //case UIManager.GUIAction.Insert_Text_File_To_Database:
                     //    model.InsertNewDocumentToDatabase((string)parameters[0], (Model.ModelDocument)ObjectTranslator.TranslateGUIToModel((UI.GUIDocument)parameters[0]));
                     //    break;
@@ -67,6 +70,16 @@ namespace Control
                         return null;
                 }
                 return null;
+            }
+
+            private LinkedList<GUIGoogleSearchResult> TranslateList(LinkedList<ModelGoogleSearchResult> m_list)
+            {
+                LinkedList<GUIGoogleSearchResult> g_list = new LinkedList<GUIGoogleSearchResult>();
+                foreach (ModelGoogleSearchResult res in m_list)
+                {
+                    g_list.AddLast((GUIGoogleSearchResult)ObjectTranslator.TranslateModelToGUI(res));
+                }
+                return g_list;
             }
             
             /// <summary>
