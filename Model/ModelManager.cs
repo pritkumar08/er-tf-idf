@@ -22,8 +22,8 @@ namespace Model
 
         public ModelManager()
         {
-            persistent_model = PersistentModel.getInstance();
-            si = new PorterStemmer();
+            //persistent_model = PersistentModel.getInstance();
+            //si = new PorterStemmer();
         }
 
         #endregion
@@ -51,22 +51,6 @@ namespace Model
         public void SaveDocument(string path, ModelDocument document)
         {
             XMLTranslator.WriteToXML(path, document);
-        }
-        
-        /// <summary>
-        /// a method to convert an HTML file into ModelDocument object,
-        /// trying to force the ModelDocument structure in the HTML file
-        /// </summary>
-        /// <param name="url"> for the HTML file to read</param>
-        /// <returns>ModelDocument representing the HTML file cotnent</returns>
-        public ModelDocument ImportDocument(string url)
-        {
-            throw new NotImplementedException();
-            /*
-            string html = HTMLTranslator.GetHTMLFromSite(url);
-            html = HTMLTranslator.StripHTML(html);
-            return TranslateStripHTMLToDocument(html);
-             */
         }
 
         /// <summary>
@@ -210,7 +194,19 @@ namespace Model
             return result;
         }
 
-       
+        public ModelDocument ImportDocument(string url)
+        {
+            string html = HTMLTranslator.GetHTMLFromSite(url);
+            //html = HTMLTranslator.StripHTML(html);
+            //return TranslateStripHTMLToDocument(html);
+            return TranslateHTMLToDocument(html);
+        }
+
+
+        public LinkedList<ModelGoogleSearchResult> SearchWeb(string label)
+        {
+            return GoogleSearch.PerformGoogleSearch(label);
+        }
 
         #endregion // Public Mehtods
 
@@ -286,15 +282,6 @@ namespace Model
             return b;
         }
 
-<<<<<<< .mine
-            public ModelDocument ImportDocument(string url)
-            {
-                string html = HTMLTranslator.GetHTMLFromSite(url);
-                //html = HTMLTranslator.StripHTML(html);
-                //return TranslateStripHTMLToDocument(html);
-                return TranslateHTMLToDocument(html);
-            }
-=======
         /// <summary>
         /// creates a new bag,each word in the bag has it tf-idf value
         /// according the database
@@ -311,134 +298,8 @@ namespace Model
                                   group w by w.Text into g
                                   select new { Text = g.Key, Locations = g })
                              select new { Text = x.Text, Weight = x.Locations.Sum(w => w.Weight) };
->>>>>>> .r24
-
-<<<<<<< .mine
-            private ModelDocument TranslateHTMLToDocument(string html)
-            {
-                ModelDocument doc = new ModelDocument();
-                bool header = false, addPar = false;
-                int parId = 1;
-                try{
-                    ModelParagraph par = null; 
-                    for (int i = 0; i < html.Length; i++)
-                    {
-                        if ((html[i] == '<') &&(html[i+1] == 'h') && (html[i + 2] >= '0') && (html[i + 2] <= '9'))
-                        {
-                            par = new ModelParagraph("", parId, 1);
-                            header = true;
-                            int j = i + 4;
-                            string body = GetHeaderTextTillTagStarts(html, ref j);
-                            int titleWeight = int.Parse(html[i + 2].ToString());
-                            ModelHeader head = new ModelHeader(body, titleWeight);
-                            par.AddNewElementToParagraph(head);
-                            i = j;
-                            addPar = true;
-                        }
-                        if ((html[i] == '>'))
-                        {
-                            int j = i + 1;
-                            if (isPlainText(j, html))
-                            {
-                                string body = GetTextTillTagStarts(html, ref j);
-                                if (header)
-                                {
-                                    ModelParagraph par2 = new ModelParagraph(body, parId,1);
-                                    par.AddNewElementToParagraph(par2);
-                                    header = false;
-                                }
-                                else
-                                {
-                                    par = new ModelParagraph(body, parId, 1);
-                                }
-                                i = j-1;
-                                addPar = true;
-                            }
-
-                        }
-                        if (addPar)
-                        {
-                            doc.AddParagraph(par);
-                            parId++;
-                            addPar = false;
-                        }
-                    }
-                    return doc;
-                }
-                catch
-                {
-                    return null;
-                }
-            }
-
-            private string GetTextTillTagStarts(string html, ref int j)
-            {
-                j--;
-                string str = "";
-                try
-                {
-
-                    for (; j < html.Length; j++)
-                    {
-                        if ((html[j] == '<') && (html[j + 1] == 'h') && (html[j + 2] >= '0') && (html[j + 2] <= '9'))
-                            return str;
-                        if ((html[j] == '>'))
-                        {
-                            string s = "";
-                            while (((html[j] != '<') && (html[j] != '{')))
-                            {
-                                if (j >= html.Length)
-                                    return str;
-                                if (isPlainText(j, html))
-                                    if (html[j] == '>')
-                                        s = "";
-                                    else
-                                        s += html[j];
-                                j++;
-                            }
-                            j--;
-                            if (s!="")
-                                str = str + "\n" + s;
-                        }
-                    }
-                    return str;
-                }
-                catch
-                {
-                    return str;
-                }
-            }
-
-            private bool isPlainText(int j, string html)
-            {
-                if ((html[j] == '\r') || (html[j] == '\t') || (html[j] == '\n') || (html[j] == '<'))
-                    return false;
-                return true;
-            }
-
-            private string GetHeaderTextTillTagStarts(string html, ref int j)
-            {
-                string str = "";
-                for (; j < html.Length; j++)
-                {
-                    if ((html[j] != '<') && (html[j] != '{'))
-                    {
-                        if (isPlainText(j, html))
-                            if (html[j] == '>')
-                                str = "";
-                            else
-                                str = str + html[j];
-                    }
-                    else
-                        break;
-                }
-                return str;
-            }
-
-            private ModelDocument TranslateStripHTMLToDocument(string html)
-=======
             foreach (var g in wordGroups)
->>>>>>> .r24
+
             {
                 double tf = g.Weight / total_weight;
                 double idf = 0;
@@ -449,6 +310,128 @@ namespace Model
             }
             return bag;
         }
+
+        private ModelDocument TranslateHTMLToDocument(string html)
+        {
+            ModelDocument doc = new ModelDocument();
+            bool header = false, addPar = false;
+            int parId = 1;
+            try{
+                ModelParagraph par = null; 
+                for (int i = 0; i < html.Length; i++)
+                {
+                    if ((html[i] == '<') &&(html[i+1] == 'h') && (html[i + 2] >= '0') && (html[i + 2] <= '9'))
+                    {
+                        par = new ModelParagraph("", parId, 1);
+                        header = true;
+                        int j = i + 4;
+                        string body = GetHeaderTextTillTagStarts(html, ref j);
+                        int titleWeight = int.Parse(html[i + 2].ToString());
+                        ModelHeader head = new ModelHeader(body, titleWeight);
+                        par.AddNewElementToParagraph(head);
+                        i = j;
+                        addPar = true;
+                    }
+                    if ((html[i] == '>'))
+                    {
+                        int j = i + 1;
+                        if (isPlainText(j, html))
+                        {
+                            string body = GetTextTillTagStarts(html, ref j);
+                            if (header)
+                            {
+                                ModelParagraph par2 = new ModelParagraph(body, parId,1);
+                                par.AddNewElementToParagraph(par2);
+                                header = false;
+                            }
+                            else
+                            {
+                                par = new ModelParagraph(body, parId, 1);
+                            }
+                            i = j-1;
+                            addPar = true;
+                        }
+
+                    }
+                    if (addPar)
+                    {
+                        doc.AddParagraph(par);
+                        parId++;
+                        addPar = false;
+                    }
+                }
+                return doc;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        private string GetTextTillTagStarts(string html, ref int j)
+        {
+            j--;
+            string str = "";
+            try
+            {
+
+                for (; j < html.Length; j++)
+                {
+                    if ((html[j] == '<') && (html[j + 1] == 'h') && (html[j + 2] >= '0') && (html[j + 2] <= '9'))
+                        return str;
+                    if ((html[j] == '>'))
+                    {
+                        string s = "";
+                        while (((html[j] != '<') && (html[j] != '{')))
+                        {
+                            if (j >= html.Length)
+                                return str;
+                            if (isPlainText(j, html))
+                                if (html[j] == '>')
+                                    s = "";
+                                else
+                                    s += html[j];
+                            j++;
+                        }
+                        j--;
+                        if (s!="")
+                            str = str + "\n" + s;
+                    }
+                }
+                return str;
+            }
+            catch
+            {
+                return str;
+            }
+        }
+
+        private bool isPlainText(int j, string html)
+        {
+            if ((html[j] == '\r') || (html[j] == '\t') || (html[j] == '\n') || (html[j] == '<'))
+                return false;
+            return true;
+        }
+
+        private string GetHeaderTextTillTagStarts(string html, ref int j)
+        {
+            string str = "";
+            for (; j < html.Length; j++)
+            {
+                if ((html[j] != '<') && (html[j] != '{'))
+                {
+                    if (isPlainText(j, html))
+                        if (html[j] == '>')
+                            str = "";
+                        else
+                            str = str + html[j];
+                }
+                else
+                    break;
+            }
+            return str;
+        }
+            
 
         #endregion // Private Mehtods
 
