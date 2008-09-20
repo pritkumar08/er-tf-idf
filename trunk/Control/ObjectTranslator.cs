@@ -63,6 +63,13 @@ namespace Control
                     UI.GUIHeader g_head = new UI.GUIHeader(m_head.Text, m_head.Weight);
                     return g_head;
                 }
+                if (item is Model.ModelGoogleSearchResult)
+                {
+                    Model.ModelGoogleSearchResult m_search = (Model.ModelGoogleSearchResult)item;
+                    UI.GUIGoogleSearchResult g_search =
+                        new UI.GUIGoogleSearchResult(m_search.URL, m_search.Title, m_search.Content);
+                    return g_search;
+                }
                 return null;
             }
 
@@ -99,6 +106,13 @@ namespace Control
                     UI.GUIHeader g_head = (UI.GUIHeader)item;
                     Model.ModelHeader m_head = new Model.ModelHeader(g_head.GUIDocumentItemText, g_head.GUIDocumentItemWeight);
                     return m_head;
+                }
+                if (item is UI.GUIGoogleSearchResult)
+                {
+                    UI.GUIGoogleSearchResult g_search = (UI.GUIGoogleSearchResult)item;
+                    Model.ModelGoogleSearchResult m_search =
+                        new Model.ModelGoogleSearchResult(g_search.URL, g_search.Title, g_search.Content);
+                    return m_search;
                 }
                 return null;
             }
