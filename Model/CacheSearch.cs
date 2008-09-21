@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
+using UrlHistoryLibrary;
 
 namespace Model
 {
@@ -29,9 +30,14 @@ namespace Model
         #region CacheSearch : Methods
 
             [DllImport("Wininet.dll", SetLastError = true, CharSet = CharSet.Auto)]
-            public static extern Boolean GetUrlCacheEntryInfo(String lpxaUrlName, IntPtr lpCacheEntryInfo, ref int lpdwCacheEntryInfoBufferSize);
+            private static extern Boolean GetUrlCacheEntryInfo(String lpxaUrlName, IntPtr lpCacheEntryInfo, ref int lpdwCacheEntryInfoBufferSize);
 
-            public static string GetPathForCachedFile(string fileUrl)
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="fileUrl"></param>
+            /// <returns></returns>
+            private static string GetPathForCachedFile(string fileUrl)
             {
                 int cacheEntryInfoBufferSize = 0;
                 IntPtr cacheEntryInfoBuffer = IntPtr.Zero;
@@ -63,7 +69,24 @@ namespace Model
                 {
                     if (!cacheEntryInfoBuffer.Equals(IntPtr.Zero)) Marshal.FreeHGlobal(cacheEntryInfoBuffer);
                 }
-            }    
+            }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <returns></returns>
+            public static Dictionary<string, string> CacheWebAddresses()
+            {
+                Dictionary<string, string> addDic = new Dictionary<string, string>();
+                UrlHistoryWrapperClass urlHistory = new UrlHistoryWrapperClass();
+                UrlHistoryWrapperClass.STATURLEnumerator enumerator = urlHistory.GetEnumerator();
+                while (enumerator.MoveNext())
+                {
+                    if ((!addDic.Keys.Contains(enumerator.Current.URL)) && (enumerator.Current.URL.StartsWith("http")))
+                        addDic.Add(enumerator.Current.URL, enumerator.Current.Title);
+                }
+                return addDic;
+            }
 
         #endregion
        

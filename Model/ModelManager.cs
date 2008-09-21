@@ -208,6 +208,12 @@ namespace Model
             return GoogleSearch.PerformGoogleSearch(label);
         }
 
+
+        public Dictionary<string, string> ImportCacheData()
+        {
+            return CacheSearch.CacheWebAddresses();
+        }
+
         #endregion // Public Mehtods
 
         #region ModelManager : Private Methods
@@ -436,6 +442,5 @@ namespace Model
         #endregion // Private Mehtods
 
         #endregion // Methods
-
     }
 }
