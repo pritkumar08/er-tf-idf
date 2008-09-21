@@ -60,6 +60,9 @@ namespace Control
                     case UIManager.GUIAction.Import_Text_File:
                         document = model.ImportDocument((string)parameters[0]);
                         return new Object[] { ObjectTranslator.TranslateModelToGUI(document) };
+                    case UIManager.GUIAction.Import_Cache_Data:
+                        Dictionary<string, string> addDic = model.ImportCacheData();
+                        return new Object[] { addDic };
                     case UIManager.GUIAction.Search_Web:
                         LinkedList<ModelGoogleSearchResult> list = model.SearchWeb((string)parameters[0]);
                         return new Object[] {TranslateList(list)};
