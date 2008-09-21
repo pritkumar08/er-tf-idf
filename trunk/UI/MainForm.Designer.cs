@@ -76,16 +76,18 @@ namespace UI
             this.tlstpbtnSearchGoogle = new System.Windows.Forms.ToolStripButton();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.tlstpbtnCacheImporter = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1.SuspendLayout();
             this.tlstpMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // stsstpMain
             // 
-            this.stsstpMain.Location = new System.Drawing.Point(0, 356);
+            this.stsstpMain.Location = new System.Drawing.Point(0, 365);
             this.stsstpMain.Name = "stsstpMain";
             this.stsstpMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.stsstpMain.Size = new System.Drawing.Size(481, 22);
+            this.stsstpMain.Size = new System.Drawing.Size(535, 22);
             this.stsstpMain.TabIndex = 0;
             this.stsstpMain.Text = "statusStrip1";
             // 
@@ -99,7 +101,7 @@ namespace UI
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(481, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(535, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "munMain";
             // 
@@ -332,11 +334,13 @@ namespace UI
             this.tlstpbtnInsertFile,
             this.toolStripSeparator6,
             this.tlstptxtSearch,
-            this.tlstpbtnSearchGoogle});
+            this.tlstpbtnSearchGoogle,
+            this.toolStripSeparator8,
+            this.tlstpbtnCacheImporter});
             this.tlstpMain.Location = new System.Drawing.Point(0, 24);
             this.tlstpMain.Name = "tlstpMain";
             this.tlstpMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.tlstpMain.Size = new System.Drawing.Size(481, 25);
+            this.tlstpMain.Size = new System.Drawing.Size(535, 25);
             this.tlstpMain.Stretch = true;
             this.tlstpMain.TabIndex = 0;
             this.tlstpMain.Text = "ToolStripMain";
@@ -489,11 +493,27 @@ namespace UI
             this.openFileDialog1.Filter = "Text Comparer Files(*.erp)|*.erp";
             this.openFileDialog1.RestoreDirectory = true;
             // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 25);
+            // 
+            // tlstpbtnCacheImporter
+            // 
+            this.tlstpbtnCacheImporter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tlstpbtnCacheImporter.Image = ((System.Drawing.Image)(resources.GetObject("tlstpbtnCacheImporter.Image")));
+            this.tlstpbtnCacheImporter.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tlstpbtnCacheImporter.Name = "tlstpbtnCacheImporter";
+            this.tlstpbtnCacheImporter.Size = new System.Drawing.Size(23, 22);
+            this.tlstpbtnCacheImporter.Text = "Import Cache";
+            this.tlstpbtnCacheImporter.ToolTipText = "Import Cache";
+            this.tlstpbtnCacheImporter.Click += new System.EventHandler(this.tlstpbtnCacheImporter_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(481, 378);
+            this.ClientSize = new System.Drawing.Size(535, 387);
             this.Controls.Add(this.stsstpMain);
             this.Controls.Add(this.tlstpMain);
             this.Controls.Add(this.menuStrip1);
@@ -561,5 +581,7 @@ namespace UI
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripTextBox tlstptxtSearch;
         private System.Windows.Forms.ToolStripButton tlstpbtnSearchGoogle;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ToolStripButton tlstpbtnCacheImporter;
     }
 }

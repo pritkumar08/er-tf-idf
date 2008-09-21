@@ -36,7 +36,8 @@ namespace UI
                 Save_Text_File = 1,
                 Insert_Text_File_To_Database = 2,
                 Search_Web = 3,
-                Import_Text_File = 4
+                Import_Text_File = 4,
+                Import_Cache_Data = 5
             };
        
         #endregion
@@ -73,6 +74,8 @@ namespace UI
                         return OnGetInformation(GUIAction.Insert_Text_File_To_Database, parameters);
                     case MainForm.MainFormActions.Import_Document :
                         return OnGetInformation(GUIAction.Import_Text_File, parameters);
+                    case MainForm.MainFormActions.Import_Cache_Data:
+                        return OnGetInformation(GUIAction.Import_Cache_Data, parameters);
                     case MainForm.MainFormActions.Search_Web :
                         return OnGetInformation(GUIAction.Search_Web, parameters);
                     case MainForm.MainFormActions.Exit_Application:

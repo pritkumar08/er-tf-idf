@@ -45,7 +45,9 @@ namespace UI
                 Save_Document = 1,
                 Insert_File_To_Database = 2,
                 Import_Document = 3,
-                Exit_Application = 4
+                Import_Cache_Data = 4,
+                Search_Web = 5,
+                Exit_Application = 6
             };
 
         #endregion
@@ -154,6 +156,23 @@ namespace UI
                 }
             }
 
+            private void tlstpbtnSearchGoogle_Click(object sender, EventArgs e)
+            {
+                Object[] objects =
+                        OnRequestForInformation(MainFormActions.Search_Web, new Object[] { tlstptxtSearch.Text });
+                ShowSearchResults((LinkedList<GUIGoogleSearchResult>)objects[0]);
+            }
+
+            private void tlstpbtnCacheImporter_Click(object sender, EventArgs e)
+            {
+                Object[] objects =
+                        OnRequestForInformation(MainFormActions.Import_Cache_Data, null);
+                CacheDataForm dataForm = new CacheDataForm((Dictionary<string, string>)objects[0]);
+                dataForm.MdiParent = this;
+                dataForm.Show();
+            }
+
+
         #endregion
 
         #region "MainForm : Methods"
@@ -234,7 +253,15 @@ namespace UI
                 return null;
             }
 
+            private void ShowSearchResults(LinkedList<GUIGoogleSearchResult> searchList)
+            {
+                SearchForm search = new SearchForm(searchList);
+                search.MdiParent = this;
+                search.Show();
+            }
+
         #endregion
 
+           
     }
 }
