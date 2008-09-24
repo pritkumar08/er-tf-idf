@@ -37,14 +37,28 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataSetPersistentModelTest.cs" />
+    <Compile Include="ModelManagerTest.cs" />
     <Compile Include="PersistentModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AuthoringTests.txt" />
+    <Content Include="input1.xml" />
+    <Content Include="XMLFile1.xml" />
+    <Content Include="XMLFile2.xml" />
+    <Content Include="XMLFile3.xml" />
+    <Content Include="XMLFile4.xml" />
+    <Content Include="XMLFile5.xml" />
+    <Content Include="XMLFile6.xml" />
+    <Content Include="XMLFile7.xml" />
+    <Content Include="XMLFile8.xml" />
   </ItemGroup>
   <ItemGroup>
     <Shadow Include="Test References\Model.accessor" />

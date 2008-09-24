@@ -46,6 +46,12 @@
     <Compile Include="AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CacheDataForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CacheDataForm.Designer.cs">
+      <DependentUpon>CacheDataForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="cntHeader.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -66,6 +72,7 @@
     </Compile>
     <Compile Include="GUIDocument.cs" />
     <Compile Include="GUIDocumentItem.cs" />
+    <Compile Include="GUIGoogleSearchResult.cs" />
     <Compile Include="GUIHeader.cs" />
     <Compile Include="GUIItem.cs" />
     <Compile Include="GUIParagraph.cs" />
@@ -80,6 +87,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SearchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchForm.Designer.cs">
+      <DependentUpon>SearchForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -87,6 +100,10 @@
     <EmbeddedResource Include="AboutForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CacheDataForm.resx">
+      <DependentUpon>CacheDataForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="cntHeader.resx">
       <DependentUpon>cntHeader.cs</DependentUpon>
@@ -107,6 +124,10 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchForm.resx">
+      <DependentUpon>SearchForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

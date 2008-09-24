@@ -21,6 +21,8 @@ namespace UI
 
                 private int totalControlsHeight = 5;
 
+                private string fileName = "";
+
                 private GUIDocument savedDocument = null;
 
             #endregion
@@ -37,10 +39,11 @@ namespace UI
 
         #region DocumentForm : Initialization
 
-            public DocumentForm(GUIDocument document)
+            public DocumentForm(GUIDocument document, string fileName)
             {
                 InitializeComponent();
-                savedDocument = document;
+                this.savedDocument = document;
+                this.fileName = fileName; 
             }
 
         #endregion
@@ -51,7 +54,8 @@ namespace UI
             {
                 Document_Focus = 0,
                 Save_File = 1,
-                Document_Close = 2
+                Document_Close = 2,
+                Insert_File_To_Database = 3
             };
 
         #endregion
@@ -82,10 +86,17 @@ namespace UI
 
             private void DocumentForm_Load(object sender, EventArgs e)
             {
+                this.Text = "";
+                if (fileName != "")
+                {
+                    int name = fileName.LastIndexOf("\\");
+                    this.Text = fileName.Substring(name + 1, fileName.Length - name - 1);
+                }
                 if (savedDocument != null)
                 {
                     totalControlsHeight = 5;
                     InitializeDocumentComponents(savedDocument);
+                    IsFileChanged = false;
                 }
                 else
                 {
@@ -359,24 +370,28 @@ namespace UI
                 }
             }
 
-            private void SaveDocumentInDatabase()
+            internal void InsertDocumentInDatabase()
             {
                 try
                 {
-
                     if (IsFileChanged)
                     {
                         DialogResult res =
                             MessageBox.Show("Do you wish to save the changes before inserting it to the database", "Text Comparer", MessageBoxButtons.YesNoCancel);
                         if (res == DialogResult.Yes)
-                            //SaveFile(currentFileName);
+                        {
+                            object[] o = OnRequestForInformation(DocumentFormActions.Save_File,
+                                            new Object[] { fileName });
+                            if ((DialogResult)o[0] == DialogResult.OK)
+                                fileName = (string)o[1];
+                        }
                         if (res == DialogResult.Cancel)
                             return;
-                        //OnRequestForInformation(MainFormActions.Insert_File_To_Database, new Object[] { currentFileName, savedDocument });
-                        MessageBox.Show("The file was inserted into the database. "
-                                        + "From now on in order to insert the fileToolStripMenuItem once again you must save it on "
-                                        + "a different name", "Text Comparer", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
+                    OnRequestForInformation(DocumentFormActions.Insert_File_To_Database, new Object[] { fileName, savedDocument });
+                    MessageBox.Show("The file was inserted into the database. "
+                                    + "From now on in order to insert the fileToolStripMenuItem once again you must save it on "
+                                    + "a different name", "Text Comparer", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch
                 {
@@ -407,6 +422,8 @@ namespace UI
             }
 
         #endregion
+
+
             
     }
 }

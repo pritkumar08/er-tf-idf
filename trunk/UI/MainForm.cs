@@ -91,7 +91,7 @@ namespace UI
                 for (int i = 0; i < 5; i++)
                 {
                     int num = 1213644 + i;
-                    string file = "C:\\Documents and Settings\\Elad\\Desktop\\tt" + num.ToString() + ".erp";
+                    string file = Application.LocalUserAppDataPath + "\\"+ num.ToString() + ".erp";
                     Object[] objects =
                         OnRequestForInformation(MainFormActions.Import_Document, new Object[] { "http://www.imdb.com/title/tt" + num.ToString() + "/" });
                     OnRequestForInformation
@@ -112,7 +112,7 @@ namespace UI
 
             private void tlstpbtnInsertFile_Click(object sender, EventArgs e)
             {
-                
+                GetDocumentForm(currentDocument).InsertDocumentInDatabase();
             }
 
             protected virtual Object[] OnRequestForInformation(MainFormActions action, Object[] parameter)
@@ -151,6 +151,9 @@ namespace UI
                     case DocumentForm.DocumentFormActions.Document_Close:
                         RemoveFile((int)parameters[0]);
                         return null;
+                    case DocumentForm.DocumentFormActions.Insert_File_To_Database:
+                        InsertToDatabase((string)parameters[0], (GUIDocument)parameters[1]);
+                        return null;
                     default :
                         return null;
                 }
@@ -179,16 +182,10 @@ namespace UI
 
             private void CreateNewDocumentForm(GUIDocument document, string fileName)
             {
-                DocumentForm docForm = new DocumentForm(document);
+                DocumentForm docForm = new DocumentForm(document, fileName);
                 docForm.DocumentFormEvent += new DocumentForm.DocumentFormEventHandler(DocumentFormHandler);
                 docForm.Tag = ++documentKeyCounter;
                 docForm.MdiParent = this;
-                docForm.Text = "";
-                if (fileName != "")
-                {
-                    int name = fileName.LastIndexOf("\\");
-                    docForm.Text = fileName.Substring(name + 1, fileName.Length - name - 1);
-                }
                 docForm.WindowState = FormWindowState.Maximized;
                 documents.AddFirst(docForm);
                 docForm.Show();
@@ -212,13 +209,13 @@ namespace UI
                 {
                     DialogResult res = saveFileDialog1.ShowDialog();
                     if (res == DialogResult.OK)
-                    {
                         fileName = saveFileDialog1.FileName;
-                        OnRequestForInformation
-                            (MainFormActions.Save_Document,
-                                new Object[] { fileName, GetDocumentForm(currentDocument).GenerateDocument()});
-                    }
-                }
+                    if (res == DialogResult.Cancel) ;
+
+                }  
+                OnRequestForInformation
+                        (MainFormActions.Save_Document,
+                            new Object[] { fileName, GetDocumentForm(currentDocument).GenerateDocument() });
             }
 
             private void RemoveFile(int tag)
@@ -242,7 +239,12 @@ namespace UI
                 removeDocumentItemsToolStripMenuItem.Enabled = true;
                 documentToolStripMenuItem.Enabled = true;
             }
-        
+
+            private void InsertToDatabase(string fileName, GUIDocument doc)
+            {
+                OnRequestForInformation(MainFormActions.Insert_File_To_Database, new Object[] { fileName, doc });
+            }
+
             private DocumentForm GetDocumentForm(int tag)
             {
                 foreach (DocumentForm doc in documents)

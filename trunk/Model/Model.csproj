@@ -49,21 +49,32 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GAPI, Version=0.2.2.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Xml" />
+    <Reference Include="UrlHistoryLibrary, Version=1.0.3186.24765, Culture=neutral, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CacheEntryInfo.cs" />
+    <Compile Include="CacheSearch.cs" />
+    <Compile Include="DataSetPersistentModel.cs" />
     <Compile Include="erpDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>erpDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="GoogleSearch.cs" />
+    <Compile Include="HTMLTranslator.cs" />
     <Compile Include="ModelDocument.cs" />
     <Compile Include="ModelDocumentItem.cs" />
+    <Compile Include="ModelGoogleSearchResult.cs" />
     <Compile Include="ModelHeader.cs" />
     <Compile Include="IPersistentModel.cs" />
     <Compile Include="ModelItem.cs" />

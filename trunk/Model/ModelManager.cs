@@ -15,6 +15,7 @@ namespace Model
 
         private IPersistentModel persistent_model;
         private StemmerInterface si;
+        private Double total_square_sum = -1;
 
         #endregion
 
@@ -23,7 +24,8 @@ namespace Model
         public ModelManager()
         {
             //persistent_model = PersistentModel.getInstance();
-            //si = new PorterStemmer();
+            persistent_model = DataSetPersistentModel.getInstance();
+            si = new PorterStemmer();
         }
 
         #endregion
@@ -62,35 +64,37 @@ namespace Model
         public void InsertDocument(string path)
         {
             ModelDocument d = XMLTranslator.ReadFromXML(path);
-            List<RawWord> words = d.getWords();
-            List<RawWord> filtered = new List<RawWord>();
-            foreach (RawWord w in words)
-            {
-                if (!(string.IsNullOrEmpty(normalize(w.Text))))
-                {
-                    w.Text = normalize(w.Text);
-                    filtered.Add(w);
-                }
-            }
-            /*
-            IEnumerable<RawWord> words = from w in d.getWords()
-                                         where
-                                             (!((w.Text = normalize(w.Text)).Equals("")))
-                                         select w;
-             */
-            double total_weights = filtered.Sum(w => w.weight);
-            int counter = 0;            
-            foreach (RawWord word in filtered)
-            {
-                /*
-                byte[] str = System.Text.UnicodeEncoding.ASCII.GetBytes(
-                    ("%progress:" + (double)counter / filtered.Count +
-                    "  inserting word: " + word.text + "\n").ToCharArray());
-                fs.Write(str, 0, str.Length);*/
-                persistent_model.InsertWord(
-                    word.Text, path, word.LocationID, word.Weight);
-                counter++;
-            }
+            InsertDocument_aux(path, d);
+            (persistent_model as DataSetPersistentModel).AcceptChanges();
+        }
+
+        /// <summary>
+        /// almost the same functionality as InsertDocument,except that 
+        /// the XML file hasn't been created yet 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="doc"></param>
+        public void InsertNewDocumentToDatabase(string fileName, ModelDocument doc)
+        {
+            InsertDocument_aux(fileName, doc);
+        }
+
+        /// <summary>
+        /// generates a ModelDocument object from content of the given url
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public ModelDocument ImportDocument(string url)
+        {
+            string html = HTMLTranslator.GetHTMLFromSite(url);
+            //html = HTMLTranslator.StripHTML(html);
+            //return TranslateStripHTMLToDocument(html);
+            return TranslateHTMLToDocument(html);
+        }
+
+        public LinkedList<ModelGoogleSearchResult> SearchWeb(string label)
+        {
+            return GoogleSearch.PerformGoogleSearch(label);
         }
 
         /// <summary>
@@ -110,35 +114,14 @@ namespace Model
                     int wfc = persistent_model.CountFilesContains(w);
                     double idf = wfc > 0 ? Math.Log(files_count / wfc) : 0;
                     words.Add(new ProcessedWord() { 
-                        word = w, 
-                        locations = persistent_model.getWordLocations(w) ,
-                        idf = idf
+                        Word = w, 
+                        Locations = persistent_model.getWordLocations(w) ,
+                        Idf = idf
                     });                
                 }
             return words;
-        }
+        }       
 
-        /// <summary>
-        /// direct calculating of the tf_idf funcion for a word in a file
-        /// existing in the database
-        /// </summary>
-        /// <param name="word"></param>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        public double tf_idf(string word, string path)
-        {
-            // --- Calculating tf(word,path)                        
-            //tf(word,path) = n(word,path)/n(all,path)
-            double tf_word =
-                persistent_model.GetTotalWeight(word, path) /
-                persistent_model.GetTotalWeights(path);
-            // --- Calculating idf(word)                        
-            //idf(word) = log(m/x)
-            double idf_word = Math.Log(
-                (double)persistent_model.FilesCount() /
-                persistent_model.CountFilesContains(word));
-            return tf_word * idf_word;
-        }
         /// <summary>
         /// 
         /// </summary>
@@ -178,9 +161,9 @@ namespace Model
         /// <param name="path"></param>
         /// <param name="f">an inner product function pointer to evaluate the 
         /// similarity between two bags of words</param>
-        /// <returns>a vector with all non-zero similarities between the new file 
+        /// <returns>a vector with all non-zero similarities values between the new file 
         /// and the rest of the database</returns>
-        public List<Record<string, double>> tagNewFile(string path, 
+        public List<Record<string, double>> evaluateSimilarity(string path, 
             Func<WordsBag,WordsBag, double> f)
         {
             List<Record<string, double>> result = new List<Record<string, double>>();
@@ -194,18 +177,32 @@ namespace Model
             return result;
         }
 
-        public ModelDocument ImportDocument(string url)
+        /// <summary>
+        /// computing the similarity vector using the L2 norm as the similarity
+        /// function between two bag of words,i.e:
+        /// f(b1,b2) = sigma(b1i.tf_idf*b2i.tf_idf)/sum_of_all_squares
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public List<Record<string, double>> L2NormSimilarity(string path)
         {
-            string html = HTMLTranslator.GetHTMLFromSite(url);
-            //html = HTMLTranslator.StripHTML(html);
-            //return TranslateStripHTMLToDocument(html);
-            return TranslateHTMLToDocument(html);
+            double squares_sum = this.getTotalSquaresSum();
+            return evaluateSimilarity(path, generateSimilarityFunction(
+                (x, y) => x*y / squares_sum));
         }
 
-
-        public LinkedList<ModelGoogleSearchResult> SearchWeb(string label)
+        /// <summary>
+        /// computing the similarity vector using the min value as the similarity
+        /// function between two bag of words,i.e:
+        /// f(b1,b2) = sigma(min(b1i.tf_idf,b2i.tf_idf))/sum_of_all_squares
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public List<Record<string, double>> minValSimilarity(string path)
         {
-            return GoogleSearch.PerformGoogleSearch(label);
+            double squares_sum = this.getTotalSquaresSum();
+            return evaluateSimilarity(path, generateSimilarityFunction(
+                (x, y) => Math.Min(x, y) / squares_sum));
         }
 
 
@@ -219,20 +216,31 @@ namespace Model
         #region ModelManager : Private Methods
 
         /// <summary>
-        /// if !StopList.contains(word) returns a normalized form of word 
-        /// else returns empty string
+        /// direct calculating of the tf_idf funcion for a word in a file
+        /// existing in the database
         /// </summary>
         /// <param name="word"></param>
+        /// <param name="path"></param>
         /// <returns></returns>
-        private string normalize(string word)
+        public double tf_idf(string word, string path)
         {
-            if (ServiceRanking.StopWordsHandler.stopWordsList.Contains(word))
-                return String.Empty;
-            string w = si.stemTerm(word);
-            //w = Regex.Escape(w);// Replace(w, @"\W", "'&'");
-            w = Regex.Replace(w, @"\W", "");
-            return w;
+            // --- Calculating tf(word,path)                        
+            //tf(word,path) = n(word,path)/n(all,path)
+            double tf_word =
+                persistent_model.GetTotalWeight(word, path) /
+                persistent_model.GetTotalWeights(path);
+            // --- Calculating idf(word)                        
+            //idf(word) = log(m/x)
+            double idf_word = Math.Log(
+                (double)persistent_model.FilesCount() /
+                persistent_model.CountFilesContains(word));
+            return tf_word * idf_word;
         }
+       
+
+        #endregion // Public Mehtods
+
+        #region ModelManager : Private Methods
 
         /// <summary>
         /// translating a stripped HTML document into a ModelDocument object,
@@ -263,58 +271,6 @@ namespace Model
                 doc.AddParagraph(par);
             }
             return doc;
-        }
-
-        /// <summary>
-        /// creating a new words bag for a file not included in the database.
-        /// all the idf values are taken according the current information in the database.
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns>a list of bagWord representing all non-stop-words upper-cased
-        /// <paramref name="path"/> and in normalized form</returns>
-        private WordsBag createWordsBag(string path)
-        {
-            List<RawWord> filtered = new List<RawWord>();
-            foreach (RawWord w in XMLTranslator.ReadFromXML(path).getWords())
-            {
-                if (!(string.IsNullOrEmpty(normalize(w.Text))))
-                {
-                    w.Text = normalize(w.Text).ToUpper();
-                    filtered.Add(w);
-                }
-            }
-            WordsBag b = new WordsBag() { Name = path };
-            if (filtered.Count > 0) b.Bag = createBag(filtered);
-            return b;
-        }
-
-        /// <summary>
-        /// creates a new bag,each word in the bag has it tf-idf value
-        /// according the database
-        /// </summary>
-        /// <param name="words"></param>
-        /// <returns>a bag for a given list of raw words</returns>
-        private List<BagWord> createBag(List<RawWord> words)
-        {
-            List<BagWord> bag = new List<BagWord>();
-            double total_weight = words.Sum(w => w.Weight);
-            double files_count = (double)persistent_model.FilesCount();
-            var wordGroups = from x in
-                                 (from w in words
-                                  group w by w.Text into g
-                                  select new { Text = g.Key, Locations = g })
-                             select new { Text = x.Text, Weight = x.Locations.Sum(w => w.Weight) };
-            foreach (var g in wordGroups)
-
-            {
-                double tf = g.Weight / total_weight;
-                double idf = 0;
-                int c = persistent_model.CountFilesContains(g.Text);
-                if (c > 0)
-                    idf = Math.Log((double)files_count / c);
-                bag.Add(new BagWord { word = g.Text, tf_idf = tf * idf });
-            }
-            return bag;
         }
 
         private ModelDocument TranslateHTMLToDocument(string html)
@@ -437,10 +393,137 @@ namespace Model
             }
             return str;
         }
-            
+
+        /// <summary>
+        /// inserts the file's contetnt (the d parameter) into the database
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="d">the file's (raw) content</param>
+        private void InsertDocument_aux(string path, ModelDocument d)
+        {
+            List<RawWord> words = d.getWords();
+            List<RawWord> filtered = new List<RawWord>();
+            foreach (RawWord w in words)
+            {
+                if (!(string.IsNullOrEmpty(normalize(w.Text))))
+                {
+                    w.Text = normalize(w.Text);
+                    filtered.Add(w);
+                }
+            }
+            double total_weights = filtered.Sum(w => w.Weight);
+            foreach (RawWord word in filtered)
+            {
+                persistent_model.InsertWord(
+                    word.Text, path, word.LocationID, word.Weight);
+            }
+        }
+
+        /// <summary>
+        /// creating a new words bag for a file not included in the database.
+        /// all the idf values are taken according the current information in the database.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns>a list of bagWord representing all non-stop-words upper-cased
+        /// <paramref name="path"/> and in normalized form</returns>
+        private WordsBag createWordsBag(string path)
+        {
+            List<RawWord> filtered = new List<RawWord>();
+            foreach (RawWord w in XMLTranslator.ReadFromXML(path).getWords())
+            {
+                if (!(string.IsNullOrEmpty(normalize(w.Text))))
+                {
+                    w.Text = normalize(w.Text).ToUpper();
+                    filtered.Add(w);
+                }
+            }
+            WordsBag b = new WordsBag() { Name = path };
+            if (filtered.Count > 0) b.Bag = createBag(filtered);
+            return b;
+        }
+
+        /// <summary>
+        /// creates a new bag,each word in the bag has it tf-idf value
+        /// according the database
+        /// </summary>
+        /// <param name="words"></param>
+        /// <returns>a bag for a given list of raw words</returns>
+        private List<BagWord> createBag(List<RawWord> words)
+        {
+            List<BagWord> bag = new List<BagWord>();
+            double total_weight = words.Sum(w => w.Weight);
+            double files_count = (double)persistent_model.FilesCount();
+            var wordgroups = from x in
+                                 (from w in words
+                                  group w by w.Text into g
+                                  select new { text = g.Key, locations = g })
+                             select new { text = x.text, weight = x.locations.Sum(w => w.Weight) };
+            foreach (var g in wordgroups)
+            {
+                double tf = g.weight / total_weight;
+                double idf = 0;
+                int c = persistent_model.CountFilesContains(g.text);
+                if (c > 0)
+                    idf = Math.Log((double)files_count / c);
+                bag.Add(new BagWord { Word = g.text, TfIdf = tf * idf });
+            }
+            return bag;
+        }
+
+        /// <summary>
+        /// generates the inner-product function pointer 
+        /// </summary>
+        /// <param name="f">the o operation between two elements in the inner-product
+        /// e.g (1)f(x,y) = x*y ,(2) f(x,y) = x*y/sqrt(x^2+y^2)</param>
+        /// <returns></returns>
+            private Func<WordsBag, WordsBag, double> generateSimilarityFunction(
+                Func<double, double, double> f)
+            {
+                return (b1, b2) =>
+                (
+                    from w1 in b1.Bag
+                    from w2 in b2.Bag
+                    where w1.Word.Equals(w2.Word)
+                    select f(w1.TfIdf, w2.TfIdf)
+                ).Sum(x => x);
+            }
+  
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>the total square sum of all the tf-ifds in the system,i.e
+        /// sum for each words bag represents a file sums all tf-idf^2</returns>
+            private double getTotalSquaresSum()
+            {
+                if (total_square_sum != -1) return total_square_sum;
+                List<WordsBag> tb = this.getWordsBag();
+                total_square_sum = (from b in tb select b.Bag.Sum(x =>Math.Pow(x.TfIdf,2))).Sum();
+                return total_square_sum;
+            }
+
+            /// <summary>
+            /// if !StopList.contains(word) returns a normalized form of word 
+            /// else returns an empty string
+            /// </summary>
+            /// <param name="word"></param>
+            /// <returns></returns>
+            private string normalize(string word)
+            {
+                if (ServiceRanking.StopWordsHandler.stopWordsList.Contains(word))
+                    return String.Empty;
+                string w = si.stemTerm(word);
+                //w = Regex.Escape(w);// Replace(w, @"\W", "'&'");
+                w = Regex.Replace(w, @"\W", "");
+                return w;
+            }
+
+            public List<string> getWords()
+            {
+                return persistent_model.getWords();
+            }
+    }
 
         #endregion // Private Mehtods
 
         #endregion // Methods
     }
-}
