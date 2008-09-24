@@ -62,7 +62,7 @@ namespace Model
 
         private void createWeightTables()
         {
-            string query_suffix = " (Word VARCHAR(50),FileName VARCHAR(100),"+
+            string query_suffix = " (Word VARCHAR(50),FileName VARCHAR(200),"+
             "Location INT,Weight Double,wCount INT)";
             createTablesOfType(
                 Enum.GetNames(typeof(WEIGHTS_Segments)), 
@@ -149,6 +149,9 @@ namespace Model
 
         public void InsertWord(String word, String path, int locationID, double weight)
         {
+            if (word.Length > 50 || path.Length > 200)
+                throw new PersistentModelException("word must be at most 50 chars and file path"
+                    + " must be at most 200 chars\n");
             try
             {
                 string tableName = getTableName(word,typeof(WEIGHTS_Segments));
@@ -203,12 +206,15 @@ namespace Model
 
         public int CountFilesContains(string word)
         {
+            if (word.Length > 50)
+                throw new PersistentModelException("word length must be at most 50 chars\n");
             return getFilesCount(word);
         }
-
         
         public List<RawWord> getFileWords(string path)
         {
+            if (path.Length > 200)
+                throw new PersistentModelException("file path length must be at most 200 chars\n");
             List<RawWord> words = new List<RawWord>();
             try
             {
@@ -268,6 +274,7 @@ namespace Model
             }
             
         }
+        
         public List<string> getFiles()
         {
             return getFiles_aux("");
@@ -275,51 +282,21 @@ namespace Model
 
         public List<string> getFiles(string word)
         {
+            if (word.Length > 50)
+                throw new PersistentModelException("word length must be at most 50 chars\n");
             return getFiles_aux(" WHERE Word = '" + word);
         }
 
         public int FilesCount()
         {
             return getFiles().Count;
-        }
-        
-        private int getFilesCount(string word)
-        {
-            return getFiles_aux(" WHERE Word = '" + word + "' AND Weight > 0").Count;
-        }
-
-        private List<string> getFiles_aux(string where_pred)
-        {
-            List<string> files = new List<string>();            
-            try
-            {
-                connection.Open();
-                foreach (string tableName in Enum.GetNames(typeof(WEIGHTS_Segments)))
-                {
-                    string query = "SELECT DISTINCT FileName FROM "
-                    + WEIGHTS_TABLE_PREFIX + tableName + where_pred;
-                    OleDbDataReader reader = ExecuteSelectionQuery(query);
-                    while (reader.Read())
-                    {
-                        string fname = reader.GetString(0);
-                        if (!files.Contains(fname))
-                            files.Add(fname);
-                    }
-                }
-                return files;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            finally
-            {
-                connection.Close();
-            }
-        }
+        }                
 
         public List<Location> getWordLocations(string w)
         {
+            if (w.Length > 50)
+                throw new PersistentModelException("word length must be at most 50 chars\n");
+
             List<Location> locations = new List<Location>();
             try
             {
@@ -333,9 +310,9 @@ namespace Model
                     while (reader.Read())
                     {
                         locations.Add(new Location(){
-                            fileName = reader.GetString(0),
-                            locationID = reader.GetInt32(1),
-                            weight = reader.GetDouble(2)
+                            FileName = reader.GetString(0),
+                            LocationID = reader.GetInt32(1),
+                            Weight = reader.GetDouble(2)
                         });
                     }
                 }
@@ -579,6 +556,41 @@ namespace Model
             if (tType.Equals(typeof(TF_IDF_Segments)))
                 return TF_IDF_TABLE_PREFIX + LetterToSegments(word.ToCharArray()[0]);
             return "";
+        }
+
+        private int getFilesCount(string word)
+        {
+            return getFiles_aux(" WHERE Word = '" + word + "' AND Weight > 0").Count;
+        }
+
+        private List<string> getFiles_aux(string where_pred)
+        {
+            List<string> files = new List<string>();
+            try
+            {
+                connection.Open();
+                foreach (string tableName in Enum.GetNames(typeof(WEIGHTS_Segments)))
+                {
+                    string query = "SELECT DISTINCT FileName FROM "
+                    + WEIGHTS_TABLE_PREFIX + tableName + where_pred;
+                    OleDbDataReader reader = ExecuteSelectionQuery(query);
+                    while (reader.Read())
+                    {
+                        string fname = reader.GetString(0);
+                        if (!files.Contains(fname))
+                            files.Add(fname);
+                    }
+                }
+                return files;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
 
         //private static string TF_IDF_SegmentsToString(TF_IDF_Segments s)

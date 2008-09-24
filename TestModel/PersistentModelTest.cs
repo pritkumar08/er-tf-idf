@@ -105,18 +105,6 @@ namespace TestModel
         }
 
         /// <summary>
-        ///A test for createTFIDFTables
-        ///</summary>
-        [TestMethod()]
-        [DeploymentItem("Model.dll")]
-        public void createTFIDFTablesTest()
-        {
-            PersistentModel_Accessor target = new PersistentModel_Accessor(); // TODO: Initialize to an appropriate value
-            target.createTFIDFTables();
-            Assert.Inconclusive("A method that does not return a value cannot be verified.");
-        }      
-
-        /// <summary>
         ///A test for LetterToSegments
         ///</summary>
         [TestMethod()]
@@ -137,51 +125,16 @@ namespace TestModel
         [TestMethod()]
         public void InsertWordTest()
         {
-            //PersistentModel_Accessor target = new PersistentModel_Accessor(); // TODO: Initialize to an appropriate value
-            string word = "dome"; // TODO: Initialize to an appropriate value
-            string path = "file1"; // TODO: Initialize to an appropriate value
-            int locationID = 1; // TODO: Initialize to an appropriate value
-            double weight = 1.242; // TODO: Initialize to an appropriate value
-            model_instance.InsertWord(word, path, locationID, weight);
+            InsertWord("dome", "file1", 1, 1.242);
+            InsertWord("dome", "file2", 12, 0.03);
+            InsertWord("dome","file1",12,0.005);
             double tw = model_instance.GetTotalWeight("DOME", "file1");
-            Assert.AreEqual(weight, tw);
-
-            word = "dome"; 
-            path = "file2";
-            locationID = 12; 
-            weight = 0.03;
-            model_instance.InsertWord(word, path, locationID, weight);            
-            tw = model_instance.GetTotalWeight("DOME", "file2");
-            Assert.AreEqual(weight, tw);
-            
-            word = "dome";
-            path = "file1";
-            locationID = 12;
-            weight = 0.005;
-            model_instance.InsertWord(word, path, locationID, weight);
-            tw = model_instance.GetTotalWeight("DOME", "file1");
-            Assert.AreEqual(weight, tw);
+            Assert.AreEqual(1.247, tw);         
         }
-
-        /// <summary>
-        ///A test for InsertWordTFIDF
-        ///</summary>
-        [TestMethod()]
-        public void InsertWordTFIDFTest()
+        public void InsertWord(string word, string path, int location, double weight)
         {
-            //PersistentModel_Accessor target = new PersistentModel_Accessor(); // TODO: Initialize to an appropriate value
-            string word = "home"; // TODO: Initialize to an appropriate value
-            string path = "file1"; // TODO: Initialize to an appropriate value
-            double tf = 1.4; // TODO: Initialize to an appropriate value
-            double idf = 0.053; // TODO: Initialize to an appropriate value
-            model_instance.InsertWordTFIDF(word, path, tf, idf);
-            word = "home"; 
-            path = "file2";
-            tf = 1.4; 
-            idf = 0.053;
-            model_instance.InsertWordTFIDF(word, path, tf, idf);            
+            model_instance.InsertWord(word, path, location, weight);
         }
-
         /// <summary>
         ///A test for GetTotalWeights
         ///</summary>
@@ -212,22 +165,6 @@ namespace TestModel
         }
 
         /// <summary>
-        ///A test for GetTFByWordAndFile
-        ///</summary>
-        [TestMethod()]
-        public void GetTFByWordAndFileTest()
-        {
-            PersistentModel_Accessor target = new PersistentModel_Accessor(); // TODO: Initialize to an appropriate value
-            string word = string.Empty; // TODO: Initialize to an appropriate value
-            string path = string.Empty; // TODO: Initialize to an appropriate value
-            double expected = 0F; // TODO: Initialize to an appropriate value
-            double actual;
-            actual = target.GetTFByWordAndFile(word, path);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
-
-        /// <summary>
         ///A test for WordAndFileExist
         ///</summary>
         [TestMethod()]
@@ -242,24 +179,12 @@ namespace TestModel
             object[] resultExpected = null; // TODO: Initialize to an appropriate value
             bool expected = false; // TODO: Initialize to an appropriate value
             bool actual;
+            /*
             actual = model_instance.WordAndFileExistTest(word, path, tableName, out result);
             Assert.AreEqual(resultExpected, result);
             Assert.AreEqual(expected, actual);
             Assert.Inconclusive("Verify the correctness of this test method.");
-        }
-
-        /// <summary>
-        ///A test for GetInversionList
-        ///</summary>
-        [TestMethod()]
-        public void GetInversionListTest()
-        {
-            PersistentModel_Accessor target = new PersistentModel_Accessor(); // TODO: Initialize to an appropriate value
-            List<Word> expected = null; // TODO: Initialize to an appropriate value
-            List<Word> actual;
-            actual = target.GetInversionList();
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+             */
         }
 
         /// <summary>
@@ -271,22 +196,6 @@ namespace TestModel
             PersistentModel expected = null; // TODO: Initialize to an appropriate value
             PersistentModel actual;
             actual = PersistentModel.getInstance();
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
-
-        /// <summary>
-        ///A test for GetIDFByWordAndFile
-        ///</summary>
-        [TestMethod()]
-        public void GetIDFByWordAndFileTest()
-        {
-            PersistentModel_Accessor target = new PersistentModel_Accessor(); // TODO: Initialize to an appropriate value
-            string word = string.Empty; // TODO: Initialize to an appropriate value
-            string path = string.Empty; // TODO: Initialize to an appropriate value
-            double expected = 0F; // TODO: Initialize to an appropriate value
-            double actual;
-            actual = target.GetIDFByWordAndFile(word, path);
             Assert.AreEqual(expected, actual);
             Assert.Inconclusive("Verify the correctness of this test method.");
         }
@@ -356,30 +265,15 @@ namespace TestModel
             double weight = 2.345; // TODO: Initialize to an appropriate value
             int counter = 2; // TODO: Initialize to an appropriate value
             model_instance.UpdateWordWeightTest(tableName, word, path, locationID, weight, counter);
-            object[] result;
+            object[] result;            
+            /*
             model_instance.WordAndFileExistTest(word, path, tableName, out result);
             Assert.AreEqual(word.ToUpper(), result[0]);
             Assert.AreEqual(path, result[1]);
             Assert.AreEqual(locationID, result[2]);
             Assert.AreEqual(weight, result[3]);
             Assert.AreEqual(counter, result[4]);
-        }
-
-        /// <summary>
-        ///A test for UpdateWordTFIDF
-        ///</summary>
-        [TestMethod()]
-        [DeploymentItem("Model.dll")]
-        public void UpdateWordTFIDFTest()
-        {
-            PersistentModel_Accessor target = new PersistentModel_Accessor(); // TODO: Initialize to an appropriate value
-            string tableName = string.Empty; // TODO: Initialize to an appropriate value
-            string word = string.Empty; // TODO: Initialize to an appropriate value
-            string path = string.Empty; // TODO: Initialize to an appropriate value
-            double tf = 0F; // TODO: Initialize to an appropriate value
-            double idf = 0F; // TODO: Initialize to an appropriate value
-            target.UpdateWordTFIDF(tableName, word, path, tf, idf);
-            Assert.Inconclusive("A method that does not return a value cannot be verified.");
+             */
         }
 
         /// <summary>
@@ -423,7 +317,59 @@ namespace TestModel
             Assert.AreEqual(expected, actual);
         }
 
+        [TestMethod()]
+        public void GetWordsTest()
+        {        
+            List<string> expected = new List<string>(){};
+            List<string> actual = model_instance.getWords();
+            Assert.AreEqual(expected.Count, actual.Count);
+            for (int i = 0; i < expected.Count;i++ )
+                Assert.AreEqual(expected[i], actual[i]);
+            InsertWord("w1", "f1", 1, 1.0);
+            InsertWord("w1", "f2", 1, 1.0);
+            InsertWord("w2", "f1", 1, 1.0);
+            InsertWord("w3", "f1", 1, 1.0);
+            InsertWord("w1", "f1", 2, 1.0);
+            InsertWord("w1", "f1", 1, 1.0);
+            actual = model_instance.getWords();
+            expected.AddRange(new string[]{"W1","W2","W3"});
+            Assert.AreEqual(expected.Count, actual.Count);
+            for (int i = 0; i < expected.Count; i++)
+                Assert.AreEqual(expected[i], actual[i]);
 
+
+            //List<RawWord> getFileWords(string path);
+            //List<Location> getWordLocations(string w);
+        }
+
+        [TestMethod()]
+        public void getFileWords()
+        {
+            List<RawWord> expected = new List<RawWord>() { };
+            InsertWord("w1", "f1", 1, 1.0);
+            InsertWord("w1", "f2", 1, 1.0);
+            InsertWord("w2", "f1", 1, 1.0);
+            InsertWord("w3", "f1", 1, 1.0);
+            InsertWord("w1", "f1", 2, 1.0);
+            InsertWord("w1", "f1", 1, 1.0);
+            List<RawWord> actual = model_instance.getFileWords("f1");
+            expected.AddRange(new RawWord[] { 
+                new RawWord(){Text="W1",LocationID=1,Weight=2.0},
+                new RawWord(){Text="W2",LocationID=1,Weight=1.0},
+                new RawWord(){Text="W3",LocationID=1,Weight=1.0},
+                new RawWord(){Text="W1",LocationID=2,Weight=1.0}
+            });
+            CollectionAssert.AreEquivalent(expected, actual);            
+            actual = model_instance.getFileWords("f2");
+            expected.Clear();
+            expected.AddRange(new RawWord[] { 
+                new RawWord(){Text="W1",LocationID=1,Weight=1.0}
+            });
+            CollectionAssert.AreEquivalent(expected, actual);
+            expected.Clear();
+            actual = model_instance.getFileWords("f3");
+            CollectionAssert.AreEquivalent(expected, actual);            
+        }
         /// <summary>
         ///A test for DBClean
         ///</summary>

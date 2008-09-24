@@ -6,3 +6,5 @@ D:\Project in advanced programming\Model\bin\Debug\Model.dll
 D:\Project in advanced programming\Model\bin\Debug\Model.pdb
 D:\Project in advanced programming\Model\bin\Debug\erp.mdb
 D:\Project in advanced programming\Model\bin\Debug\ModelDatabase-old.mdb
+D:\Project in advanced programming\Model\bin\Debug\GAPI.pdb
+D:\Project in advanced programming\Model\bin\Debug\UrlHistoryLibrary.pdb

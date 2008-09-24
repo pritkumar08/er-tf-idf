@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Document>
+  <paragraph pid="1" weight="0">
+    <header weight="0">this is a header for the test paragraph </header>
+    <paragraph pid="2" weight="0">i like to ride on my bikes </paragraph> tests are evil and macroes are too
+  </paragraph>
+</Document>
