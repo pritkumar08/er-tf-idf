@@ -37,39 +37,39 @@ namespace Model
             /// </summary>
             /// <param name="fileUrl"></param>
             /// <returns></returns>
-            private static string GetPathForCachedFile(string fileUrl)
-            {
-                int cacheEntryInfoBufferSize = 0;
-                IntPtr cacheEntryInfoBuffer = IntPtr.Zero;
-                int lastError; Boolean result;
-                try
-                {
-                    // call to see how big the buffer needs to be
-                    result = GetUrlCacheEntryInfo(fileUrl, IntPtr.Zero, ref cacheEntryInfoBufferSize);
-                    lastError = Marshal.GetLastWin32Error();
-                    if (result == false)
-                    {
-                        if (lastError == ERROR_FILE_NOT_FOUND) return null;
-                    }
-                    // allocate the necessary amount of memory
-                    cacheEntryInfoBuffer = Marshal.AllocHGlobal(cacheEntryInfoBufferSize);
+            //private static string GetPathForCachedFile(string fileUrl)
+            //{
+            //    int cacheEntryInfoBufferSize = 0;
+            //    IntPtr cacheEntryInfoBuffer = IntPtr.Zero;
+            //    int lastError; Boolean result;
+            //    try
+            //    {
+            //        // call to see how big the buffer needs to be
+            //        result = GetUrlCacheEntryInfo(fileUrl, IntPtr.Zero, ref cacheEntryInfoBufferSize);
+            //        lastError = Marshal.GetLastWin32Error();
+            //        if (result == false)
+            //        {
+            //            if (lastError == ERROR_FILE_NOT_FOUND) return null;
+            //        }
+            //        // allocate the necessary amount of memory
+            //        cacheEntryInfoBuffer = Marshal.AllocHGlobal(cacheEntryInfoBufferSize);
 
-                    // make call again with properly sized buffer
-                    result = GetUrlCacheEntryInfo(fileUrl, cacheEntryInfoBuffer, ref cacheEntryInfoBufferSize);
-                    lastError = Marshal.GetLastWin32Error();
-                    if (result == true)
-                    {
-                        Object strObj = Marshal.PtrToStructure(cacheEntryInfoBuffer, typeof(CacheEntryInfo));
-                        CacheEntryInfo internetCacheEntry = (CacheEntryInfo)strObj;
-                        String localFileName = Marshal.PtrToStringAuto(internetCacheEntry.lpszLocalFileName); return localFileName;
-                    }
-                    else return null;// file not found
-                }
-                finally
-                {
-                    if (!cacheEntryInfoBuffer.Equals(IntPtr.Zero)) Marshal.FreeHGlobal(cacheEntryInfoBuffer);
-                }
-            }
+            //        // make call again with properly sized buffer
+            //        result = GetUrlCacheEntryInfo(fileUrl, cacheEntryInfoBuffer, ref cacheEntryInfoBufferSize);
+            //        lastError = Marshal.GetLastWin32Error();
+            //        if (result == true)
+            //        {
+            //            Object strObj = Marshal.PtrToStructure(cacheEntryInfoBuffer, typeof(CacheEntryInfo));
+            //            CacheEntryInfo internetCacheEntry = (CacheEntryInfo)strObj;
+            //            String localFileName = Marshal.PtrToStringAuto(internetCacheEntry.lpszLocalFileName); return localFileName;
+            //        }
+            //        else return null;// file not found
+            //    }
+            //    finally
+            //    {
+            //        if (!cacheEntryInfoBuffer.Equals(IntPtr.Zero)) Marshal.FreeHGlobal(cacheEntryInfoBuffer);
+            //    }
+            //}
 
             /// <summary>
             /// 
