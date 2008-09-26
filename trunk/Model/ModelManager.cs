@@ -89,7 +89,9 @@ namespace Model
             string html = HTMLTranslator.GetHTMLFromSite(url);
             //html = HTMLTranslator.StripHTML(html);
             //return TranslateStripHTMLToDocument(html);
-            return TranslateHTMLToDocument(html);
+            if (html != null)
+                return TranslateHTMLToDocument(html);
+            return null; 
         }
 
         public LinkedList<ModelGoogleSearchResult> SearchWeb(string label)
@@ -205,10 +207,40 @@ namespace Model
                 (x, y) => Math.Min(x, y) / squares_sum));
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Dictionary<string, string> ImportCacheData()
         {
             return CacheSearch.CacheWebAddresses();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public List<string> getWords()
+        {
+            return persistent_model.getWords();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void CreateCacheDatabase()
+        {
+            Dictionary<string, ModelDocument> cacheDocument = new Dictionary<string, ModelDocument>();
+            Dictionary<string, string> cacheLinks = CacheSearch.CacheWebAddresses();
+            foreach (string link in cacheLinks.Keys)
+            {
+                ModelDocument doc = ImportDocument(link);
+                if (doc != null)
+                {
+                    doc.Title = cacheLinks[link];
+                    cacheDocument.Add(link, doc);
+                }
+            }
         }
 
         #endregion // Public Mehtods
@@ -236,11 +268,6 @@ namespace Model
                 persistent_model.CountFilesContains(word));
             return tf_word * idf_word;
         }
-       
-
-        #endregion // Public Mehtods
-
-        #region ModelManager : Private Methods
 
         /// <summary>
         /// translating a stripped HTML document into a ModelDocument object,
@@ -273,16 +300,22 @@ namespace Model
             return doc;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="html"></param>
+        /// <returns></returns>
         private ModelDocument TranslateHTMLToDocument(string html)
         {
             ModelDocument doc = new ModelDocument();
             bool header = false, addPar = false;
             int parId = 1;
-            try{
-                ModelParagraph par = null; 
+            try
+            {
+                ModelParagraph par = null;
                 for (int i = 0; i < html.Length; i++)
                 {
-                    if ((html[i] == '<') &&(html[i+1] == 'h') && (html[i + 2] >= '0') && (html[i + 2] <= '9'))
+                    if ((html[i] == '<') && (html[i + 1] == 'h') && (html[i + 2] >= '0') && (html[i + 2] <= '9'))
                     {
                         par = new ModelParagraph("", parId, 1);
                         header = true;
@@ -302,7 +335,7 @@ namespace Model
                             string body = GetTextTillTagStarts(html, ref j);
                             if (header)
                             {
-                                ModelParagraph par2 = new ModelParagraph(body, parId,1);
+                                ModelParagraph par2 = new ModelParagraph(body, parId, 1);
                                 par.AddNewElementToParagraph(par2);
                                 header = false;
                             }
@@ -310,7 +343,7 @@ namespace Model
                             {
                                 par = new ModelParagraph(body, parId, 1);
                             }
-                            i = j-1;
+                            i = j - 1;
                             addPar = true;
                         }
 
@@ -330,6 +363,12 @@ namespace Model
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="html"></param>
+        /// <param name="j"></param>
+        /// <returns></returns>
         private string GetTextTillTagStarts(string html, ref int j)
         {
             j--;
@@ -356,7 +395,7 @@ namespace Model
                             j++;
                         }
                         j--;
-                        if (s!="")
+                        if (s != "")
                             str = str + "\n" + s;
                     }
                 }
@@ -368,6 +407,12 @@ namespace Model
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="j"></param>
+        /// <param name="html"></param>
+        /// <returns></returns>
         private bool isPlainText(int j, string html)
         {
             if ((html[j] == '\r') || (html[j] == '\t') || (html[j] == '\n') || (html[j] == '<'))
@@ -375,6 +420,12 @@ namespace Model
             return true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="html"></param>
+        /// <param name="j"></param>
+        /// <returns></returns>
         private string GetHeaderTextTillTagStarts(string html, ref int j)
         {
             string str = "";
@@ -476,59 +527,49 @@ namespace Model
         /// <param name="f">the o operation between two elements in the inner-product
         /// e.g (1)f(x,y) = x*y ,(2) f(x,y) = x*y/sqrt(x^2+y^2)</param>
         /// <returns></returns>
-            private Func<WordsBag, WordsBag, double> generateSimilarityFunction(
-                Func<double, double, double> f)
-            {
-                return (b1, b2) =>
-                (
-                    from w1 in b1.Bag
-                    from w2 in b2.Bag
-                    where w1.Word.Equals(w2.Word)
-                    select f(w1.TfIdf, w2.TfIdf)
-                ).Sum(x => x);
-            }
-  
+        private Func<WordsBag, WordsBag, double> generateSimilarityFunction(
+            Func<double, double, double> f)
+        {
+            return (b1, b2) =>
+            (
+                from w1 in b1.Bag
+                from w2 in b2.Bag
+                where w1.Word.Equals(w2.Word)
+                select f(w1.TfIdf, w2.TfIdf)
+            ).Sum(x => x);
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <returns>the total square sum of all the tf-ifds in the system,i.e
         /// sum for each words bag represents a file sums all tf-idf^2</returns>
-            private double getTotalSquaresSum()
-            {
-                if (total_square_sum != -1) return total_square_sum;
-                List<WordsBag> tb = this.getWordsBag();
-                total_square_sum = (from b in tb select b.Bag.Sum(x =>Math.Pow(x.TfIdf,2))).Sum();
-                return total_square_sum;
-            }
+        private double getTotalSquaresSum()
+        {
+            if (total_square_sum != -1) return total_square_sum;
+            List<WordsBag> tb = this.getWordsBag();
+            total_square_sum = (from b in tb select b.Bag.Sum(x => Math.Pow(x.TfIdf, 2))).Sum();
+            return total_square_sum;
+        }
 
-            /// <summary>
-            /// if !StopList.contains(word) returns a normalized form of word 
-            /// else returns an empty string
-            /// </summary>
-            /// <param name="word"></param>
-            /// <returns></returns>
-            private string normalize(string word)
-            {
-                if (ServiceRanking.StopWordsHandler.stopWordsList.Contains(word))
-                    return String.Empty;
-                string w = si.stemTerm(word);
-                //w = Regex.Escape(w);// Replace(w, @"\W", "'&'");
-                w = Regex.Replace(w, @"\W", "");
-                return w;
-            }
-
-            public List<string> getWords()
-            {
-                return persistent_model.getWords();
-            }
-
-            public void CleanDB()
-            {
-                persistent_model.CleanDB();
-            }
-    }
+        /// <summary>
+        /// if !StopList.contains(word) returns a normalized form of word 
+        /// else returns an empty string
+        /// </summary>
+        /// <param name="word"></param>
+        /// <returns></returns>
+        private string normalize(string word)
+        {
+            if (ServiceRanking.StopWordsHandler.stopWordsList.Contains(word))
+                return String.Empty;
+            string w = si.stemTerm(word);
+            //w = Regex.Escape(w);// Replace(w, @"\W", "'&'");
+            w = Regex.Replace(w, @"\W", "");
+            return w;
+        }
 
         #endregion // Private Mehtods
-
+   
         #endregion // Methods
     }
+}
