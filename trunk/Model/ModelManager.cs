@@ -170,15 +170,74 @@ namespace Model
         public List<Record<string, double>> evaluateSimilarity(string path, 
             Func<WordsBag,WordsBag, double> f)
         {
+            WordsBag new_bag = createWordsBag(path);
+            return evaluateSimilarity_aux(new_bag, f);
+        }
+
+        /// <summary>
+        /// comparing a new well-formed xml file (according to the system's DTD)
+        /// to all other files in the database.        
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="f">an inner product function pointer to evaluate the 
+        /// similarity between two bags of words</param>
+        /// <returns>a vector with all non-zero similarities values between the new file 
+        /// and the rest of the database</returns>
+        public List<Record<string, double>> evaluateSimilarity(ModelDocument doc,
+            Func<WordsBag, WordsBag, double> f)
+        {            
+            WordsBag new_bag = createWordsBag(doc);
+            return evaluateSimilarity_aux(new_bag, f);
+        }
+
+        private List<Record<string, double>> evaluateSimilarity_aux(WordsBag new_bag, Func<WordsBag, WordsBag, double> f)
+        {
             List<Record<string, double>> result = new List<Record<string, double>>();
-            WordsBag new_bag = createWordsBag(path);            
             foreach (WordsBag bag in this.getWordsBag())
             {
                 double res = f(new_bag, bag);
-                if (res > 0) result.Add(new Record<string, double> { 
-                                            first = bag.Name, second = res });
+                if (res > 0) result.Add(new Record<string, double>
+                {
+                    first = bag.Name,
+                    second = res
+                });
             }
             return result;
+        }
+
+        /// <summary>
+        /// creating a new words bag for a file not included in the database.
+        /// all the idf values are taken according the current information in the database.
+        /// </summary>
+        /// <param name="path">an existing XML file name</param>
+        /// <returns>a list of bagWord representing all non-stop-words upper-cased
+        /// <paramref name="path"/> and in normalized form</returns>
+        private WordsBag createWordsBag(string path)
+        {
+            return createWordsBag(XMLTranslator.ReadFromXML(path));
+        }
+
+        /// <summary>
+        /// same as <code>createWordsBag(string)</code> but gets directly 
+        /// the <code>ModelDocument</code> object as a paramenter
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <returns></returns>
+        private WordsBag createWordsBag(ModelDocument doc)
+        {
+            List<RawWord> filtered = new List<RawWord>();
+            foreach (RawWord w in doc.getWords())
+            {
+                if (!(string.IsNullOrEmpty(normalize(w.Text))))
+                {
+                    w.Text = normalize(w.Text).ToUpper();
+                    filtered.Add(w);
+                }
+            }
+            WordsBag b = new WordsBag() { Name = doc.Title };
+            if (filtered.Count > 0) b.Bag = createBag(filtered);
+            return b;
+
         }
 
         /// <summary>
@@ -186,13 +245,26 @@ namespace Model
         /// function between two bag of words,i.e:
         /// f(b1,b2) = sigma(b1i.tf_idf*b2i.tf_idf)/sum_of_all_squares
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="path">an existing XML file name</param>
         /// <returns></returns>
         public List<Record<string, double>> L2NormSimilarity(string path)
         {
             double squares_sum = this.getTotalSquaresSum();
             return evaluateSimilarity(path, generateSimilarityFunction(
                 (x, y) => x*y / squares_sum));
+        }
+
+        /// <summary>
+        /// same as <code>L2NormSimilarity(string path)</code> but gets directly the 
+        /// <code>ModelDocument</code> object as parameter
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <returns></returns>
+        public List<Record<string, double>> L2NormSimilarity(ModelDocument doc)
+        {
+            double squares_sum = this.getTotalSquaresSum();
+            return evaluateSimilarity(doc, generateSimilarityFunction(
+                (x, y) => x * y / squares_sum));
         }
 
         /// <summary>
@@ -206,6 +278,19 @@ namespace Model
         {
             double squares_sum = this.getTotalSquaresSum();
             return evaluateSimilarity(path, generateSimilarityFunction(
+                (x, y) => Math.Min(x, y) / squares_sum));
+        }
+
+        /// <summary>
+        /// same as <code>minValSimilarity(string path)</code> but gets directly the 
+        /// <code>ModelDocument</code> object as parameter
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <returns></returns>
+        public List<Record<string, double>> minValSimilarity(ModelDocument doc)
+        {
+            double squares_sum = this.getTotalSquaresSum();
+            return evaluateSimilarity(doc, generateSimilarityFunction(
                 (x, y) => Math.Min(x, y) / squares_sum));
         }
 
@@ -240,11 +325,12 @@ namespace Model
                 {
                     doc.Title = cacheLinks[link];
                     cacheDocument.Add(link, doc);
+                    InsertDocument_aux(link, doc);
                 }
             }
         }
-
-                /// <summary>
+        
+        /// <summary>
         /// Deletes all DB content
         /// </summary>
         public void CleanDB()
@@ -478,29 +564,6 @@ namespace Model
                     word.Text, path, word.LocationID, word.Weight);
             }
             persistent_model.UpdateDB();
-        }
-
-        /// <summary>
-        /// creating a new words bag for a file not included in the database.
-        /// all the idf values are taken according the current information in the database.
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns>a list of bagWord representing all non-stop-words upper-cased
-        /// <paramref name="path"/> and in normalized form</returns>
-        private WordsBag createWordsBag(string path)
-        {
-            List<RawWord> filtered = new List<RawWord>();
-            foreach (RawWord w in XMLTranslator.ReadFromXML(path).getWords())
-            {
-                if (!(string.IsNullOrEmpty(normalize(w.Text))))
-                {
-                    w.Text = normalize(w.Text).ToUpper();
-                    filtered.Add(w);
-                }
-            }
-            WordsBag b = new WordsBag() { Name = path };
-            if (filtered.Count > 0) b.Bag = createBag(filtered);
-            return b;
         }
 
         /// <summary>
