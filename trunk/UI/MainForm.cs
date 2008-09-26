@@ -47,7 +47,8 @@ namespace UI
                 Import_Document = 3,
                 Import_Cache_Data = 4,
                 Search_Web = 5,
-                Exit_Application = 6
+                Create_Cache_Database = 6,
+                Exit_Application = 7
             };
 
         #endregion
@@ -175,6 +176,10 @@ namespace UI
                 dataForm.Show();
             }
 
+            private void tlstpbtnCacheDatabase_Click(object sender, EventArgs e)
+            {
+                CreateCacheDatabase();
+            }
 
         #endregion
 
@@ -210,7 +215,6 @@ namespace UI
                     DialogResult res = saveFileDialog1.ShowDialog();
                     if (res == DialogResult.OK)
                         fileName = saveFileDialog1.FileName;
-                    if (res == DialogResult.Cancel) ;
 
                 }  
                 OnRequestForInformation
@@ -262,8 +266,12 @@ namespace UI
                 search.Show();
             }
 
+            private void CreateCacheDatabase()
+            {
+                OnRequestForInformation(MainFormActions.Create_Cache_Database, null);
+            }
+
         #endregion
 
-           
     }
 }
