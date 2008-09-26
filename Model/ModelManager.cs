@@ -65,7 +65,7 @@ namespace Model
         {
             ModelDocument d = XMLTranslator.ReadFromXML(path);
             InsertDocument_aux(path, d);
-            (persistent_model as DataSetPersistentModel).AcceptChanges();
+            (persistent_model as DataSetPersistentModel).UpdateDB();
         }
 
         /// <summary>
@@ -520,6 +520,11 @@ namespace Model
             public List<string> getWords()
             {
                 return persistent_model.getWords();
+            }
+
+            public void CleanDB()
+            {
+                persistent_model.CleanDB();
             }
     }
 

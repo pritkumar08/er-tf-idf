@@ -89,6 +89,7 @@ namespace TestModel
         public void InsertDocumentTest()
         {
             ModelManager target = new ModelManager(); // TODO: Initialize to an appropriate value
+            target.CleanDB();
             List<string> words = target.getWords();
             string path = "D:\\Project in advanced programming\\TestModel\\XMLFile1.xml"; // TODO: Initialize to an appropriate value            
             target.InsertDocument(path);

@@ -9,3 +9,7 @@ D:\Project in advanced programming\Control\bin\Debug\UI.pdb
 D:\Project in advanced programming\Control\obj\Debug\ResolveAssemblyReference.cache
 D:\Project in advanced programming\Control\bin\Debug\erp.mdb
 D:\Project in advanced programming\Control\bin\Debug\ModelDatabase-old.mdb
+D:\Project in advanced programming\Control\bin\Debug\UrlHistoryLibrary.dll
+D:\Project in advanced programming\Control\bin\Debug\GAPI.dll
+D:\Project in advanced programming\Control\bin\Debug\UrlHistoryLibrary.pdb
+D:\Project in advanced programming\Control\bin\Debug\GAPI.pdb

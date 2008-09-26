@@ -17,6 +17,7 @@ namespace Model
 
         private static OleDbConnection connection;
         private erpDataSet dataset = new erpDataSet();
+        Dictionary<string, OleDbDataAdapter> adapters = new Dictionary<string, OleDbDataAdapter>();
         //OleDbDataAdapter da = new OleDbDataAdapter();
 
         private const String connectionString_old =
@@ -32,26 +33,20 @@ namespace Model
         #region DataSetPersistentModel : Initialization
 
         protected DataSetPersistentModel()
-        {
-            //CleanDB();
-            //createTables();
-            //AcceptChanges();
+        {            
+            createTables();
             try
             {
-                OleDbConnection conn = new OleDbConnection(connectionString);
                 foreach (string prefix in Enum.GetNames(typeof(WEIGHTS_Segments)))
                 {
                     string table_name = WEIGHTS_TABLE_PREFIX + prefix;
-                    OleDbDataAdapter oOrdersDataAdapter = new
-                        OleDbDataAdapter(new OleDbCommand(
-                            "SELECT * FROM " + table_name, conn));
-                    oOrdersDataAdapter.DeleteCommand = new OleDbCommand(
-                        "DELETE * FROM "+ table_name+ 
-                        " WHERE Word = ? AND FileName = ? AND Location = ?",conn);
-                    oOrdersDataAdapter.UpdateCommand = new OleDbCommand(
-                        "UPDATE "+ table_name + " SET wCount = @wCount"
-                        + " WHERE Word = ? AND FileName = ? AND Location = ?",conn);
-                    oOrdersDataAdapter.Fill(dataset, table_name);
+                    OleDbDataAdapter adapter = new OleDbDataAdapter();
+                    adapter.SelectCommand = CreateSelectCommand(table_name, connection);
+                    adapter.InsertCommand = CreateInsertCommand(table_name, connection);
+                    adapter.DeleteCommand = CreateDeleteCommand(table_name, connection);
+                    adapter.UpdateCommand = CreateUpdateCommand(table_name, connection);
+                    adapters.Add(table_name, adapter);
+                    adapter.Fill(dataset, table_name);                    
                 }
             }
             catch (Exception e)
@@ -81,19 +76,13 @@ namespace Model
                 foreach (string prefix in Enum.GetNames(typeof(WEIGHTS_Segments)))
                 {
                     string table_name = WEIGHTS_TABLE_PREFIX + prefix;
-                    OleDbConnection conn = new OleDbConnection(connectionString);
-                    OleDbDataAdapter da = new OleDbDataAdapter();
-                    da.SelectCommand = CreateSelectCommand(table_name, conn);
-                    da.DeleteCommand = CreateDeleteCommand(table_name, conn);
-                    da.UpdateCommand = CreateUpdateCommand(table_name, conn);
                     foreach (DataRow r in dataset.Tables[table_name].Rows)
                     {
                         r.Delete();
                     }
-                    da.Update(dataset, table_name);
+                    adapters[table_name].Update(dataset, table_name);
                 }
                 dataset.AcceptChanges();
-                //da.Update(dataset);
             }
             catch (OleDbException ex)
             {                
@@ -128,6 +117,19 @@ namespace Model
         {
             return new OleDbCommand(
                                 "SELECT * FROM " + table_name, conn);
+        }
+
+        private OleDbCommand CreateInsertCommand(string table_name, OleDbConnection conn)
+        {
+            OleDbCommand cmd = new OleDbCommand(
+            "INSERT INTO " + table_name + " (Word,FileName,Location,Weight,wCount)" 
+            + "VALUES (?,?,?,?,?)", conn);
+            cmd.Parameters.Add("Word", OleDbType.WChar, 50, "Word");
+            cmd.Parameters.Add("FileName", OleDbType.WChar, 200, "FileName");
+            cmd.Parameters.Add("Location", OleDbType.Integer, 10, "Location");
+            cmd.Parameters.Add("Weight", OleDbType.Double, 15, "Weight");            
+            cmd.Parameters.Add("wCount", OleDbType.Integer, 10, "wCount");            
+            return cmd;
         }
 
         #endregion
@@ -275,9 +277,14 @@ namespace Model
 
         #endregion
 
-        public void AcceptChanges()
+        public void UpdateDB()
         {
-            dataset.AcceptChanges();
+            foreach (string prefix in Enum.GetNames(typeof(WEIGHTS_Segments)))
+            {
+                string table_name = WEIGHTS_TABLE_PREFIX + prefix;
+                adapters[table_name].Update(dataset, table_name);
+            }
+            dataset.AcceptChanges();            
         }
 
         public void RejectChanges()
@@ -286,8 +293,90 @@ namespace Model
         }
         #region PersistentModel : Private Methods
 
+        private void createWeightTables()
+        {
+            string query_suffix = " (Word VARCHAR(50),FileName VARCHAR(200)," +
+            "Location INT,Weight Double,wCount INT)";
+            createTablesOfType(
+                Enum.GetNames(typeof(WEIGHTS_Segments)),
+                WEIGHTS_TABLE_PREFIX, query_suffix);
+        }
+
+        private void createTablesOfType(string[] tableNames, string commmonNamePrefix, string fieldsDef)
+        {
+            string query_prefix = "CREATE TABLE ";
+            foreach (string tableName in tableNames)
+            {
+                if (!TableExists(commmonNamePrefix + tableName))
+                ExecuteNonQuery(
+                    query_prefix + commmonNamePrefix + tableName + fieldsDef);
+            }
+        }
+
+        private bool TableExists(string tableName)
+        {
+            bool exists;
+            try
+            {
+                exists= false;
+                connection.Open();
+                /*
+                DataTable tableInfo = connection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, 
+                    new string[] { "Nothing", "Nothing", tableName,"TABLE"});
+                exists = tableInfo.Rows.Count > 0;
+                 */
+                string query = "SELECT COUNT (*) FROM " + tableName;
+                OleDbCommand command = new OleDbCommand(query, connection);
+                int? res = command.ExecuteScalar() as int?;
+                return res != null;
+            }
+            catch (Exception e)
+            {
+                if (e.Message.Contains("Make sure it exists"))
+                    return false;
+                else throw e;
+            }
+            finally
+            {
+                connection.Close();                
+            }
+        }
+
+        private OleDbDataReader ExecuteSelectionQuery(String query)
+        {
+            try
+            {
+                OleDbCommand command = new OleDbCommand(query, connection);
+                return command.ExecuteReader();
+            }
+            catch (Exception exp)
+            {
+                throw exp;
+            }
+        }
+
+        private void ExecuteNonQuery(String query)
+        {
+            try
+            {
+                connection.Open();
+                OleDbCommand command = new OleDbCommand(query, connection);
+                command.ExecuteNonQuery();
+            }
+            catch (Exception exp)
+            {
+                throw exp;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
         private void createTables()
         {
+            createWeightTables();
+            /*
             foreach (string prefix in Enum.GetNames(typeof(WEIGHTS_Segments)))
             {
                 DataTable weights_table = new DataTable(WEIGHTS_TABLE_PREFIX + prefix);
@@ -338,24 +427,11 @@ namespace Model
                 PrimaryKeyColumns[1] = weights_table.Columns["FileName"];
                 PrimaryKeyColumns[2] = weights_table.Columns["Location"];
                 weights_table.PrimaryKey = PrimaryKeyColumns;
-
-                dataset.Tables.Add(weights_table);
+                
+                dataset.Tables.Add(weights_table);             
             }
+             */
         }
-
-        [Obsolete]
-        private void createTablesOfType(string[] tableNames, string commmonNamePrefix, string fieldsDef)
-        {
-            string query_prefix = "CREATE TABLE ";
-            foreach (string tableName in tableNames)
-                ExecuteNonQuery(
-                    query_prefix + commmonNamePrefix + tableName + fieldsDef);
-        }
-
-        private void ExecuteNonQuery(string p)
-        {
-            throw new NotImplementedException();
-        }        
         
         private double getWeight(string word, string path)
         {

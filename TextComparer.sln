@@ -1,6 +1,22 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4805DA63-A1BE-4EA4-91A7-1CABE19CFE2F}"
+	ProjectSection(SolutionItems) = preProject
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+		TextComparer.vsmdi = TextComparer.vsmdi
+		TextComparer1.vsmdi = TextComparer1.vsmdi
+		TextComparer10.vsmdi = TextComparer10.vsmdi
+		TextComparer2.vsmdi = TextComparer2.vsmdi
+		TextComparer3.vsmdi = TextComparer3.vsmdi
+		TextComparer4.vsmdi = TextComparer4.vsmdi
+		TextComparer5.vsmdi = TextComparer5.vsmdi
+		TextComparer6.vsmdi = TextComparer6.vsmdi
+		TextComparer7.vsmdi = TextComparer7.vsmdi
+		TextComparer8.vsmdi = TextComparer8.vsmdi
+		TextComparer9.vsmdi = TextComparer9.vsmdi
+	EndProjectSection
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{A4DECB19-6E16-4259-84FE-3BB475EC905D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Control", "Control\Control.csproj", "{D333D543-04DF-4D0D-A5B0-664F73A4B39E}"
@@ -9,17 +25,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{9DFE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestModel", "TestModel\TestModel.csproj", "{0AA7D6E9-E62F-4158-A8C1-06ED847D8EE6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4805DA63-A1BE-4EA4-91A7-1CABE19CFE2F}"
-	ProjectSection(SolutionItems) = preProject
-		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
-		TextComparer.vsmdi = TextComparer.vsmdi
-		TextComparer1.vsmdi = TextComparer1.vsmdi
-		TextComparer2.vsmdi = TextComparer2.vsmdi
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project1", "Project1\Project1.csproj", "{562A60F4-6861-4F16-9E83-0A7762D10726}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = TextComparer2.vsmdi
+		CategoryFile = TextComparer10.vsmdi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +52,10 @@ Global
 		{0AA7D6E9-E62F-4158-A8C1-06ED847D8EE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AA7D6E9-E62F-4158-A8C1-06ED847D8EE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AA7D6E9-E62F-4158-A8C1-06ED847D8EE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{562A60F4-6861-4F16-9E83-0A7762D10726}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{562A60F4-6861-4F16-9E83-0A7762D10726}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{562A60F4-6861-4F16-9E83-0A7762D10726}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{562A60F4-6861-4F16-9E83-0A7762D10726}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
