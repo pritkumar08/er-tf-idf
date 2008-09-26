@@ -30,6 +30,7 @@ namespace Model
 
         #endregion
 
+
         #region ModelManager : Methods
 
         #region ModelManager : Public Methods
@@ -243,9 +244,7 @@ namespace Model
             }
         }
 
-        #endregion // Public Mehtods
-
-        /// <summary>
+                /// <summary>
         /// Deletes all DB content
         /// </summary>
         public void CleanDB()
@@ -274,6 +273,10 @@ namespace Model
                 persistent_model.CountFilesContains(word));
             return tf_word * idf_word;
         }
+
+        #endregion // Public Mehtods
+
+        #region ModelManager : Private Methods
 
         /// <summary>
         /// translating a stripped HTML document into a ModelDocument object,
