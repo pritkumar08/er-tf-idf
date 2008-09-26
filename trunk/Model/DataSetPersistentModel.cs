@@ -315,16 +315,9 @@ namespace Model
 
         private bool TableExists(string tableName)
         {
-            bool exists;
             try
             {
-                exists= false;
                 connection.Open();
-                /*
-                DataTable tableInfo = connection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, 
-                    new string[] { "Nothing", "Nothing", tableName,"TABLE"});
-                exists = tableInfo.Rows.Count > 0;
-                 */
                 string query = "SELECT COUNT (*) FROM " + tableName;
                 OleDbCommand command = new OleDbCommand(query, connection);
                 int? res = command.ExecuteScalar() as int?;
