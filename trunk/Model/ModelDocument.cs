@@ -10,6 +10,7 @@ namespace Model
         #region Document : Members & Consts
 
             private LinkedList<ModelDocumentItem> paragraphs = null;
+            private string title;
 
         #endregion
 
@@ -29,6 +30,18 @@ namespace Model
                 get
                 {
                     return this.paragraphs;
+                }
+            }
+
+            public string Title
+            {
+                get
+                {
+                    return this.title;
+                }
+                set
+                {
+                    this.title = value;
                 }
             }
 

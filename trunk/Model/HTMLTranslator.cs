@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Net;
 
 namespace Model
 {
@@ -31,7 +32,15 @@ namespace Model
             internal static string GetHTMLFromSite(string url)
             {
                 System.Net.WebClient oClient = new System.Net.WebClient();
-                return oClient.DownloadString(url);
+                try
+                {
+                    return oClient.DownloadString(url);
+                }
+                catch
+                {
+                    return null;
+                }
+                
             }
 
             internal static string StripHTML(string source)
