@@ -66,6 +66,9 @@ namespace Control
                     case UIManager.GUIAction.Search_Web:
                         LinkedList<ModelGoogleSearchResult> list = model.SearchWeb((string)parameters[0]);
                         return new Object[] {TranslateList(list)};
+                    case UIManager.GUIAction.Create_Cache_Database:
+                        model.CreateCacheDatabase();
+                        break;
                     //case UIManager.GUIAction.Insert_Text_File_To_Database:
                     //    model.InsertNewDocumentToDatabase((string)parameters[0], (Model.ModelDocument)ObjectTranslator.TranslateGUIToModel((UI.GUIDocument)parameters[0]));
                     //    break;
