@@ -35,37 +35,16 @@ namespace Model
         #region ModelManager : Public Methods
 
         /// <summary>
-        /// a method to strictly read an XML file and construct 
-        /// from it a ModelDocument object
-        /// </summary>
-        /// <param name="path">an XML file to read</param>
-        /// <returns>a ModelDocument object represents the xml file</returns>
-        public ModelDocument OpenDocument(string path)
-        {
-            return XMLTranslator.ReadFromXML(path);
-        }
-       
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path">path of XML file for writing</param>
-        /// <param name="document">a ModelDocument object to read</param>
-        public void SaveDocument(string path, ModelDocument document)
-        {
-            XMLTranslator.WriteToXML(path, document);
-        }
-
-        /// <summary>
-        /// a method to insert an XML file content into the Database
+        /// a method to insert an XML file content into the Database.
         /// this method inserts the XML content after normalizing its content
-        /// (the words - using stop list and word normalization)
+        /// (the words - using stop list and word normalization), i.e the
+        /// database holds information only on the normalized form of each word
         /// </summary>
         /// <param name="path"> XML file to read</param>
         public void InsertDocument(string path)
         {
             ModelDocument d = XMLTranslator.ReadFromXML(path);
             InsertDocument_aux(path, d);
-            (persistent_model as DataSetPersistentModel).UpdateDB();
         }
 
         /// <summary>
@@ -76,9 +55,31 @@ namespace Model
         /// <param name="doc"></param>
         public void InsertNewDocumentToDatabase(string fileName, ModelDocument doc)
         {
+            SaveDocument(fileName, doc);
             InsertDocument_aux(fileName, doc);
         }
 
+        /// <summary>
+        /// Stores a ModelDocument object as an XML file
+        /// </summary>
+        /// <param name="path">path of XML file for writing</param>
+        /// <param name="document">a ModelDocument object to read</param>
+        public void SaveDocument(string path, ModelDocument document)
+        {
+            XMLTranslator.WriteToXML(path, document);
+        }
+
+        /// <summary>
+        /// a method to strictly read an XML file and construct 
+        /// from it a ModelDocument object
+        /// </summary>
+        /// <param name="path">an XML file to read</param>
+        /// <returns>a ModelDocument object represents the xml file</returns>
+        public ModelDocument OpenDocument(string path)
+        {
+            return XMLTranslator.ReadFromXML(path);
+        }
+       
         /// <summary>
         /// generates a ModelDocument object from content of the given url
         /// </summary>
@@ -217,14 +218,13 @@ namespace Model
         }
 
         /// <summary>
-        /// 
+        /// retrieves all the words in the system's DB
         /// </summary>
         /// <returns></returns>
         public List<string> getWords()
         {
             return persistent_model.getWords();
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -245,7 +245,13 @@ namespace Model
 
         #endregion // Public Mehtods
 
-        #region ModelManager : Private Methods
+        /// <summary>
+        /// Deletes all DB content
+        /// </summary>
+        public void CleanDB()
+        {
+            persistent_model.CleanDB();
+        }
 
         /// <summary>
         /// direct calculating of the tf_idf funcion for a word in a file
@@ -468,6 +474,7 @@ namespace Model
                 persistent_model.InsertWord(
                     word.Text, path, word.LocationID, word.Weight);
             }
+            persistent_model.UpdateDB();
         }
 
         /// <summary>
@@ -571,5 +578,6 @@ namespace Model
         #endregion // Private Mehtods
    
         #endregion // Methods
+
     }
 }

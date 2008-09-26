@@ -328,6 +328,11 @@ namespace Model
             }
         }
 
+        public void UpdateDB()
+        {
+            //do nothing here - all operations in this impl are directly on the DB 
+        }
+
         #endregion
 
         #region PersistentModel : Private Methods
@@ -620,6 +625,7 @@ namespace Model
             return getTableName(word, typeof(WEIGHTS_Segments));
         }
         #endregion
+
     }
 
     public class PersistentModelException : Exception
