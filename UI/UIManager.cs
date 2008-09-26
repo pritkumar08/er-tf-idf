@@ -37,7 +37,8 @@ namespace UI
                 Insert_Text_File_To_Database = 2,
                 Search_Web = 3,
                 Import_Text_File = 4,
-                Import_Cache_Data = 5
+                Import_Cache_Data = 5,
+                Create_Cache_Database = 6
             };
        
         #endregion
@@ -78,6 +79,8 @@ namespace UI
                         return OnGetInformation(GUIAction.Import_Cache_Data, parameters);
                     case MainForm.MainFormActions.Search_Web :
                         return OnGetInformation(GUIAction.Search_Web, parameters);
+                    case MainForm.MainFormActions.Create_Cache_Database :
+                        return OnGetInformation(GUIAction.Create_Cache_Database, parameters);
                     case MainForm.MainFormActions.Exit_Application:
                         Application.Exit();
                         return null;
