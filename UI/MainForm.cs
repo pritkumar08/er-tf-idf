@@ -17,7 +17,9 @@ namespace UI
                 private LinkedList<DocumentForm> documents;
                 
                 private int documentKeyCounter = 0;
-                private int currentDocument = -1;        
+                private int currentDocument = -1;
+
+                private WaitForm waitForm = null;
 
             #endregion
 
@@ -48,7 +50,8 @@ namespace UI
                 Import_Cache_Data = 4,
                 Search_Web = 5,
                 Create_Cache_Database = 6,
-                Exit_Application = 7
+                Check_Similarity = 7,
+                Exit_Application = 8
             };
 
         #endregion
@@ -160,11 +163,47 @@ namespace UI
                 }
             }
 
+            private Object[] SimilarityFormHandler(SimilarityForm.SimilarityFormActions action, Object[] parameters)
+            {
+                switch (action)
+                {
+                    case SimilarityForm.SimilarityFormActions.Reorder:
+                        FindSimilarity(parameters);
+                        return null;
+                    default:
+                        return null;
+                }
+            }
+
+            private void BW_DoCreateCacheDB(object sender, DoWorkEventArgs e)
+            {
+                OnRequestForInformation(MainFormActions.Create_Cache_Database, null);
+            }
+
+            private void BW_CreateCacheDBCompleted(object sender, RunWorkerCompletedEventArgs e)
+            {
+                waitForm.Close();
+                waitForm = null;
+            }
+
+            private void BW_DoFindSimilarity(object sender, DoWorkEventArgs e)
+            {
+                e.Result = OnRequestForInformation(MainFormActions.Check_Similarity, (Object[]) e.Argument);
+            }
+
+            private void BW_FindSimilarityCompleted(object sender, RunWorkerCompletedEventArgs e)
+            {
+                Object[] objects = (Object[]) e.Result;
+                LinkedList<GUIGoogleSearchResult> orderedResults =
+                    (LinkedList<GUIGoogleSearchResult>)objects[0];
+                ShowSearchResults(SimilarityForm.SimilarityType.L2_Norm, orderedResults);
+            }
+
             private void tlstpbtnSearchGoogle_Click(object sender, EventArgs e)
             {
                 Object[] objects =
                         OnRequestForInformation(MainFormActions.Search_Web, new Object[] { tlstptxtSearch.Text });
-                ShowSearchResults((LinkedList<GUIGoogleSearchResult>)objects[0]);
+                ShowSearchResults(SimilarityForm.SimilarityType.None, (LinkedList<GUIGoogleSearchResult>)objects[0]);
             }
 
             private void tlstpbtnCacheImporter_Click(object sender, EventArgs e)
@@ -179,6 +218,14 @@ namespace UI
             private void tlstpbtnCacheDatabase_Click(object sender, EventArgs e)
             {
                 CreateCacheDatabase();
+            }
+
+            private void tlstpbtnSimilarity_Click(object sender, EventArgs e)
+            {
+                SimilarityForm similar = new SimilarityForm();
+                similar.SimilarityFormEvent += new SimilarityForm.SimilarityFormEventHandler(SimilarityFormHandler);
+                similar.MdiParent = this;
+                similar.Show();
             }
 
         #endregion
@@ -259,19 +306,46 @@ namespace UI
                 return null;
             }
 
-            private void ShowSearchResults(LinkedList<GUIGoogleSearchResult> searchList)
+            private void ShowSearchResults(SimilarityForm.SimilarityType type, LinkedList<GUIGoogleSearchResult> searchList)
             {
-                SearchForm search = new SearchForm(searchList);
+                string caption = "Search Results ";
+                switch (type)
+                {
+                    case SimilarityForm.SimilarityType.L2_Norm:
+                        caption += "According to L2 Norm Algorithm";
+                        break;
+                    case SimilarityForm.SimilarityType.Min_Val:
+                        caption += "According to Minimum Value Algorithm";
+                        break;
+                }
+                SearchForm search = new SearchForm(searchList, caption);
                 search.MdiParent = this;
                 search.Show();
             }
 
             private void CreateCacheDatabase()
             {
-                OnRequestForInformation(MainFormActions.Create_Cache_Database, null);
+                BackgroundWorker bw = new BackgroundWorker();
+                bw.DoWork += new DoWorkEventHandler(BW_DoCreateCacheDB);
+                bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BW_CreateCacheDBCompleted);
+                bw.RunWorkerAsync();
+                waitForm = new WaitForm("Creating database", "Please wait while creating database");
+                waitForm.ShowDialog();
+            }
+
+            private void FindSimilarity(object[] parameters)
+            {
+                BackgroundWorker bw = new BackgroundWorker();
+                bw.DoWork += new DoWorkEventHandler(BW_DoFindSimilarity);
+                bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BW_FindSimilarityCompleted);
+                bw.RunWorkerAsync(parameters);
+                waitForm = new WaitForm("Finding Similarity", "Please wait generating similarity...");
+                waitForm.ShowDialog();
             }
 
         #endregion
+
+
 
     }
 }

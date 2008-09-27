@@ -23,10 +23,13 @@ namespace UI
 
         #region GUIParagraph : Initialization
 
-            public SearchForm(LinkedList<GUIGoogleSearchResult> googleResults)
+
+
+            public SearchForm(LinkedList<GUIGoogleSearchResult> googleResults, string formCaption)
             {
                 InitializeComponent();
                 this.googleResults = googleResults;
+                this.Text = formCaption;
                 PrintResult(0);
             }
 
