@@ -38,7 +38,8 @@ namespace UI
                 Search_Web = 3,
                 Import_Text_File = 4,
                 Import_Cache_Data = 5,
-                Create_Cache_Database = 6
+                Create_Cache_Database = 6,
+                Check_Similarity = 7
             };
        
         #endregion
@@ -81,6 +82,8 @@ namespace UI
                         return OnGetInformation(GUIAction.Search_Web, parameters);
                     case MainForm.MainFormActions.Create_Cache_Database :
                         return OnGetInformation(GUIAction.Create_Cache_Database, parameters);
+                    case MainForm.MainFormActions.Check_Similarity:
+                        return OnGetInformation(GUIAction.Check_Similarity, parameters);
                     case MainForm.MainFormActions.Exit_Application:
                         Application.Exit();
                         return null;

@@ -48,6 +48,10 @@ namespace UI
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.importCacheDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importFromFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.createCacheDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.evaluateSimilarityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reorganizeSearchResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.customizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,17 +66,16 @@ namespace UI
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.tlsbtnAddParagraph = new System.Windows.Forms.ToolStripButton();
             this.tlstpbtnRemove = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.tlstpbtnInsertFile = new System.Windows.Forms.ToolStripButton();
-            this.tlstpbtnCacheImporter = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.tlstptxtSearch = new System.Windows.Forms.ToolStripTextBox();
             this.tlstpbtnSearchGoogle = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tlstpbtnCacheImporter = new System.Windows.Forms.ToolStripButton();
             this.tlstpbtnCacheDatabase = new System.Windows.Forms.ToolStripButton();
+            this.tlstpbtnSimilarity = new System.Windows.Forms.ToolStripButton();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
-            this.createCacheDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.tlstpMain.SuspendLayout();
             this.SuspendLayout();
@@ -92,6 +95,7 @@ namespace UI
             this.fileToolStripMenuItem,
             this.documentToolStripMenuItem,
             this.dataToolStripMenuItem,
+            this.evaluateSimilarityToolStripMenuItem,
             this.toolsToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -120,7 +124,7 @@ namespace UI
             this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.newToolStripMenuItem.Text = "&New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripButton_Click);
             // 
@@ -242,6 +246,33 @@ namespace UI
             this.importFromFileToolStripMenuItem.Text = "Import From Web...";
             this.importFromFileToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
             // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(186, 6);
+            // 
+            // createCacheDatabaseToolStripMenuItem
+            // 
+            this.createCacheDatabaseToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("createCacheDatabaseToolStripMenuItem.Image")));
+            this.createCacheDatabaseToolStripMenuItem.Name = "createCacheDatabaseToolStripMenuItem";
+            this.createCacheDatabaseToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.createCacheDatabaseToolStripMenuItem.Text = "Create Cache Database";
+            // 
+            // evaluateSimilarityToolStripMenuItem
+            // 
+            this.evaluateSimilarityToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.reorganizeSearchResultsToolStripMenuItem});
+            this.evaluateSimilarityToolStripMenuItem.Name = "evaluateSimilarityToolStripMenuItem";
+            this.evaluateSimilarityToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.evaluateSimilarityToolStripMenuItem.Text = "Similarity";
+            // 
+            // reorganizeSearchResultsToolStripMenuItem
+            // 
+            this.reorganizeSearchResultsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("reorganizeSearchResultsToolStripMenuItem.Image")));
+            this.reorganizeSearchResultsToolStripMenuItem.Name = "reorganizeSearchResultsToolStripMenuItem";
+            this.reorganizeSearchResultsToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.reorganizeSearchResultsToolStripMenuItem.Text = "Reorganize Search Results...";
+            // 
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -254,13 +285,13 @@ namespace UI
             // customizeToolStripMenuItem
             // 
             this.customizeToolStripMenuItem.Name = "customizeToolStripMenuItem";
-            this.customizeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.customizeToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.customizeToolStripMenuItem.Text = "&Customize...";
             // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.optionsToolStripMenuItem.Text = "&Options...";
             // 
             // helpToolStripMenuItem
@@ -306,7 +337,8 @@ namespace UI
             this.tlstpbtnSearchGoogle,
             this.toolStripSeparator1,
             this.tlstpbtnCacheImporter,
-            this.tlstpbtnCacheDatabase});
+            this.tlstpbtnCacheDatabase,
+            this.tlstpbtnSimilarity});
             this.tlstpMain.Location = new System.Drawing.Point(0, 24);
             this.tlstpMain.Name = "tlstpMain";
             this.tlstpMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -372,11 +404,6 @@ namespace UI
             this.tlstpbtnRemove.ToolTipText = "Remove Documents Items";
             this.tlstpbtnRemove.Click += new System.EventHandler(this.tlstpbtnRemove_Click);
             // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
-            // 
             // tlstpbtnInsertFile
             // 
             this.tlstpbtnInsertFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -388,16 +415,10 @@ namespace UI
             this.tlstpbtnInsertFile.Text = "Insert File To Database";
             this.tlstpbtnInsertFile.Click += new System.EventHandler(this.tlstpbtnInsertFile_Click);
             // 
-            // tlstpbtnCacheImporter
+            // toolStripSeparator5
             // 
-            this.tlstpbtnCacheImporter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tlstpbtnCacheImporter.Image = ((System.Drawing.Image)(resources.GetObject("tlstpbtnCacheImporter.Image")));
-            this.tlstpbtnCacheImporter.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tlstpbtnCacheImporter.Name = "tlstpbtnCacheImporter";
-            this.tlstpbtnCacheImporter.Size = new System.Drawing.Size(23, 22);
-            this.tlstpbtnCacheImporter.Text = "Import Cache";
-            this.tlstpbtnCacheImporter.ToolTipText = "View IE Cache";
-            this.tlstpbtnCacheImporter.Click += new System.EventHandler(this.tlstpbtnCacheImporter_Click);
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
             // 
             // tlstptxtSearch
             // 
@@ -415,6 +436,22 @@ namespace UI
             this.tlstpbtnSearchGoogle.Text = "Go >>";
             this.tlstpbtnSearchGoogle.Click += new System.EventHandler(this.tlstpbtnSearchGoogle_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // tlstpbtnCacheImporter
+            // 
+            this.tlstpbtnCacheImporter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tlstpbtnCacheImporter.Image = ((System.Drawing.Image)(resources.GetObject("tlstpbtnCacheImporter.Image")));
+            this.tlstpbtnCacheImporter.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tlstpbtnCacheImporter.Name = "tlstpbtnCacheImporter";
+            this.tlstpbtnCacheImporter.Size = new System.Drawing.Size(23, 22);
+            this.tlstpbtnCacheImporter.Text = "Import Cache";
+            this.tlstpbtnCacheImporter.ToolTipText = "View IE Cache";
+            this.tlstpbtnCacheImporter.Click += new System.EventHandler(this.tlstpbtnCacheImporter_Click);
+            // 
             // tlstpbtnCacheDatabase
             // 
             this.tlstpbtnCacheDatabase.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -425,6 +462,17 @@ namespace UI
             this.tlstpbtnCacheDatabase.Text = "toolStripButton1";
             this.tlstpbtnCacheDatabase.ToolTipText = "Create Cache Database";
             this.tlstpbtnCacheDatabase.Click += new System.EventHandler(this.tlstpbtnCacheDatabase_Click);
+            // 
+            // tlstpbtnSimilarity
+            // 
+            this.tlstpbtnSimilarity.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tlstpbtnSimilarity.Image = ((System.Drawing.Image)(resources.GetObject("tlstpbtnSimilarity.Image")));
+            this.tlstpbtnSimilarity.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tlstpbtnSimilarity.Name = "tlstpbtnSimilarity";
+            this.tlstpbtnSimilarity.Size = new System.Drawing.Size(23, 22);
+            this.tlstpbtnSimilarity.Text = "toolStripButton1";
+            this.tlstpbtnSimilarity.ToolTipText = "Reorganiza Search Results";
+            this.tlstpbtnSimilarity.Click += new System.EventHandler(this.tlstpbtnSimilarity_Click);
             // 
             // saveFileDialog1
             // 
@@ -438,23 +486,6 @@ namespace UI
             this.openFileDialog1.DefaultExt = "erp";
             this.openFileDialog1.Filter = "Text Comparer Files(*.erp)|*.erp";
             this.openFileDialog1.RestoreDirectory = true;
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(186, 6);
-            // 
-            // createCacheDatabaseToolStripMenuItem
-            // 
-            this.createCacheDatabaseToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("createCacheDatabaseToolStripMenuItem.Image")));
-            this.createCacheDatabaseToolStripMenuItem.Name = "createCacheDatabaseToolStripMenuItem";
-            this.createCacheDatabaseToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.createCacheDatabaseToolStripMenuItem.Text = "Create Cache Database";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
             // MainForm
             // 
@@ -525,5 +556,8 @@ namespace UI
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem createCacheDatabaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem evaluateSimilarityToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reorganizeSearchResultsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton tlstpbtnSimilarity;
     }
 }
