@@ -117,6 +117,42 @@ namespace Control
                 return null;
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="type"></param>
+            /// <returns></returns>
+            static internal Model.ModelManager.SimilarityType TranslateGUISimilarity(UI.SimilarityForm.SimilarityType type)
+            {
+                switch (type)
+                {
+                    case UI.SimilarityForm.SimilarityType.None:
+                        return Model.ModelManager.SimilarityType.None;
+                    case UI.SimilarityForm.SimilarityType.L2_Norm:
+                        return Model.ModelManager.SimilarityType.L2_Norm;
+                    case UI.SimilarityForm.SimilarityType.Min_Val:
+                        return Model.ModelManager.SimilarityType.Min_Value;
+                    default:
+                        return Model.ModelManager.SimilarityType.None;
+                }
+            }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="engine"></param>
+            /// <returns></returns>
+            static internal Model.ModelManager.SearchEngine TranslateGUIEngine(UI.SimilarityForm.SearchEngine engine)
+            {
+                switch (engine)
+                {
+                    case UI.SimilarityForm.SearchEngine.Google:
+                        return Model.ModelManager.SearchEngine.Google;
+                    default:
+                        return Model.ModelManager.SearchEngine.None;
+                }
+            }
+
         #endregion
 
 

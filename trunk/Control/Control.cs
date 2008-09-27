@@ -69,6 +69,8 @@ namespace Control
                     case UIManager.GUIAction.Create_Cache_Database:
                         model.CreateCacheDatabase();
                         break;
+                    case UIManager.GUIAction.Check_Similarity:
+                        return FindSimilarity(parameters);
                     //case UIManager.GUIAction.Insert_Text_File_To_Database:
                     //    model.InsertNewDocumentToDatabase((string)parameters[0], (Model.ModelDocument)ObjectTranslator.TranslateGUIToModel((UI.GUIDocument)parameters[0]));
                     //    break;
@@ -76,17 +78,7 @@ namespace Control
                         return null;
                 }
                 return null;
-            }
-
-            private LinkedList<GUIGoogleSearchResult> TranslateList(LinkedList<ModelGoogleSearchResult> m_list)
-            {
-                LinkedList<GUIGoogleSearchResult> g_list = new LinkedList<GUIGoogleSearchResult>();
-                foreach (ModelGoogleSearchResult res in m_list)
-                {
-                    g_list.AddLast((GUIGoogleSearchResult)ObjectTranslator.TranslateModelToGUI(res));
-                }
-                return g_list;
-            }
+            }           
             
             /// <summary>
             /// 
@@ -106,6 +98,39 @@ namespace Control
         #endregion
 
         #region Control : Methods
+
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="m_list"></param>
+            /// <returns></returns>
+            private LinkedList<GUIGoogleSearchResult> TranslateList(LinkedList<ModelGoogleSearchResult> m_list)
+            {
+                LinkedList<GUIGoogleSearchResult> g_list = new LinkedList<GUIGoogleSearchResult>();
+                foreach (ModelGoogleSearchResult res in m_list)
+                {
+                    g_list.AddLast((GUIGoogleSearchResult)ObjectTranslator.TranslateModelToGUI(res));
+                }
+                return g_list;
+            }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="parameters"></param>
+            /// <returns></returns>
+            private Object[] FindSimilarity(object[] parameters)
+            {
+                string searchLabel = (string)parameters[0];
+                UI.SimilarityForm.SearchEngine u_engine = (UI.SimilarityForm.SearchEngine)parameters[1];
+                Model.ModelManager.SearchEngine m_engine = ObjectTranslator.TranslateGUIEngine(u_engine);
+                UI.SimilarityForm.SimilarityType u_type = (UI.SimilarityForm.SimilarityType)parameters[2];
+                Model.ModelManager.SimilarityType m_type = ObjectTranslator.TranslateGUISimilarity(u_type);
+                int pagesNumber = (int)parameters[3];
+                LinkedList<ModelGoogleSearchResult> ls =
+                           model.CheckSimilarity(searchLabel, m_type, m_engine, pagesNumber);
+                return new Object[] { TranslateList(ls) };
+            }
 
         #endregion
 
