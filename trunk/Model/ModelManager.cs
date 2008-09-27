@@ -30,6 +30,22 @@ namespace Model
 
         #endregion
 
+        #region ModelManager : Enum
+
+            public enum SimilarityType
+            {
+                None = 0, 
+                L2_Norm = 1,
+                Min_Value = 2
+            }
+
+            public enum SearchEngine
+            {
+                None = 0, 
+                Google = 1
+            }
+            
+        #endregion
 
         #region ModelManager : Methods
 
@@ -316,7 +332,6 @@ namespace Model
         /// </summary>
         public void CreateCacheDatabase()
         {
-            Dictionary<string, ModelDocument> cacheDocument = new Dictionary<string, ModelDocument>();
             Dictionary<string, string> cacheLinks = CacheSearch.CacheWebAddresses();
             foreach (string link in cacheLinks.Keys)
             {
@@ -324,12 +339,31 @@ namespace Model
                 if (doc != null)
                 {
                     doc.Title = cacheLinks[link];
-                    cacheDocument.Add(link, doc);
-                    InsertDocument_aux(link, doc);
+                    //InsertDocument_aux(link, doc);
                 }
             }
         }
-        
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="engine"></param>
+        /// <param name="pagesNumber"></param>
+        /// <returns></returns>
+        public LinkedList<ModelGoogleSearchResult> CheckSimilarity(string searchLabel, SimilarityType type, SearchEngine engine, int pagesNumber)
+        {
+            switch (engine)
+            {
+                case SearchEngine.Google:
+                    return CheckGoogleSimilarity(searchLabel, type, pagesNumber);
+                default:
+                    return null;
+            }
+        }
+
+
         /// <summary>
         /// Deletes all DB content
         /// </summary>
@@ -639,6 +673,89 @@ namespace Model
             //w = Regex.Escape(w);// Replace(w, @"\W", "'&'");
             w = Regex.Replace(w, @"\W", "");
             return w;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="records"></param>
+        /// <returns></returns>
+        private Record<string, double> GetMaxRecord(List<Record<string, double>> records)
+        {
+            if (records == null)
+                return null;
+            Record<string, double> maxRec = new Record<string,double>();
+            maxRec.second = -1;
+            foreach(Record<string, double> rec in records)
+            {
+                if (rec.second > maxRec.second)
+                {
+                    maxRec = rec;
+                }
+            }
+            return maxRec;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="pagesNumber"></param>
+        /// <returns></returns>
+        private LinkedList<ModelGoogleSearchResult> CheckGoogleSimilarity(string searchLabel, SimilarityType type, int pagesNumber)
+        {
+            int pages = 0;
+            LinkedList<ModelGoogleSearchResult> originalResults = SearchWeb(searchLabel);
+            Dictionary<ModelGoogleSearchResult, Record<string, double>> highestResults = 
+                new Dictionary<ModelGoogleSearchResult, Record<string, double>>();
+            foreach (ModelGoogleSearchResult result in originalResults)
+            {
+                if (pages > pagesNumber)
+                    break;
+                ModelDocument doc = ImportDocument(result.URL);
+                Record<string, double> rec = null;
+                switch (type)
+                {
+                    case SimilarityType.L2_Norm:
+                        rec = GetMaxRecord(L2NormSimilarity(doc));
+                        break;
+                    case SimilarityType.Min_Value:
+                        rec = GetMaxRecord(minValSimilarity(doc));
+                        break;
+                }
+                highestResults.Add(result, rec);
+                pages++;
+            }
+            return OrderedSimilarityResults(highestResults);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="highestResults"></param>
+        /// <returns></returns>
+        private LinkedList<ModelGoogleSearchResult> OrderedSimilarityResults(Dictionary<ModelGoogleSearchResult, Record<string, double>> highestResults)
+        {
+            if (highestResults == null)
+                return null;
+            LinkedList<ModelGoogleSearchResult> orderedResults = new LinkedList<ModelGoogleSearchResult>();
+            foreach (ModelGoogleSearchResult res1 in highestResults.Keys)
+            {
+                orderedResults.AddFirst(res1);
+                break;
+            }
+            foreach (ModelGoogleSearchResult res1 in highestResults.Keys)
+            {
+                foreach (ModelGoogleSearchResult res2 in orderedResults)
+                {
+                    if ((res1 != res2) && (highestResults[res1].second <= highestResults[res2].second))
+                    {
+                        orderedResults.AddBefore(orderedResults.Find(res2), res1);
+                        break;
+                    }
+                }
+            }
+            return orderedResults;
         }
 
         #endregion // Private Mehtods
