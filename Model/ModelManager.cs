@@ -23,7 +23,8 @@ namespace Model
 
         public ModelManager()
         {
-            //persistent_model = PersistentModel.getInstance();
+            DataSetPersistentModel.ConnectionString = 
+                DataSetPersistentModel.RELATIVE_CONNECTION_STRING;
             persistent_model = DataSetPersistentModel.getInstance();
             si = new PorterStemmer();
         }
