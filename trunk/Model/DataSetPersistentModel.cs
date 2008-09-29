@@ -18,14 +18,13 @@ namespace Model
         private static OleDbConnection connection;
         private erpDataSet dataset = new erpDataSet();
         Dictionary<string, OleDbDataAdapter> adapters = new Dictionary<string, OleDbDataAdapter>();
-        //OleDbDataAdapter da = new OleDbDataAdapter();
+        public static string ConnectionString;
 
-        private const String connectionString_old =
-            "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\\Project in advanced programming\\Model\\ModelDatabase.mdb";
-        private const String connectionString =
-        "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\\Project in advanced programming\\Model\\erp.mdb;Persist Security Info=True";
+        public const string TEST_CONNECTION_STRING = 
+            "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\\Project in advanced programming\\Model\\erp.mdb;Persist Security Info=True";
+        public const string RELATIVE_CONNECTION_STRING =
+        "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|erp.mdb;Persist Security Info=True";
         private static string ALL = "";
-
         private static string WEIGHTS_TABLE_PREFIX = "Weights_";
         
         #endregion
@@ -33,7 +32,7 @@ namespace Model
         #region DataSetPersistentModel : Initialization
 
         protected DataSetPersistentModel()
-        {            
+        {
             createTables();
             try
             {
@@ -48,6 +47,7 @@ namespace Model
                     adapters.Add(table_name, adapter);
                     adapter.Fill(dataset, table_name);                    
                 }
+                CreateKeys();
             }
             catch (Exception e)
             {
@@ -57,7 +57,7 @@ namespace Model
        
         public static DataSetPersistentModel getInstance()
         {
-            connection = new OleDbConnection(connectionString);
+            connection = new OleDbConnection(ConnectionString);
             if (instance == null)
             {
                 instance = new DataSetPersistentModel();
@@ -152,7 +152,8 @@ namespace Model
 
         private enum WEIGHTS_Segments
         {
-            A = 0, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, Symbols
+            A = 0, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, Symbols, 
+            א , ב , ג , ד , ה , ו , ז , ח , ט , י , כ , ל , מ , נ , ס , ע , פ , צ , ק , ר , ש , ת 
         }
         #endregion
 
@@ -372,6 +373,8 @@ namespace Model
             /*
             foreach (string prefix in Enum.GetNames(typeof(WEIGHTS_Segments)))
             {
+                if (TableExists(WEIGHTS_TABLE_PREFIX + prefix))
+                    continue;
                 DataTable weights_table = new DataTable(WEIGHTS_TABLE_PREFIX + prefix);
                 DataColumn c;
                 //word column
@@ -423,9 +426,21 @@ namespace Model
                 
                 dataset.Tables.Add(weights_table);             
             }
-             */
+           */
         }
-        
+
+        private void CreateKeys()
+        {
+            foreach (DataTable table in dataset.Tables)
+            {
+                DataColumn[] PrimaryKeyColumns = new DataColumn[3];
+                PrimaryKeyColumns[0] = table.Columns["Word"];
+                PrimaryKeyColumns[1] = table.Columns["FileName"];
+                PrimaryKeyColumns[2] = table.Columns["Location"];
+                table.PrimaryKey = PrimaryKeyColumns;
+            }
+        }
+
         private double getWeight(string word, string path)
         {
             double total_weight = 0;
