@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DocumentForm));
             this.pnlMain = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
@@ -49,14 +50,15 @@
             this.BackColor = System.Drawing.Color.DarkGray;
             this.ClientSize = new System.Drawing.Size(625, 455);
             this.Controls.Add(this.pnlMain);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DocumentForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Document : ";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DocumentForm_FormClosed);
-            this.Resize += new System.EventHandler(this.DocumentForm_Resize);
-            this.Activated += new System.EventHandler(this.DocumentForm_Activated);
-            this.MdiChildActivate += new System.EventHandler(this.DocumentForm_Load);
             this.Load += new System.EventHandler(this.DocumentForm_Load);
+            this.Activated += new System.EventHandler(this.DocumentForm_Activated);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DocumentForm_FormClosed);
+            this.MdiChildActivate += new System.EventHandler(this.DocumentForm_Load);
+            this.Resize += new System.EventHandler(this.DocumentForm_Resize);
             this.ResumeLayout(false);
 
         }

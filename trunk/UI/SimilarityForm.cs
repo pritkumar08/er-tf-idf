@@ -80,6 +80,7 @@ namespace UI
 
             private void btnCheck_Click(object sender, EventArgs e)
             {
+                this.Visible = false;
                 OnRequestForInformation(SimilarityFormActions.Reorder, new Object[] {txtSearch.Text ,engine, sType, (int)nmudPages.Value});
                 this.Close();
             }
@@ -104,6 +105,12 @@ namespace UI
             }
 
             private void nmudPages_ValueChanged(object sender, EventArgs e)
+            {
+                if (nmudPages.Value > 0)
+                    btnReorder.Enabled = true;
+            }
+
+            private void nmudPages_KeyDown(object sender, KeyEventArgs e)
             {
                 if (nmudPages.Value > 0)
                     btnReorder.Enabled = true;

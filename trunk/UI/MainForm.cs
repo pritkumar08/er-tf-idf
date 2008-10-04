@@ -51,7 +51,8 @@ namespace UI
                 Search_Web = 5,
                 Create_Cache_Database = 6,
                 Check_Similarity = 7,
-                Exit_Application = 8
+                Clear_Information = 8,
+                Exit_Application = 9
             };
 
         #endregion
@@ -92,16 +93,10 @@ namespace UI
 
             private void importToolStripMenuItem_Click(object sender, EventArgs e)
             {
-                for (int i = 0; i < 5; i++)
-                {
-                    int num = 1213644 + i;
-                    string file = Application.LocalUserAppDataPath + "\\"+ num.ToString() + ".erp";
-                    Object[] objects =
-                        OnRequestForInformation(MainFormActions.Import_Document, new Object[] { "http://www.imdb.com/title/tt" + num.ToString() + "/" });
-                    OnRequestForInformation
-                                (MainFormActions.Save_Document, new Object[] { file, (GUIDocument)objects[0] });
-                }
-                //CreateNewDocumentForm((GUIDocument)objects[0], "imdb"); 
+                ImportWebDocumentForm importForm = new ImportWebDocumentForm();
+                importForm.ImportWebDocumentFormEvent += 
+                    new ImportWebDocumentForm.ImportWebDocumentFormEventHandler(ImportWebDocumentHandler);
+                importForm.ShowDialog();
             }
             
             private void tlsbtnAddParagraph_Click(object sender, EventArgs e)
@@ -163,6 +158,18 @@ namespace UI
                 }
             }
 
+            private Object[] ImportWebDocumentHandler(ImportWebDocumentForm.ImportWebDocumentFormActions action, Object[] parameters)
+            {
+                switch (action)
+                {
+                    case ImportWebDocumentForm.ImportWebDocumentFormActions.Import_Web_Document:
+                        ImportWebDocument((string)parameters[0]);
+                        return null;
+                    default:
+                        return null;
+                }
+            }
+
             private Object[] SimilarityFormHandler(SimilarityForm.SimilarityFormActions action, Object[] parameters)
             {
                 switch (action)
@@ -193,10 +200,12 @@ namespace UI
 
             private void BW_FindSimilarityCompleted(object sender, RunWorkerCompletedEventArgs e)
             {
+                waitForm.Close();
+                waitForm = null;
                 Object[] objects = (Object[]) e.Result;
                 LinkedList<GUIGoogleSearchResult> orderedResults =
                     (LinkedList<GUIGoogleSearchResult>)objects[0];
-                ShowSearchResults(SimilarityForm.SimilarityType.L2_Norm, orderedResults);
+                ShowSearchResults((SimilarityForm.SimilarityType)objects[1], orderedResults);
             }
 
             private void tlstpbtnSearchGoogle_Click(object sender, EventArgs e)
@@ -226,6 +235,11 @@ namespace UI
                 similar.SimilarityFormEvent += new SimilarityForm.SimilarityFormEventHandler(SimilarityFormHandler);
                 similar.MdiParent = this;
                 similar.Show();
+            }
+
+            private void tlstpbtnClearDB_Click(object sender, EventArgs e)
+            {
+                ClearCacheDatabase();
             }
 
         #endregion
@@ -329,7 +343,7 @@ namespace UI
                 bw.DoWork += new DoWorkEventHandler(BW_DoCreateCacheDB);
                 bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BW_CreateCacheDBCompleted);
                 bw.RunWorkerAsync();
-                waitForm = new WaitForm("Creating database", "Please wait while creating database");
+                waitForm = new WaitForm("Creating database", "Please wait while creating database...");
                 waitForm.ShowDialog();
             }
 
@@ -339,13 +353,26 @@ namespace UI
                 bw.DoWork += new DoWorkEventHandler(BW_DoFindSimilarity);
                 bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BW_FindSimilarityCompleted);
                 bw.RunWorkerAsync(parameters);
-                waitForm = new WaitForm("Finding Similarity", "Please wait generating similarity...");
+                waitForm = new WaitForm("Finding Similarity", "Please wait while generating similarity...");
                 waitForm.ShowDialog();
             }
 
+            private void ClearCacheDatabase()
+            {
+                DialogResult res = MessageBox.Show(this, "You are about to clear the cache database. \nIt is an irreversible operation, would you like to continue with the operation?", "Information", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                if (res == DialogResult.OK)
+                {
+                    OnRequestForInformation(MainFormActions.Clear_Information, null);
+                }
+            }
+
+            private void ImportWebDocument(string address)
+            {
+                Object[] objects =
+                    OnRequestForInformation(MainFormActions.Import_Document, new Object[] { address });  
+                CreateNewDocumentForm((GUIDocument)objects[0], address); 
+            }
+
         #endregion
-
-
-
     }
 }
