@@ -82,7 +82,7 @@ namespace Model
                 UrlHistoryWrapperClass.STATURLEnumerator enumerator = urlHistory.GetEnumerator();
                 while (enumerator.MoveNext())
                 {
-                    if ((!addDic.Keys.Contains(enumerator.Current.URL)) && (enumerator.Current.URL.StartsWith("http")))
+                    if ((!addDic.Keys.Contains(enumerator.Current.URL)) && (enumerator.Current.URL.StartsWith("http")) && (!(enumerator.Current.URL.EndsWith(".exe"))))
                         addDic.Add(enumerator.Current.URL, enumerator.Current.Title);
                 }
                 return addDic;
