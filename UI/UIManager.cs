@@ -39,7 +39,8 @@ namespace UI
                 Import_Text_File = 4,
                 Import_Cache_Data = 5,
                 Create_Cache_Database = 6,
-                Check_Similarity = 7
+                Clear_Cache_Database = 7,
+                Check_Similarity = 8
             };
        
         #endregion
@@ -84,6 +85,8 @@ namespace UI
                         return OnGetInformation(GUIAction.Create_Cache_Database, parameters);
                     case MainForm.MainFormActions.Check_Similarity:
                         return OnGetInformation(GUIAction.Check_Similarity, parameters);
+                    case MainForm.MainFormActions.Clear_Information:
+                        return OnGetInformation(GUIAction.Clear_Cache_Database, null);
                     case MainForm.MainFormActions.Exit_Application:
                         Application.Exit();
                         return null;

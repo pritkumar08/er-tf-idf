@@ -49,12 +49,10 @@ namespace UI
             this.importCacheDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importFromFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.clearCacheDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createCacheDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.evaluateSimilarityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reorganizeSearchResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.customizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
@@ -67,12 +65,14 @@ namespace UI
             this.tlsbtnAddParagraph = new System.Windows.Forms.ToolStripButton();
             this.tlstpbtnRemove = new System.Windows.Forms.ToolStripButton();
             this.tlstpbtnInsertFile = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.tlstptxtSearch = new System.Windows.Forms.ToolStripTextBox();
             this.tlstpbtnSearchGoogle = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tlstpbtnCacheImporter = new System.Windows.Forms.ToolStripButton();
+            this.tlstpbtnImportWebDocument = new System.Windows.Forms.ToolStripButton();
+            this.tlstpbtnClearDB = new System.Windows.Forms.ToolStripButton();
             this.tlstpbtnCacheDatabase = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.tlstpbtnSimilarity = new System.Windows.Forms.ToolStripButton();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -96,7 +96,6 @@ namespace UI
             this.documentToolStripMenuItem,
             this.dataToolStripMenuItem,
             this.evaluateSimilarityToolStripMenuItem,
-            this.toolsToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -213,6 +212,7 @@ namespace UI
             this.importCacheDataToolStripMenuItem,
             this.importFromFileToolStripMenuItem,
             this.toolStripMenuItem3,
+            this.clearCacheDatabaseToolStripMenuItem,
             this.createCacheDatabaseToolStripMenuItem});
             this.dataToolStripMenuItem.Name = "dataToolStripMenuItem";
             this.dataToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
@@ -241,6 +241,7 @@ namespace UI
             // 
             // importFromFileToolStripMenuItem
             // 
+            this.importFromFileToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importFromFileToolStripMenuItem.Image")));
             this.importFromFileToolStripMenuItem.Name = "importFromFileToolStripMenuItem";
             this.importFromFileToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.importFromFileToolStripMenuItem.Text = "Import From Web...";
@@ -250,6 +251,14 @@ namespace UI
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Size = new System.Drawing.Size(186, 6);
+            // 
+            // clearCacheDatabaseToolStripMenuItem
+            // 
+            this.clearCacheDatabaseToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clearCacheDatabaseToolStripMenuItem.Image")));
+            this.clearCacheDatabaseToolStripMenuItem.Name = "clearCacheDatabaseToolStripMenuItem";
+            this.clearCacheDatabaseToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.clearCacheDatabaseToolStripMenuItem.Text = "Clear Cache Database";
+            this.clearCacheDatabaseToolStripMenuItem.Click += new System.EventHandler(this.tlstpbtnClearDB_Click);
             // 
             // createCacheDatabaseToolStripMenuItem
             // 
@@ -272,27 +281,7 @@ namespace UI
             this.reorganizeSearchResultsToolStripMenuItem.Name = "reorganizeSearchResultsToolStripMenuItem";
             this.reorganizeSearchResultsToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
             this.reorganizeSearchResultsToolStripMenuItem.Text = "Reorganize Search Results...";
-            // 
-            // toolsToolStripMenuItem
-            // 
-            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.customizeToolStripMenuItem,
-            this.optionsToolStripMenuItem});
-            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.toolsToolStripMenuItem.Text = "&Tools";
-            // 
-            // customizeToolStripMenuItem
-            // 
-            this.customizeToolStripMenuItem.Name = "customizeToolStripMenuItem";
-            this.customizeToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
-            this.customizeToolStripMenuItem.Text = "&Customize...";
-            // 
-            // optionsToolStripMenuItem
-            // 
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
-            this.optionsToolStripMenuItem.Text = "&Options...";
+            this.reorganizeSearchResultsToolStripMenuItem.Click += new System.EventHandler(this.tlstpbtnSimilarity_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -307,19 +296,19 @@ namespace UI
             // contentsToolStripMenuItem
             // 
             this.contentsToolStripMenuItem.Name = "contentsToolStripMenuItem";
-            this.contentsToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.contentsToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.contentsToolStripMenuItem.Text = "&Contents";
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(115, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(175, 6);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
-            this.aboutToolStripMenuItem.Text = "&About...";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.aboutToolStripMenuItem.Text = "About Text Comparer";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // tlstpMain
@@ -332,12 +321,14 @@ namespace UI
             this.tlsbtnAddParagraph,
             this.tlstpbtnRemove,
             this.tlstpbtnInsertFile,
-            this.toolStripSeparator5,
-            this.tlstptxtSearch,
             this.tlstpbtnSearchGoogle,
+            this.tlstptxtSearch,
             this.toolStripSeparator1,
             this.tlstpbtnCacheImporter,
+            this.tlstpbtnImportWebDocument,
+            this.tlstpbtnClearDB,
             this.tlstpbtnCacheDatabase,
+            this.toolStripSeparator4,
             this.tlstpbtnSimilarity});
             this.tlstpMain.Location = new System.Drawing.Point(0, 24);
             this.tlstpMain.Name = "tlstpMain";
@@ -415,19 +406,16 @@ namespace UI
             this.tlstpbtnInsertFile.Text = "Insert File To Database";
             this.tlstpbtnInsertFile.Click += new System.EventHandler(this.tlstpbtnInsertFile_Click);
             // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
-            // 
             // tlstptxtSearch
             // 
+            this.tlstptxtSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.tlstptxtSearch.Name = "tlstptxtSearch";
             this.tlstptxtSearch.Size = new System.Drawing.Size(100, 25);
             this.tlstptxtSearch.Text = "Search Google...";
             // 
             // tlstpbtnSearchGoogle
             // 
+            this.tlstpbtnSearchGoogle.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.tlstpbtnSearchGoogle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tlstpbtnSearchGoogle.Image = ((System.Drawing.Image)(resources.GetObject("tlstpbtnSearchGoogle.Image")));
             this.tlstpbtnSearchGoogle.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -452,6 +440,28 @@ namespace UI
             this.tlstpbtnCacheImporter.ToolTipText = "View IE Cache";
             this.tlstpbtnCacheImporter.Click += new System.EventHandler(this.tlstpbtnCacheImporter_Click);
             // 
+            // tlstpbtnImportWebDocument
+            // 
+            this.tlstpbtnImportWebDocument.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tlstpbtnImportWebDocument.Image = ((System.Drawing.Image)(resources.GetObject("tlstpbtnImportWebDocument.Image")));
+            this.tlstpbtnImportWebDocument.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tlstpbtnImportWebDocument.Name = "tlstpbtnImportWebDocument";
+            this.tlstpbtnImportWebDocument.Size = new System.Drawing.Size(23, 22);
+            this.tlstpbtnImportWebDocument.Text = "toolStripButton1";
+            this.tlstpbtnImportWebDocument.ToolTipText = "Import Web Document";
+            this.tlstpbtnImportWebDocument.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
+            // 
+            // tlstpbtnClearDB
+            // 
+            this.tlstpbtnClearDB.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tlstpbtnClearDB.Image = ((System.Drawing.Image)(resources.GetObject("tlstpbtnClearDB.Image")));
+            this.tlstpbtnClearDB.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tlstpbtnClearDB.Name = "tlstpbtnClearDB";
+            this.tlstpbtnClearDB.Size = new System.Drawing.Size(23, 22);
+            this.tlstpbtnClearDB.Text = "toolStripButton1";
+            this.tlstpbtnClearDB.ToolTipText = "Clear Cache Database";
+            this.tlstpbtnClearDB.Click += new System.EventHandler(this.tlstpbtnClearDB_Click);
+            // 
             // tlstpbtnCacheDatabase
             // 
             this.tlstpbtnCacheDatabase.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -463,6 +473,11 @@ namespace UI
             this.tlstpbtnCacheDatabase.ToolTipText = "Create Cache Database";
             this.tlstpbtnCacheDatabase.Click += new System.EventHandler(this.tlstpbtnCacheDatabase_Click);
             // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
             // tlstpbtnSimilarity
             // 
             this.tlstpbtnSimilarity.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -471,7 +486,7 @@ namespace UI
             this.tlstpbtnSimilarity.Name = "tlstpbtnSimilarity";
             this.tlstpbtnSimilarity.Size = new System.Drawing.Size(23, 22);
             this.tlstpbtnSimilarity.Text = "toolStripButton1";
-            this.tlstpbtnSimilarity.ToolTipText = "Reorganiza Search Results";
+            this.tlstpbtnSimilarity.ToolTipText = "Reorganize Search Results";
             this.tlstpbtnSimilarity.Click += new System.EventHandler(this.tlstpbtnSimilarity_Click);
             // 
             // saveFileDialog1
@@ -495,6 +510,7 @@ namespace UI
             this.Controls.Add(this.stsstpMain);
             this.Controls.Add(this.tlstpMain);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
@@ -522,9 +538,6 @@ namespace UI
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem customizeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem contentsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
@@ -542,7 +555,6 @@ namespace UI
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.ToolStripButton tlsbtnAddParagraph;
         private System.Windows.Forms.ToolStripButton tlstpbtnRemove;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripButton tlstpbtnInsertFile;
         private System.Windows.Forms.ToolStripTextBox tlstptxtSearch;
         private System.Windows.Forms.ToolStripButton tlstpbtnSearchGoogle;
@@ -559,5 +571,9 @@ namespace UI
         private System.Windows.Forms.ToolStripMenuItem evaluateSimilarityToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reorganizeSearchResultsToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton tlstpbtnSimilarity;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem clearCacheDatabaseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton tlstpbtnClearDB;
+        private System.Windows.Forms.ToolStripButton tlstpbtnImportWebDocument;
     }
 }

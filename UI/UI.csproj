@@ -76,6 +76,12 @@
     <Compile Include="GUIHeader.cs" />
     <Compile Include="GUIItem.cs" />
     <Compile Include="GUIParagraph.cs" />
+    <Compile Include="ImportWebDocumentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImportWebDocumentForm.Designer.cs">
+      <DependentUpon>ImportWebDocumentForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,6 +135,10 @@
       <DependentUpon>DocumentForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="ImportWebDocumentForm.resx">
+      <DependentUpon>ImportWebDocumentForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -150,6 +160,9 @@
       <DependentUpon>WaitForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Document2.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
