@@ -71,7 +71,10 @@ namespace Control
                         model.CreateCacheDatabase();
                         break;
                     case UIManager.GUIAction.Check_Similarity:
-                        return FindSimilarity(parameters);
+                        return new Object[] {FindSimilarity(parameters),parameters[2]};
+                    case UIManager.GUIAction.Clear_Cache_Database:
+                        model.CleanDB();
+                        break;
                     //case UIManager.GUIAction.Insert_Text_File_To_Database:
                     //    model.InsertNewDocumentToDatabase((string)parameters[0], (Model.ModelDocument)ObjectTranslator.TranslateGUIToModel((UI.GUIDocument)parameters[0]));
                     //    break;
@@ -120,7 +123,7 @@ namespace Control
             /// </summary>
             /// <param name="parameters"></param>
             /// <returns></returns>
-            private Object[] FindSimilarity(object[] parameters)
+            private LinkedList<GUIGoogleSearchResult> FindSimilarity(object[] parameters)
             {
                 string searchLabel = (string)parameters[0];
                 UI.SimilarityForm.SearchEngine u_engine = (UI.SimilarityForm.SearchEngine)parameters[1];
@@ -130,7 +133,7 @@ namespace Control
                 int pagesNumber = (int)parameters[3];
                 LinkedList<ModelGoogleSearchResult> ls =
                            model.CheckSimilarity(searchLabel, m_type, m_engine, pagesNumber);
-                return new Object[] { TranslateList(ls) };
+                return TranslateList(ls);
             }
 
         #endregion
