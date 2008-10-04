@@ -209,6 +209,8 @@ namespace Model
 
         private List<Record<string, double>> evaluateSimilarity_aux(WordsBag new_bag, Func<WordsBag, WordsBag, double> f)
         {
+            if (new_bag == null)
+                return null;
             List<Record<string, double>> result = new List<Record<string, double>>();
             foreach (WordsBag bag in this.getWordsBag())
             {
@@ -242,6 +244,8 @@ namespace Model
         /// <returns></returns>
         private WordsBag createWordsBag(ModelDocument doc)
         {
+            if (doc == null)
+                return null;
             List<RawWord> filtered = new List<RawWord>();
             foreach (RawWord w in doc.getWords())
             {
@@ -340,7 +344,7 @@ namespace Model
                 if (doc != null)
                 {
                     doc.Title = cacheLinks[link];
-                    //InsertDocument_aux(link, doc);
+                    InsertDocument_aux(link, doc);
                 }
             }
         }
@@ -714,6 +718,8 @@ namespace Model
                 if (pages > pagesNumber)
                     break;
                 ModelDocument doc = ImportDocument(result.URL);
+                if (doc == null)
+                    continue;
                 Record<string, double> rec = null;
                 switch (type)
                 {
