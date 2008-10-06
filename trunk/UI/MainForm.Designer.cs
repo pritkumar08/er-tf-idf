@@ -76,6 +76,7 @@ namespace UI
             this.tlstpbtnSimilarity = new System.Windows.Forms.ToolStripButton();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.tlstpbtnOrganizeForms = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1.SuspendLayout();
             this.tlstpMain.SuspendLayout();
             this.SuspendLayout();
@@ -329,7 +330,8 @@ namespace UI
             this.tlstpbtnClearDB,
             this.tlstpbtnCacheDatabase,
             this.toolStripSeparator4,
-            this.tlstpbtnSimilarity});
+            this.tlstpbtnSimilarity,
+            this.tlstpbtnOrganizeForms});
             this.tlstpMain.Location = new System.Drawing.Point(0, 24);
             this.tlstpMain.Name = "tlstpMain";
             this.tlstpMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -503,6 +505,16 @@ namespace UI
             this.openFileDialog1.Filter = "Text Comparer Files(*.erp)|*.erp";
             this.openFileDialog1.RestoreDirectory = true;
             // 
+            // tlstpbtnOrganizeForms
+            // 
+            this.tlstpbtnOrganizeForms.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tlstpbtnOrganizeForms.Image = ((System.Drawing.Image)(resources.GetObject("tlstpbtnOrganizeForms.Image")));
+            this.tlstpbtnOrganizeForms.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tlstpbtnOrganizeForms.Name = "tlstpbtnOrganizeForms";
+            this.tlstpbtnOrganizeForms.Size = new System.Drawing.Size(23, 22);
+            this.tlstpbtnOrganizeForms.ToolTipText = "Organize Windows";
+            this.tlstpbtnOrganizeForms.Click += new System.EventHandler(this.tlstpbtnOrganizeForms_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -576,5 +588,6 @@ namespace UI
         private System.Windows.Forms.ToolStripMenuItem clearCacheDatabaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton tlstpbtnClearDB;
         private System.Windows.Forms.ToolStripButton tlstpbtnImportWebDocument;
+        private System.Windows.Forms.ToolStripButton tlstpbtnOrganizeForms;
     }
 }
