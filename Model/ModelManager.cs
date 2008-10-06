@@ -409,6 +409,11 @@ namespace Model
             return tf_word * idf_word;
         }
 
+        public bool IsDBEmpty()
+        {
+            return m_WordsBags == null;
+        }
+
         #endregion // Public Mehtods
 
         #region ModelManager : Private Methods
