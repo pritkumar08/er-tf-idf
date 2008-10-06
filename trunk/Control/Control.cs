@@ -21,12 +21,13 @@ namespace Control
             public Control()
             {
                 model = new ModelManager();
+                bool is_empty = model.IsDBEmpty();
                 //model.CleanDB();
                 //model.ModelEvent += new ModelManager.ModelEventHandler(ModelEventHandler);
 
                 ui = new UIManager();
                 ui.GUIEvent += new UIManager.GUIEventHandler(GUIEventHandler);
-                ui.LoadGUIApplication();
+                ui.LoadGUIApplication(is_empty);
             }
 
         #endregion
