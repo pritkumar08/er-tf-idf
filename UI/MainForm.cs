@@ -182,6 +182,20 @@ namespace UI
                 }
             }
 
+            private void BW_DoSearchGoogle(object sender, DoWorkEventArgs e)
+            {
+                e.Result = OnRequestForInformation(MainFormActions.Search_Web, new Object[] { tlstptxtSearch.Text });
+            }
+
+            private void BW_SearchGoogleCompleted(object sender, RunWorkerCompletedEventArgs e)
+            {
+                waitForm.Close();
+                waitForm = null;
+                Object[] objects = (Object[]) e.Result;
+                ShowSearchResults(SimilarityForm.SimilarityType.None, (LinkedList<GUIGoogleSearchResult>)objects[0]);
+            }
+
+
             private void BW_DoCreateCacheDB(object sender, DoWorkEventArgs e)
             {
                 OnRequestForInformation(MainFormActions.Create_Cache_Database, null);
@@ -210,9 +224,17 @@ namespace UI
 
             private void tlstpbtnSearchGoogle_Click(object sender, EventArgs e)
             {
-                Object[] objects =
-                        OnRequestForInformation(MainFormActions.Search_Web, new Object[] { tlstptxtSearch.Text });
-                ShowSearchResults(SimilarityForm.SimilarityType.None, (LinkedList<GUIGoogleSearchResult>)objects[0]);
+                AsyncWorkerOperation(BW_DoSearchGoogle,BW_SearchGoogleCompleted,"Searching Google...",
+                    "Please wait while generating google results",null);
+                //BackgroundWorker bw = new BackgroundWorker();
+                //bw.DoWork += new DoWorkEventHandler(BW_DoSearchGoogle);
+                //bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BW_SearchGoogleCompleted);
+                //bw.RunWorkerAsync();
+                //waitForm = new WaitForm("Searching Google...", "Please wait while generating google results");
+                //if (waitForm.ShowDialog() == DialogResult.Cancel)
+                //{
+                //    bw.CancelAsync();
+                //}
             }
 
             private void tlstpbtnCacheImporter_Click(object sender, EventArgs e)
@@ -240,6 +262,12 @@ namespace UI
             private void tlstpbtnClearDB_Click(object sender, EventArgs e)
             {
                 ClearCacheDatabase();
+            }
+
+            private void tlstptxtSearch_Click(object sender, EventArgs e)
+            {
+                if (tlstptxtSearch.Text == "Google Search...")
+                    tlstptxtSearch.Text = "";
             }
 
         #endregion
@@ -339,22 +367,46 @@ namespace UI
 
             private void CreateCacheDatabase()
             {
-                BackgroundWorker bw = new BackgroundWorker();
-                bw.DoWork += new DoWorkEventHandler(BW_DoCreateCacheDB);
-                bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BW_CreateCacheDBCompleted);
-                bw.RunWorkerAsync();
-                waitForm = new WaitForm("Creating database", "Please wait while creating database...");
-                waitForm.ShowDialog();
+                AsyncWorkerOperation(BW_DoCreateCacheDB,BW_CreateCacheDBCompleted,"Creating database",
+                    "Please wait while creating database...",null);
+                //BackgroundWorker bw = new BackgroundWorker();
+                //bw.DoWork += new DoWorkEventHandler(BW_DoCreateCacheDB);
+                //bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BW_CreateCacheDBCompleted);
+                //bw.RunWorkerAsync();
+                //waitForm = new WaitForm("Creating database", "Please wait while creating database...");
+                //if (waitForm.ShowDialog() == DialogResult.Cancel)
+                //{
+                //    bw.CancelAsync();
+                //}
             }
 
             private void FindSimilarity(object[] parameters)
             {
+                AsyncWorkerOperation(BW_DoFindSimilarity,BW_FindSimilarityCompleted,"Finding Similarity",
+                    "Please wait while generating similarity...",parameters);
+                //BackgroundWorker bw = new BackgroundWorker();
+                //bw.DoWork += new DoWorkEventHandler(BW_DoFindSimilarity);
+                //bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BW_FindSimilarityCompleted);
+                //bw.RunWorkerAsync(parameters);
+                //waitForm = new WaitForm("Finding Similarity", "Please wait while generating similarity...");
+                //if (waitForm.ShowDialog() == DialogResult.Cancel)
+                //{
+                //    bw.CancelAsync();
+                //}
+            }
+
+            private void AsyncWorkerOperation(DoWorkEventHandler doWork, RunWorkerCompletedEventHandler workCompleted, 
+                         string caption, string text, Object[] parameters)
+            {
                 BackgroundWorker bw = new BackgroundWorker();
-                bw.DoWork += new DoWorkEventHandler(BW_DoFindSimilarity);
-                bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BW_FindSimilarityCompleted);
+                bw.DoWork += new DoWorkEventHandler(doWork);
+                bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(workCompleted);
                 bw.RunWorkerAsync(parameters);
-                waitForm = new WaitForm("Finding Similarity", "Please wait while generating similarity...");
-                waitForm.ShowDialog();
+                waitForm = new WaitForm(caption, text);
+                if (waitForm.ShowDialog() == DialogResult.Cancel)
+                {
+                    bw.CancelAsync();
+                }
             }
 
             private void ClearCacheDatabase()
@@ -374,5 +426,6 @@ namespace UI
             }
 
         #endregion
+
     }
 }

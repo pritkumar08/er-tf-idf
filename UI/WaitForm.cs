@@ -28,5 +28,14 @@ namespace UI
         #region WaitForm : Properties
 
         #endregion
+
+        #region WaitForm : Events
+
+            private void WaitForm_FormClosing(object sender, FormClosingEventArgs e)
+            {
+                this.DialogResult = DialogResult.Cancel;
+            }
+
+        #endregion
     }
 }
