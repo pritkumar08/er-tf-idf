@@ -276,9 +276,15 @@ namespace UI
 
             private void tlstptxtSearch_Click(object sender, EventArgs e)
             {
-                if (tlstptxtSearch.Text == "Google Search...")
+                if (tlstptxtSearch.Text == "Search Google...")
                     tlstptxtSearch.Text = "";
             }
+
+            private void tlstpbtnOrganizeForms_Click(object sender, EventArgs e)
+            {
+                ReorderWindows();
+            }
+
 
         #endregion
 
@@ -360,7 +366,7 @@ namespace UI
 
             private void ShowSearchResults(SimilarityForm.SimilarityType type, LinkedList<GUIGoogleSearchResult> searchList)
             {
-                string caption = "Search Results ";
+                string caption = "Google Search Results ";
                 switch (type)
                 {
                     case SimilarityForm.SimilarityType.L2_Norm:
@@ -379,6 +385,7 @@ namespace UI
             {
                 AsyncWorkerOperation(BW_DoCreateCacheDB,BW_CreateCacheDBCompleted,"Creating database",
                     "Please wait while creating database...",null);
+                SetDBEmpty(false);
                 //BackgroundWorker bw = new BackgroundWorker();
                 //bw.DoWork += new DoWorkEventHandler(BW_DoCreateCacheDB);
                 //bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BW_CreateCacheDBCompleted);
@@ -431,6 +438,7 @@ namespace UI
                 if (res == DialogResult.OK)
                 {
                     OnRequestForInformation(MainFormActions.Clear_Information, null);
+                    SetDBEmpty(true);
                 }
             }
 
@@ -453,7 +461,17 @@ namespace UI
                 clearCacheDatabaseToolStripMenuItem.Enabled = !is_db_empty;
             }
 
-        #endregion
+            private void ReorderWindows()
+            {
+                int location = 0;
+                foreach(Form frm in this.MdiChildren)
+                {
+                    frm.Width = this.Width/this.MdiChildren.Length;
+                    frm.Left = location;
+                    location += frm.Width;
+                }
+            }
 
+        #endregion
     }
 }

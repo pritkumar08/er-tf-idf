@@ -30,6 +30,8 @@ namespace UI
                 InitializeComponent();
                 this.googleResults = googleResults;
                 this.Text = formCaption;
+                if (this.googleResults.Count < RESULTS_PER_PAGE)
+                    btnNext.Enabled = false;
                 PrintResult(0);
             }
 
