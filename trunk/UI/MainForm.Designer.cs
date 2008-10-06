@@ -65,8 +65,8 @@ namespace UI
             this.tlsbtnAddParagraph = new System.Windows.Forms.ToolStripButton();
             this.tlstpbtnRemove = new System.Windows.Forms.ToolStripButton();
             this.tlstpbtnInsertFile = new System.Windows.Forms.ToolStripButton();
-            this.tlstptxtSearch = new System.Windows.Forms.ToolStripTextBox();
             this.tlstpbtnSearchGoogle = new System.Windows.Forms.ToolStripButton();
+            this.tlstptxtSearch = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tlstpbtnCacheImporter = new System.Windows.Forms.ToolStripButton();
             this.tlstpbtnImportWebDocument = new System.Windows.Forms.ToolStripButton();
@@ -406,13 +406,6 @@ namespace UI
             this.tlstpbtnInsertFile.Text = "Insert File To Database";
             this.tlstpbtnInsertFile.Click += new System.EventHandler(this.tlstpbtnInsertFile_Click);
             // 
-            // tlstptxtSearch
-            // 
-            this.tlstptxtSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tlstptxtSearch.Name = "tlstptxtSearch";
-            this.tlstptxtSearch.Size = new System.Drawing.Size(100, 25);
-            this.tlstptxtSearch.Text = "Search Google...";
-            // 
             // tlstpbtnSearchGoogle
             // 
             this.tlstpbtnSearchGoogle.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -423,6 +416,14 @@ namespace UI
             this.tlstpbtnSearchGoogle.Size = new System.Drawing.Size(23, 22);
             this.tlstpbtnSearchGoogle.Text = "Go >>";
             this.tlstpbtnSearchGoogle.Click += new System.EventHandler(this.tlstpbtnSearchGoogle_Click);
+            // 
+            // tlstptxtSearch
+            // 
+            this.tlstptxtSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tlstptxtSearch.Name = "tlstptxtSearch";
+            this.tlstptxtSearch.Size = new System.Drawing.Size(100, 25);
+            this.tlstptxtSearch.Text = "Search Google...";
+            this.tlstptxtSearch.Click += new System.EventHandler(this.tlstptxtSearch_Click);
             // 
             // toolStripSeparator1
             // 
