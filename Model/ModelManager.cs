@@ -730,7 +730,7 @@ namespace Model
                 new Dictionary<ModelGoogleSearchResult, Record<string, double>>();
             foreach (ModelGoogleSearchResult result in originalResults)
             {
-                if (pages > pagesNumber)
+                if (pages >= pagesNumber)
                     break;
                 ModelDocument doc = ImportDocument(result.URL);
                 if (doc == null)
