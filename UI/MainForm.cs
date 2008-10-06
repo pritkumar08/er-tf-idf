@@ -31,9 +31,10 @@ namespace UI
 
         #region "MainForm : Initialization"
 
-            public MainForm()
+            public MainForm(bool is_db_empty)
             {
                 InitializeComponent();
+                SetDBEmpty(is_db_empty);
                 documents = new LinkedList<DocumentForm>();
             }
 
@@ -184,7 +185,16 @@ namespace UI
 
             private void BW_DoSearchGoogle(object sender, DoWorkEventArgs e)
             {
-                e.Result = OnRequestForInformation(MainFormActions.Search_Web, new Object[] { tlstptxtSearch.Text });
+                if (e.Argument != null)
+                {
+                    e.Result = OnRequestForInformation(MainFormActions.Search_Web, 
+                        new Object[] { tlstptxtSearch.Text });
+                }
+                else
+                {
+                    e.Result = OnRequestForInformation(MainFormActions.Search_Web, 
+                        new Object[] { ((Object[])e.Argument)[0] });
+                }
             }
 
             private void BW_SearchGoogleCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -384,6 +394,11 @@ namespace UI
             {
                 AsyncWorkerOperation(BW_DoFindSimilarity,BW_FindSimilarityCompleted,"Finding Similarity",
                     "Please wait while generating similarity...",parameters);
+                if ((bool)parameters[4])
+                {
+                    AsyncWorkerOperation(BW_DoSearchGoogle,BW_SearchGoogleCompleted,"Searching Google...",
+                    "Please wait while generating google results",parameters);
+                }
                 //BackgroundWorker bw = new BackgroundWorker();
                 //bw.DoWork += new DoWorkEventHandler(BW_DoFindSimilarity);
                 //bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BW_FindSimilarityCompleted);
@@ -424,6 +439,18 @@ namespace UI
                 Object[] objects =
                     OnRequestForInformation(MainFormActions.Import_Document, new Object[] { address });  
                 CreateNewDocumentForm((GUIDocument)objects[0], address); 
+            }
+
+            private void SetDBEmpty(bool is_db_empty)
+            {
+                tlstpbtnCacheDatabase.Enabled = is_db_empty;
+                createCacheDatabaseToolStripMenuItem.Enabled = is_db_empty;
+
+                tlstpbtnSimilarity.Enabled =  !is_db_empty;
+                reorganizeSearchResultsToolStripMenuItem.Enabled = !is_db_empty;
+
+                tlstpbtnClearDB.Enabled = !is_db_empty;
+                clearCacheDatabaseToolStripMenuItem.Enabled = !is_db_empty;
             }
 
         #endregion
