@@ -40,6 +40,7 @@
             this.lblSearchEngine = new System.Windows.Forms.Label();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.lblSearchTitle = new System.Windows.Forms.Label();
+            this.chckViewGoogleSearch = new System.Windows.Forms.CheckBox();
             this.grpSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmudPages)).BeginInit();
             this.SuspendLayout();
@@ -47,7 +48,7 @@
             // btnReorder
             // 
             this.btnReorder.Enabled = false;
-            this.btnReorder.Location = new System.Drawing.Point(246, 182);
+            this.btnReorder.Location = new System.Drawing.Point(275, 204);
             this.btnReorder.Name = "btnReorder";
             this.btnReorder.Size = new System.Drawing.Size(75, 23);
             this.btnReorder.TabIndex = 0;
@@ -57,7 +58,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(331, 182);
+            this.btnCancel.Location = new System.Drawing.Point(360, 204);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
@@ -77,7 +78,7 @@
             this.grpSettings.Controls.Add(this.lblSearchTitle);
             this.grpSettings.Location = new System.Drawing.Point(12, 13);
             this.grpSettings.Name = "grpSettings";
-            this.grpSettings.Size = new System.Drawing.Size(394, 161);
+            this.grpSettings.Size = new System.Drawing.Size(423, 156);
             this.grpSettings.TabIndex = 2;
             this.grpSettings.TabStop = false;
             this.grpSettings.Text = "Configure Similarity Check";
@@ -85,7 +86,7 @@
             // nmudPages
             // 
             this.nmudPages.Enabled = false;
-            this.nmudPages.Location = new System.Drawing.Point(128, 120);
+            this.nmudPages.Location = new System.Drawing.Point(148, 120);
             this.nmudPages.Maximum = new decimal(new int[] {
             50,
             0,
@@ -102,9 +103,9 @@
             this.lblResultsNumber.AutoSize = true;
             this.lblResultsNumber.Location = new System.Drawing.Point(12, 122);
             this.lblResultsNumber.Name = "lblResultsNumber";
-            this.lblResultsNumber.Size = new System.Drawing.Size(92, 13);
+            this.lblResultsNumber.Size = new System.Drawing.Size(135, 13);
             this.lblResultsNumber.TabIndex = 6;
-            this.lblResultsNumber.Text = "Number of Pages:";
+            this.lblResultsNumber.Text = "Number of Viewed Results:";
             // 
             // cmbxSimilarity
             // 
@@ -113,7 +114,7 @@
             this.cmbxSimilarity.Items.AddRange(new object[] {
             "L2 Norm",
             "Minimum Value"});
-            this.cmbxSimilarity.Location = new System.Drawing.Point(128, 88);
+            this.cmbxSimilarity.Location = new System.Drawing.Point(148, 88);
             this.cmbxSimilarity.Name = "cmbxSimilarity";
             this.cmbxSimilarity.Size = new System.Drawing.Size(133, 21);
             this.cmbxSimilarity.TabIndex = 5;
@@ -134,7 +135,7 @@
             this.cmbxEngine.FormattingEnabled = true;
             this.cmbxEngine.Items.AddRange(new object[] {
             "Google Search..."});
-            this.cmbxEngine.Location = new System.Drawing.Point(128, 57);
+            this.cmbxEngine.Location = new System.Drawing.Point(148, 57);
             this.cmbxEngine.Name = "cmbxEngine";
             this.cmbxEngine.Size = new System.Drawing.Size(133, 21);
             this.cmbxEngine.TabIndex = 3;
@@ -152,7 +153,7 @@
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(128, 28);
+            this.txtSearch.Location = new System.Drawing.Point(148, 28);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(253, 20);
             this.txtSearch.TabIndex = 1;
@@ -166,12 +167,23 @@
             this.lblSearchTitle.TabIndex = 0;
             this.lblSearchTitle.Text = "Search:";
             // 
+            // chckViewGoogleSearch
+            // 
+            this.chckViewGoogleSearch.AutoSize = true;
+            this.chckViewGoogleSearch.Location = new System.Drawing.Point(12, 180);
+            this.chckViewGoogleSearch.Name = "chckViewGoogleSearch";
+            this.chckViewGoogleSearch.Size = new System.Drawing.Size(199, 17);
+            this.chckViewGoogleSearch.TabIndex = 8;
+            this.chckViewGoogleSearch.Text = "View Original Google Search Results";
+            this.chckViewGoogleSearch.UseVisualStyleBackColor = true;
+            // 
             // SimilarityForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(416, 217);
+            this.ClientSize = new System.Drawing.Size(447, 232);
+            this.Controls.Add(this.chckViewGoogleSearch);
             this.Controls.Add(this.grpSettings);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnReorder);
@@ -185,6 +197,7 @@
             this.grpSettings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmudPages)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -201,5 +214,6 @@
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.NumericUpDown nmudPages;
         private System.Windows.Forms.Label lblResultsNumber;
+        private System.Windows.Forms.CheckBox chckViewGoogleSearch;
     }
 }

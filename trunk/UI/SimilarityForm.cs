@@ -81,7 +81,7 @@ namespace UI
             private void btnCheck_Click(object sender, EventArgs e)
             {
                 this.Visible = false;
-                OnRequestForInformation(SimilarityFormActions.Reorder, new Object[] {txtSearch.Text ,engine, sType, (int)nmudPages.Value});
+                OnRequestForInformation(SimilarityFormActions.Reorder, new Object[] {txtSearch.Text ,engine, sType, (int)nmudPages.Value ,chckViewGoogleSearch.Checked});
                 this.Close();
             }
 
