@@ -98,9 +98,9 @@ namespace UI
 
         #region UIManager : Methods
             
-            public void LoadGUIApplication()
+            public void LoadGUIApplication(bool is_db_empty)
             {
-                frmMain = new MainForm();
+                frmMain = new MainForm(is_db_empty);
                 frmMain.MainFormEvent += new MainForm.MainFormEventHandler(MainFormEventHandler);
                 Application.Run(frmMain);
             }
