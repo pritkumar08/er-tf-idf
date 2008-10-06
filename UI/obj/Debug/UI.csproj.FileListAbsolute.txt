@@ -14,3 +14,4 @@ D:\Project in advanced programming\UI\obj\Debug\UI.CacheDataForm.resources
 D:\Project in advanced programming\UI\obj\Debug\UI.SearchForm.resources
 D:\Project in advanced programming\UI\obj\Debug\UI.SimilarityForm.resources
 D:\Project in advanced programming\UI\obj\Debug\UI.WaitForm.resources
+D:\Project in advanced programming\UI\obj\Debug\UI.ImportWebDocumentForm.resources

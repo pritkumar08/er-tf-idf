@@ -7,10 +7,8 @@ D:\Project in advanced programming\TestModel\bin\Debug\Model_Accessor.dll
 D:\Project in advanced programming\TestModel\bin\Debug\Model_Accessor.pdb
 D:\Project in advanced programming\TestModel\obj\Debug\TestModel.dll
 D:\Project in advanced programming\TestModel\obj\Debug\TestModel.pdb
-D:\Project in advanced programming\TestModel\bin\Debug\erp.mdb
-D:\Project in advanced programming\TestModel\bin\Debug\ModelDatabase-old.mdb
 D:\Project in advanced programming\TestModel\bin\Debug\OrderedTest1.orderedtest
 D:\Project in advanced programming\TestModel\bin\Debug\GAPI.dll
-D:\Project in advanced programming\TestModel\bin\Debug\GAPI.pdb
 D:\Project in advanced programming\TestModel\bin\Debug\UrlHistoryLibrary.dll
 D:\Project in advanced programming\TestModel\bin\Debug\UrlHistoryLibrary.pdb
+D:\Project in advanced programming\TestModel\bin\Debug\GAPI.pdb

@@ -175,6 +175,7 @@ namespace Model
         }
     }
 
+    [Serializable]
     public class BagWord
     {
         private string m_Word;

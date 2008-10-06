@@ -16,6 +16,13 @@ namespace Model
         private IPersistentModel persistent_model;
         private StemmerInterface si;
         private Double total_square_sum = -1;
+        private WordsBags m_WordsBags = null;
+
+        public WordsBags WordsBags
+        {
+            get { return m_WordsBags; }
+            set { m_WordsBags = value; }
+        }
 
         #endregion
 
@@ -23,9 +30,10 @@ namespace Model
 
         public ModelManager()
         {
-            DataSetPersistentModel.ConnectionString = 
-                DataSetPersistentModel.RELATIVE_CONNECTION_STRING;
+            DataSetPersistentModel.ConnectionString =
+                DataSetPersistentModel.TEST_CONNECTION_STRING;
             persistent_model = DataSetPersistentModel.getInstance();
+            m_WordsBags = Serializer.Deserialize();
             si = new PorterStemmer();
         }
 
@@ -209,10 +217,10 @@ namespace Model
 
         private List<Record<string, double>> evaluateSimilarity_aux(WordsBag new_bag, Func<WordsBag, WordsBag, double> f)
         {
-            if (new_bag == null)
+            if (new_bag == null || m_WordsBags == null)
                 return null;
             List<Record<string, double>> result = new List<Record<string, double>>();
-            foreach (WordsBag bag in this.getWordsBag())
+            foreach (WordsBag bag in m_WordsBags.Bags)
             {
                 double res = f(new_bag, bag);
                 if (res > 0) result.Add(new Record<string, double>
@@ -347,6 +355,8 @@ namespace Model
                     InsertDocument_aux(link, doc);
                 }
             }
+            m_WordsBags = new WordsBags(getWordsBag());
+            Serializer.Serialize(m_WordsBags);
         }
 
 

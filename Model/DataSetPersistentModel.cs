@@ -16,12 +16,13 @@ namespace Model
         private static DataSetPersistentModel instance = null;
 
         private static OleDbConnection connection;
-        private erpDataSet dataset = new erpDataSet();
+        private DataSet dataset = new DataSet();
+        //private erpDataSet dataset = new erpDataSet();
         Dictionary<string, OleDbDataAdapter> adapters = new Dictionary<string, OleDbDataAdapter>();
         public static string ConnectionString;
 
         public const string TEST_CONNECTION_STRING = 
-            "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\\Project in advanced programming\\Model\\erp.mdb;Persist Security Info=True";
+            "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\\Project in advanced programming\\Control\\erp.mdb;Persist Security Info=True";
         public const string RELATIVE_CONNECTION_STRING =
         "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|erp.mdb;Persist Security Info=True";
         private static string ALL = "";
@@ -80,6 +81,7 @@ namespace Model
                     {
                         r.Delete();
                     }
+                    //dataset.Tables[table_name].Clear();
                     adapters[table_name].Update(dataset, table_name);
                 }
                 dataset.AcceptChanges();
@@ -165,6 +167,8 @@ namespace Model
         {
             string tableName = getTableName(word, typeof(WEIGHTS_Segments));
             DataRow r;
+            if (!(dataset.Tables.Contains(tableName)))
+                return;
             if (dataset.Tables[tableName].Rows.Contains(
                 new object[] { word, path, locationID }))
             {
@@ -535,7 +539,7 @@ namespace Model
 
         private static string getTableName(string word, Type tType)
         {
-            char c = word.ToUpper().ToCharArray()[0];
+            char c = word.Normalize().ToUpper().ToCharArray()[0];
             if (tType.Equals(typeof(WEIGHTS_Segments)))
                 return WEIGHTS_TABLE_PREFIX + (char.IsLetter(c)?c.ToString():"Symbols");
             return "";

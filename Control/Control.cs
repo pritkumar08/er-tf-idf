@@ -21,7 +21,7 @@ namespace Control
             public Control()
             {
                 model = new ModelManager();
-                model.CleanDB();
+                //model.CleanDB();
                 //model.ModelEvent += new ModelManager.ModelEventHandler(ModelEventHandler);
 
                 ui = new UIManager();
