@@ -28,10 +28,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestModel", "TestModel\Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project1", "Project1\Project1.csproj", "{562A60F4-6861-4F16-9E83-0A7762D10726}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBInstallation", "DBInstallation\DBInstallation.csproj", "{365BB2D1-5CF6-4121-9E34-181CB4A6D2DF}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup3", "Setup3\Setup3.vdproj", "{8B97DEF2-65F9-498B-8955-A242C6FFE8AF}"
+EndProject
 Global
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = TextComparer11.vsmdi
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -57,6 +58,12 @@ Global
 		{562A60F4-6861-4F16-9E83-0A7762D10726}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{562A60F4-6861-4F16-9E83-0A7762D10726}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{562A60F4-6861-4F16-9E83-0A7762D10726}.Release|Any CPU.Build.0 = Release|Any CPU
+		{365BB2D1-5CF6-4121-9E34-181CB4A6D2DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{365BB2D1-5CF6-4121-9E34-181CB4A6D2DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{365BB2D1-5CF6-4121-9E34-181CB4A6D2DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{365BB2D1-5CF6-4121-9E34-181CB4A6D2DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B97DEF2-65F9-498B-8955-A242C6FFE8AF}.Debug|Any CPU.ActiveCfg = Debug
+		{8B97DEF2-65F9-498B-8955-A242C6FFE8AF}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

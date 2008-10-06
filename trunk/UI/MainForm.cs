@@ -399,6 +399,7 @@ namespace UI
                          string caption, string text, Object[] parameters)
             {
                 BackgroundWorker bw = new BackgroundWorker();
+                bw.WorkerSupportsCancellation = true;
                 bw.DoWork += new DoWorkEventHandler(doWork);
                 bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(workCompleted);
                 bw.RunWorkerAsync(parameters);

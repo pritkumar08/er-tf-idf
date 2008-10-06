@@ -62,18 +62,8 @@
     <Reference Include="UrlHistoryLibrary, Version=1.0.3186.24765, Culture=neutral, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CacheEntryInfo.cs" />
     <Compile Include="CacheSearch.cs" />
     <Compile Include="DataSetPersistentModel.cs" />
-    <Compile Include="erpDataSet.cs">
-      <DependentUpon>erpDataSet.xsd</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="erpDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>erpDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="GoogleSearch.cs" />
     <Compile Include="HTMLTranslator.cs" />
     <Compile Include="ModelDocument.cs" />
@@ -85,15 +75,6 @@
     <Compile Include="ModelManager.cs" />
     <Compile Include="Normalization\NGram.cs" />
     <Compile Include="ModelParagraph.cs" />
-    <Compile Include="PersistentDataSet.cs">
-      <DependentUpon>PersistentDataSet.xsd</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="PersistentDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PersistentDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="PersistentModel.cs" />
     <Compile Include="Normalization\PorterStemmer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -104,49 +85,21 @@
     </Compile>
     <Compile Include="Normalization\StopWordsHandler.cs" />
     <Compile Include="Record.cs" />
+    <Compile Include="Serializer.cs" />
     <Compile Include="TFIDCalculator.cs" />
     <Compile Include="Normalization\TFIDFMeasure.cs" />
     <Compile Include="Normalization\Tokeniser.cs" />
     <Compile Include="Word.cs" />
     <Compile Include="WordsBag.cs" />
+    <Compile Include="WordsBags.cs" />
     <Compile Include="XMLTranslator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="erpDataSet.xsc">
-      <DependentUpon>erpDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="erpDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>erpDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="erpDataSet.xss">
-      <DependentUpon>erpDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="PersistentDataSet.xsc">
-      <DependentUpon>PersistentDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="PersistentDataSet.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>PersistentDataSet.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="PersistentDataSet.xss">
-      <DependentUpon>PersistentDataSet.xsd</DependentUpon>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="erp.mdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ModelDatabase-old.mdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
