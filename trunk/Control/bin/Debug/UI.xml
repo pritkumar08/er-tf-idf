@@ -1,0 +1,1285 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>UI</name>
+    </assembly>
+    <members>
+        <member name="M:UI.WaitForm.#ctor(System.String,System.String)">
+            <summary>
+            The wait form constructor
+            </summary>
+            <param name="caption">The caption of the form.</param>
+            <param name="description">The description written under the image.</param>
+        </member>
+        <member name="M:UI.WaitForm.WaitForm_FormClosing(System.Object,System.Windows.Forms.FormClosingEventArgs)">
+            <summary>
+            The form closing event.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="F:UI.WaitForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:UI.WaitForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:UI.WaitForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:UI.AboutForm.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UI.AboutForm.btnOk_Click(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="F:UI.AboutForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:UI.AboutForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:UI.AboutForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:UI.DocumentForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:UI.DocumentForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:UI.DocumentForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:UI.DocumentForm.IsFileChanged">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:UI.DocumentForm.paragraphID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:UI.DocumentForm.totalControlsHeight">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:UI.DocumentForm.fileName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:UI.DocumentForm.savedDocument">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UI.DocumentForm.#ctor(UI.GUIDocument,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="document"></param>
+            <param name="fileName"></param>
+        </member>
+        <member name="M:UI.DocumentForm.DocumentForm_Load(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.DocumentForm.OnRequestForInformation(UI.DocumentForm.DocumentFormActions,System.Object[])">
+            <summary>
+            
+            </summary>
+            <param name="action"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UI.DocumentForm.ParagraphHandler(UI.cntParagraph.CntParagraphActions,System.Object[])">
+            <summary>
+            
+            </summary>
+            <param name="action"></param>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UI.DocumentForm.DocumentForm_Resize(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.DocumentForm.DocumentForm_Activated(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.DocumentForm.DocumentForm_FormClosed(System.Object,System.Windows.Forms.FormClosedEventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.DocumentForm.OpenNewDocument">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UI.DocumentForm.RemoveDocumentItems">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UI.DocumentForm.AddParagraph(System.Int32,System.Int32,UI.GUIParagraph)">
+            <summary>
+            
+            </summary>
+            <param name="left"></param>
+            <param name="parentId"></param>
+            <param name="par"></param>
+        </member>
+        <member name="M:UI.DocumentForm.AddHeader(System.Int32,System.Int32,UI.GUIHeader)">
+            <summary>
+            
+            </summary>
+            <param name="left"></param>
+            <param name="parentID"></param>
+            <param name="head"></param>
+        </member>
+        <member name="M:UI.DocumentForm.RemoveChildrenCotrols(System.Int32,System.Int32@)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <param name="i"></param>
+        </member>
+        <member name="M:UI.DocumentForm.SetComponentsHeight(System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="i"></param>
+            <param name="height"></param>
+        </member>
+        <member name="M:UI.DocumentForm.GenerateDocument">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:UI.DocumentForm.AddParagraphItems(UI.GUIParagraph@,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="par"></param>
+            <param name="index"></param>
+        </member>
+        <member name="M:UI.DocumentForm.InitializeDocumentComponents(UI.GUIDocument)">
+            <summary>
+            
+            </summary>
+            <param name="doc"></param>
+        </member>
+        <member name="M:UI.DocumentForm.AddParagraphToScreenFromDocument(System.Int32,System.Int32,UI.GUIParagraph)">
+            <summary>
+            
+            </summary>
+            <param name="left"></param>
+            <param name="parentId"></param>
+            <param name="par"></param>
+        </member>
+        <member name="M:UI.DocumentForm.InsertDocumentInDatabase">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UI.DocumentForm.ExitFromFile">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UI.DocumentForm.FileChanged">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="E:UI.DocumentForm.DocumentFormEvent">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:UI.DocumentForm.DocumentFormActions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:UI.DocumentForm.DocumentFormEventHandler">
+            <summary>
+            
+            </summary>
+            <param name="action"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="F:UI.cntParagraph.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:UI.cntParagraph.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:UI.cntParagraph.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:UI.cntParagraph.paragraph">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:UI.cntParagraph.parentParagraphID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UI.cntParagraph.#ctor(System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <param name="parentID"></param>
+        </member>
+        <member name="M:UI.cntParagraph.#ctor(UI.GUIParagraph,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="paragraph"></param>
+            <param name="parentID"></param>
+        </member>
+        <member name="M:UI.cntParagraph.OnMakingAction(UI.cntParagraph.CntParagraphActions,System.Object[])">
+            <summary>
+            
+            </summary>
+            <param name="action"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UI.cntParagraph.cntParagraph_Load(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.cntParagraph.btnAddHeader_Click(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.cntParagraph.btnAddParagraph_Click(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.cntParagraph.cntParagraph_Resize(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="P:UI.cntParagraph.ControlParagraph">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UI.cntParagraph.RemoveMe">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UI.cntParagraph.ParentID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="E:UI.cntParagraph.CntParagraphEvent">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:UI.cntParagraph.CntParagraphActions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:UI.cntParagraph.CntParagraphEventHandler">
+            <summary>
+            
+            </summary>
+            <param name="action"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="T:UI.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:UI.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:UI.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="F:UI.MainForm.documents">
+            <summary>
+            List of document currently open.
+            </summary>
+        </member>
+        <member name="M:UI.MainForm.#ctor(System.Boolean)">
+            <summary>
+            The main form constructor.
+            </summary>
+            <param name="is_db_empty">was the database already initialize</param>
+        </member>
+        <member name="M:UI.MainForm.newToolStripButton_Click(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.MainForm.openToolStripButton_Click(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.MainForm.saveToolStripButton_Click(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.MainForm.importToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.MainForm.tlsbtnAddParagraph_Click(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.MainForm.tlstpbtnRemove_Click(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.MainForm.tlstpbtnInsertFile_Click(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.MainForm.OnRequestForInformation(UI.MainForm.MainFormActions,System.Object[])">
+            <summary>
+            
+            </summary>
+            <param name="action"></param>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UI.MainForm.aboutToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.MainForm.exitToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.MainForm.DocumentFormHandler(UI.DocumentForm.DocumentFormActions,System.Object[])">
+            <summary>
+            
+            </summary>
+            <param name="action"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UI.MainForm.ImportWebDocumentHandler(UI.ImportWebDocumentForm.ImportWebDocumentFormActions,System.Object[])">
+            <summary>
+            
+            </summary>
+            <param name="action"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UI.MainForm.SimilarityFormHandler(UI.SimilarityForm.SimilarityFormActions,System.Object[])">
+            <summary>
+            
+            </summary>
+            <param name="action"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UI.MainForm.BW_DoSearchGoogle(System.Object,System.ComponentModel.DoWorkEventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.MainForm.BW_SearchGoogleCompleted(System.Object,System.ComponentModel.RunWorkerCompletedEventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.MainForm.BW_DoCreateCacheDB(System.Object,System.ComponentModel.DoWorkEventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.MainForm.BW_CreateCacheDBCompleted(System.Object,System.ComponentModel.RunWorkerCompletedEventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.MainForm.BW_DoFindSimilarity(System.Object,System.ComponentModel.DoWorkEventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.MainForm.BW_FindSimilarityCompleted(System.Object,System.ComponentModel.RunWorkerCompletedEventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.MainForm.tlstpbtnSearchGoogle_Click(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.MainForm.tlstpbtnCacheImporter_Click(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.MainForm.tlstpbtnCacheDatabase_Click(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.MainForm.tlstpbtnSimilarity_Click(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.MainForm.tlstpbtnClearDB_Click(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.MainForm.tlstptxtSearch_Click(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.MainForm.tlstpbtnOrganizeForms_Click(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.MainForm.saveAsToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.MainForm.contentsToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.MainForm.CreateNewDocumentForm(UI.GUIDocument,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="document"></param>
+            <param name="fileName"></param>
+        </member>
+        <member name="M:UI.MainForm.OpenFile">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UI.MainForm.SaveFile(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="fileName"></param>
+        </member>
+        <member name="M:UI.MainForm.RemoveFile(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="tag"></param>
+        </member>
+        <member name="M:UI.MainForm.SetCurrentDocument(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="documentTag"></param>
+        </member>
+        <member name="M:UI.MainForm.InsertToDatabase(System.String,UI.GUIDocument)">
+            <summary>
+            
+            </summary>
+            <param name="fileName"></param>
+            <param name="doc"></param>
+        </member>
+        <member name="M:UI.MainForm.GetDocumentForm(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="tag"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UI.MainForm.ShowSearchResults(UI.SimilarityForm.SimilarityType,System.Collections.Generic.LinkedList{UI.GUIGoogleSearchResult})">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <param name="searchList"></param>
+        </member>
+        <member name="M:UI.MainForm.CreateCacheDatabase">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UI.MainForm.FindSimilarity(System.Object[])">
+            <summary>
+            
+            </summary>
+            <param name="parameters"></param>
+        </member>
+        <member name="M:UI.MainForm.AsyncWorkerOperation(System.ComponentModel.DoWorkEventHandler,System.ComponentModel.RunWorkerCompletedEventHandler,System.String,System.String,System.Object[])">
+            <summary>
+            
+            </summary>
+            <param name="doWork"></param>
+            <param name="workCompleted"></param>
+            <param name="caption"></param>
+            <param name="text"></param>
+            <param name="parameters"></param>
+        </member>
+        <member name="M:UI.MainForm.ClearCacheDatabase">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UI.MainForm.ImportWebDocument(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="address"></param>
+        </member>
+        <member name="M:UI.MainForm.SetDBEmpty(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="is_db_empty"></param>
+        </member>
+        <member name="M:UI.MainForm.ReorderWindows">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UI.MainForm.EnableSave(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="enable"></param>
+        </member>
+        <member name="F:UI.MainForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:UI.MainForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:UI.MainForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:UI.MainForm.MainFormActions">
+            <summary>
+            This enum is in charge over the functionality of the main form
+            </summary>
+        </member>
+        <member name="T:UI.MainForm.MainFormEventHandler">
+            <summary>
+            The delegate for the events of the main form.
+            </summary>
+            <param name="action">What action is taken</param>
+            <param name="parameters">What are the parameter to send with the event</param>
+            <returns></returns>
+        </member>
+        <member name="F:UI.GUIGoogleSearchResult.url">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:UI.GUIGoogleSearchResult.title">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:UI.GUIGoogleSearchResult.content">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UI.GUIGoogleSearchResult.#ctor(System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="url"></param>
+            <param name="title"></param>
+            <param name="content"></param>
+        </member>
+        <member name="P:UI.GUIGoogleSearchResult.URL">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UI.GUIGoogleSearchResult.Title">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UI.GUIGoogleSearchResult.Content">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:UI.ImportWebDocumentForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:UI.ImportWebDocumentForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:UI.ImportWebDocumentForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:UI.ImportWebDocumentForm.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UI.ImportWebDocumentForm.OnRequestForInformation(UI.ImportWebDocumentForm.ImportWebDocumentFormActions,System.Object[])">
+            <summary>
+            
+            </summary>
+            <param name="action"></param>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UI.ImportWebDocumentForm.btnOk_Click(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.ImportWebDocumentForm.btnCancel_Click(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.ImportWebDocumentForm.txtAddress_KeyDown(System.Object,System.Windows.Forms.KeyEventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.ImportWebDocumentForm.OpenWebDocument">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UI.ImportWebDocumentForm.TranslateAddress(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="address"></param>
+            <returns></returns>
+        </member>
+        <member name="E:UI.ImportWebDocumentForm.ImportWebDocumentFormEvent">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:UI.ImportWebDocumentForm.ImportWebDocumentFormActions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:UI.ImportWebDocumentForm.ImportWebDocumentFormEventHandler">
+            <summary>
+            
+            </summary>
+            <param name="action"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="F:UI.SimilarityForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:UI.SimilarityForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:UI.SimilarityForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:UI.SimilarityForm.OnRequestForInformation(UI.SimilarityForm.SimilarityFormActions,System.Object[])">
+            <summary>
+            
+            </summary>
+            <param name="action"></param>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UI.SimilarityForm.btnCancel_Click(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.SimilarityForm.btnCheck_Click(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.SimilarityForm.cmbxEngine_SelectedIndexChanged(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.SimilarityForm.cmbxSimilarity_SelectedIndexChanged(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.SimilarityForm.cmbxSortingMethod_SelectedIndexChanged(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.SimilarityForm.nmudPages_ValueChanged(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.SimilarityForm.nmudPages_KeyDown(System.Object,System.Windows.Forms.KeyEventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="E:UI.SimilarityForm.SimilarityFormEvent">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:UI.SimilarityForm.SimilarityFormActions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:UI.SimilarityForm.SearchEngine">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:UI.SimilarityForm.SimilarityType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:UI.SimilarityForm.SortingMethod">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:UI.SimilarityForm.SimilarityFormEventHandler">
+            <summary>
+            
+            </summary>
+            <param name="action"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="F:UI.SearchForm.LEFT_POSITION">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:UI.SearchForm.RESULTS_PER_PAGE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:UI.SearchForm.googleResults">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:UI.SearchForm.currentIndex">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UI.SearchForm.#ctor(System.Collections.Generic.LinkedList{UI.GUIGoogleSearchResult},System.String)">
+            <summary>
+            
+            </summary>
+            <param name="googleResults"></param>
+            <param name="formCaption"></param>
+        </member>
+        <member name="M:UI.SearchForm.btnNext_Click(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.SearchForm.btnPrev_Click(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.SearchForm.PrintResult(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="index"></param>
+        </member>
+        <member name="M:UI.SearchForm.RemoveTags(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="text"></param>
+            <returns></returns>
+        </member>
+        <member name="F:UI.SearchForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:UI.SearchForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:UI.SearchForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:UI.GUIDocumentItem.text">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:UI.GUIDocumentItem.weight">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UI.GUIDocumentItem.#ctor(System.String,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="text"></param>
+            <param name="weight"></param>
+        </member>
+        <member name="P:UI.GUIDocumentItem.GUIDocumentItemText">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UI.GUIDocumentItem.GUIDocumentItemWeight">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:UI.GUIParagraph.id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:UI.GUIParagraph.items">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UI.GUIParagraph.#ctor(System.String,System.Int32,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="body"></param>
+            <param name="id"></param>
+            <param name="weight"></param>
+        </member>
+        <member name="M:UI.GUIParagraph.AddNewElementToParagraph(UI.GUIDocumentItem)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:UI.GUIParagraph.RemoveElementFromParagraph(UI.GUIDocumentItem)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="P:UI.GUIParagraph.GUIParagraphID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UI.GUIParagraph.GUIParagraphItems">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UI.GUIHeader.#ctor(System.String,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="title"></param>
+            <param name="weight"></param>
+        </member>
+        <member name="F:UI.cntHeader.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:UI.cntHeader.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:UI.cntHeader.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:UI.cntHeader.header">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:UI.cntHeader.parentParagraphID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UI.cntHeader.#ctor(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="parentID"></param>
+        </member>
+        <member name="M:UI.cntHeader.#ctor(UI.GUIHeader,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="header"></param>
+            <param name="parentID"></param>
+        </member>
+        <member name="M:UI.cntHeader.cntHeader_Load(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.cntHeader.cntHeader_Resize(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="P:UI.cntHeader.ControlHeader">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UI.cntHeader.RemoveMe">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UI.cntHeader.ParentID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:UI.CacheDataForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:UI.CacheDataForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:UI.CacheDataForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:UI.CacheDataForm.cacheAddress">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UI.CacheDataForm.#ctor(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            
+            </summary>
+            <param name="cacheAddress"></param>
+        </member>
+        <member name="M:UI.CacheDataForm.CacheDataForm_Resize(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:UI.CacheDataForm.FillList">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:UI.GUIDocument.paragraphs">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UI.GUIDocument.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UI.GUIDocument.AddParagraph(UI.GUIParagraph)">
+            <summary>
+            
+            </summary>
+            <param name="par"></param>
+        </member>
+        <member name="M:UI.GUIDocument.RemoveParagraph(UI.GUIParagraph)">
+            <summary>
+            
+            </summary>
+            <param name="par"></param>
+        </member>
+        <member name="P:UI.GUIDocument.DocumentParagraphs">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UI.UIManager.#ctor">
+            <summary>
+            The UIManager constructor.
+            </summary>
+        </member>
+        <member name="M:UI.UIManager.InitializeComponents">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UI.UIManager.OnGetInformation(UI.UIManager.GUIAction,System.Object[])">
+            <summary>
+            
+            </summary>
+            <param name="action"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UI.UIManager.MainFormEventHandler(UI.MainForm.MainFormActions,System.Object[])">
+            <summary>
+            
+            </summary>
+            <param name="action"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UI.UIManager.LoadGUIApplication(System.Boolean)">
+            <summary>
+            Loading new main form.
+            </summary>
+            <param name="is_db_empty">Was the database initialized.</param>
+        </member>
+        <member name="E:UI.UIManager.GUIEvent">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:UI.UIManager.GUIAction">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:UI.UIManager.GUIEventHandler">
+            <summary>
+            
+            </summary>
+            <param name="action"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

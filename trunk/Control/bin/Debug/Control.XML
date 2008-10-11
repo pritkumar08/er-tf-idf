@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Control</name>
+    </assembly>
+    <members>
+        <member name="M:Control.ObjectTranslator.TranslateModelToGUI(Model.ModelItem)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Control.ObjectTranslator.TranslateGUIToModel(UI.GUIItem)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Control.ObjectTranslator.TranslateGUISimilarity(UI.SimilarityForm.SimilarityType)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Control.ObjectTranslator.TranslateGUIEngine(UI.SimilarityForm.SearchEngine)">
+            <summary>
+            
+            </summary>
+            <param name="engine"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Control.Control.GUIEventHandler(UI.UIManager.GUIAction,System.Object[])">
+            <summary>
+            
+            </summary>
+            <param name="action"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Control.Control.TranslateList(System.Collections.Generic.LinkedList{Model.ModelGoogleSearchResult})">
+            <summary>
+            
+            </summary>
+            <param name="m_list"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Control.Control.FindSimilarity(System.Object[])">
+            <summary>
+            
+            </summary>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Control.clsMain.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+    </members>
+</doc>
