@@ -9,13 +9,23 @@ namespace Model
 
         #region Document : Members & Consts
 
+            /// <summary>
+            /// 
+            /// </summary>
             private LinkedList<ModelDocumentItem> paragraphs = null;
+
+            /// <summary>
+            /// 
+            /// </summary>
             private string title;
 
         #endregion
 
         #region Document : Initialization
 
+            /// <summary>
+            /// 
+            /// </summary>
             public ModelDocument()
             {
                 paragraphs = new LinkedList<ModelDocumentItem>();
@@ -25,6 +35,9 @@ namespace Model
 
         #region Document : Properties
         
+            /// <summary>
+            /// 
+            /// </summary>
             public LinkedList<ModelDocumentItem> Paragraphs
             {
                 get
@@ -33,6 +46,9 @@ namespace Model
                 }
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
             public string Title
             {
                 get
@@ -57,6 +73,10 @@ namespace Model
 
         #region Document : Methods
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="par"></param>
             public void AddParagraph(ModelParagraph par)
             {
                 if (!(paragraphs.Contains(par)))
@@ -65,6 +85,10 @@ namespace Model
                 }
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="par"></param>
             public void RemoveParagraph(ModelParagraph par)
             {
                 if (paragraphs.Contains(par))
@@ -73,6 +97,10 @@ namespace Model
                 }
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <returns></returns>
             public List<RawWord> getWords()
             {
                 List<RawWord> words = new List<RawWord>();
