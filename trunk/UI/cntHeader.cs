@@ -12,20 +12,35 @@ namespace UI
     {
         #region cntHeader : Members & Consts
 
+            /// <summary>
+            /// 
+            /// </summary>
             private GUIHeader header = null;
+            /// <summary>
+            /// 
+            /// </summary>
             private int parentParagraphID;
 
         #endregion
 
         #region cntHeader : Initialization
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="parentID"></param>
             public cntHeader(int parentID)
             {
                 InitializeComponent();
                 header = new GUIHeader("",0.00000);
                 this.parentParagraphID = parentID;
             }
-
+            
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="header"></param>
+            /// <param name="parentID"></param>
             internal cntHeader(GUIHeader header, int parentID)
             {
                 InitializeComponent();
@@ -41,6 +56,9 @@ namespace UI
 
         #region cntHeader : Properties
 
+            /// <summary>
+            /// 
+            /// </summary>
             internal GUIHeader ControlHeader
             {
                 get
@@ -55,6 +73,9 @@ namespace UI
                 }
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
             internal bool RemoveMe
             {
                 get
@@ -62,7 +83,10 @@ namespace UI
                     return chkbxHeaderRemove.Checked;
                 }
             }
-
+            
+            /// <summary>
+            /// 
+            /// </summary>
             internal int ParentID
             {
                 get
@@ -79,6 +103,11 @@ namespace UI
 
         #region cntHeader : EventHandlers
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void cntHeader_Load(object sender, EventArgs e)
             {
                 if (header != null)
@@ -88,6 +117,11 @@ namespace UI
                 }
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void cntHeader_Resize(object sender, EventArgs e)
             {
                 richTextBody.Width = this.Width - 15;

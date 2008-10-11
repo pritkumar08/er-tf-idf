@@ -10,11 +10,19 @@ namespace UI
 {
     public partial class AboutForm : Form
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public AboutForm()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnOk_Click(object sender, EventArgs e)
         {
             this.Close();

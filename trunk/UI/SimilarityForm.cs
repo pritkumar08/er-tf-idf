@@ -31,16 +31,25 @@ namespace UI
 
         #region SimilarityForm : Enums
 
+            /// <summary>
+            /// 
+            /// </summary>
             public enum SimilarityFormActions
             {
                 Reorder = 0
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
             public enum SearchEngine
             {
                 Google = 0
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
             public enum SimilarityType
             {
                 None = 0,
@@ -48,6 +57,9 @@ namespace UI
                 Min_Val = 2
             };
 
+            /// <summary>
+            /// 
+            /// </summary>
             public enum SortingMethod
             {
                 None = 0,
@@ -63,18 +75,33 @@ namespace UI
 
         #region SimilarityForm : Events
 
+            /// <summary>
+            /// 
+            /// </summary>
             public event SimilarityFormEventHandler SimilarityFormEvent;
 
         #endregion
 
         #region SimilarityForm : Delegates
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="action"></param>
+            /// <param name="parameters"></param>
+            /// <returns></returns>
             public delegate Object[] SimilarityFormEventHandler(SimilarityFormActions action, Object[] parameters);
 
         #endregion
 
         #region SimilarityForm : EventHandler
-
+            
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="action"></param>
+            /// <param name="parameter"></param>
+            /// <returns></returns>
             protected virtual Object[] OnRequestForInformation(SimilarityFormActions action, Object[] parameter)
             {
                 if (SimilarityFormEvent != null)
@@ -82,11 +109,21 @@ namespace UI
                 return null;
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void btnCancel_Click(object sender, EventArgs e)
             {
                 this.Close();
             }
-
+            
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void btnCheck_Click(object sender, EventArgs e)
             {
                 this.Visible = false;
@@ -96,11 +133,21 @@ namespace UI
                 this.Close();
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void cmbxEngine_SelectedIndexChanged(object sender, EventArgs e)
             {
                 cmbxSimilarity.Enabled = true;
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void cmbxSimilarity_SelectedIndexChanged(object sender, EventArgs e)
             {
                 cmbxSortingMethod.Enabled = true;
@@ -114,7 +161,12 @@ namespace UI
                         break;
                 }
             }
-
+            
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void cmbxSortingMethod_SelectedIndexChanged(object sender, EventArgs e)
             {
                 nmudPages.Enabled = true;
@@ -129,12 +181,22 @@ namespace UI
                 }
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void nmudPages_ValueChanged(object sender, EventArgs e)
             {
                 if (nmudPages.Value > 0)
                     btnReorder.Enabled = true;
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void nmudPages_KeyDown(object sender, KeyEventArgs e)
             {
                 if (nmudPages.Value > 0)

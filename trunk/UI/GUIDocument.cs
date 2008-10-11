@@ -9,12 +9,18 @@ namespace UI
         
         #region GUIDocument : Members & Consts
 
+            /// <summary>
+            /// 
+            /// </summary>
             private LinkedList<GUIParagraph> paragraphs;
 
         #endregion
 
         #region GUIDocument : Initialization
 
+            /// <summary>
+            /// 
+            /// </summary>
             public GUIDocument()
             {
                 paragraphs = new LinkedList<GUIParagraph>();
@@ -24,6 +30,9 @@ namespace UI
 
         #region GUIDocument : Properties
 
+            /// <summary>
+            /// 
+            /// </summary>
             public LinkedList<GUIDocumentItem> DocumentParagraphs
             {
                 get
@@ -49,6 +58,10 @@ namespace UI
 
         #region GUIDocument : Methods
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="par"></param>
             public void AddParagraph(GUIParagraph par)
             {
                 if (!(paragraphs.Contains(par)))
@@ -57,6 +70,10 @@ namespace UI
                 }
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="par"></param>
             public void RemoveParagraph(GUIParagraph par)
             {
                 if (paragraphs.Contains(par))

@@ -8,14 +8,29 @@ namespace UI
     {
         #region GUIGoogleSearchResult : Members & Consts
             
+            /// <summary>
+            /// 
+            /// </summary>
             private string url;
+            /// <summary>
+            /// 
+            /// </summary>
             private string title;
+            /// <summary>
+            /// 
+            /// </summary>
             private string content;
 
         #endregion
 
         #region GUIGoogleSearchResult : Initialization
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="url"></param>
+            /// <param name="title"></param>
+            /// <param name="content"></param>
             public GUIGoogleSearchResult(string url, string title, string content)
             {
                 this.url = url;
@@ -25,8 +40,11 @@ namespace UI
 
         #endregion
 
-            #region GUIGoogleSearchResult : Properties
+        #region GUIGoogleSearchResult : Properties
 
+            /// <summary>
+            /// 
+            /// </summary>
             public string URL
             {
                 get
@@ -35,6 +53,9 @@ namespace UI
                 }
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
             public string Title
             {
                 get
@@ -42,7 +63,10 @@ namespace UI
                     return this.title;
                 }
             }
-
+            
+            /// <summary>
+            /// 
+            /// </summary>
             public string Content
             {
                 get

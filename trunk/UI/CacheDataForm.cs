@@ -12,12 +12,19 @@ namespace UI
     {
         #region CacheDataForm : Members & Consts
 
+            /// <summary>
+            /// 
+            /// </summary>
             Dictionary<string, string> cacheAddress;
             
         #endregion
 
         #region CacheDataForm : Initialization
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="cacheAddress"></param>
             public CacheDataForm(Dictionary<string,string> cacheAddress)
             {
                 InitializeComponent();
@@ -37,6 +44,11 @@ namespace UI
 
         #region CacheDataForm : Events Handlers
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void CacheDataForm_Resize(object sender, EventArgs e)
             {
                 lstvwCache.Columns[0].Width = (int) this.Width / 3;
@@ -47,6 +59,9 @@ namespace UI
 
         #region CacheDataForm : Methods
 
+            /// <summary>
+            /// 
+            /// </summary>
             private void FillList()
             {
                 foreach (string link in cacheAddress.Keys)
