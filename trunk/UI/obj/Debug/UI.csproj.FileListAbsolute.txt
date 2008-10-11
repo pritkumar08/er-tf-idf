@@ -15,3 +15,4 @@ D:\Project in advanced programming\UI\obj\Debug\UI.SearchForm.resources
 D:\Project in advanced programming\UI\obj\Debug\UI.SimilarityForm.resources
 D:\Project in advanced programming\UI\obj\Debug\UI.WaitForm.resources
 D:\Project in advanced programming\UI\obj\Debug\UI.ImportWebDocumentForm.resources
+D:\Project in advanced programming\UI\bin\Debug\UI.XML

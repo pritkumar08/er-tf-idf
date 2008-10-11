@@ -6,6 +6,7 @@ using System.Linq;
 using Stemming;
 using System.Text.RegularExpressions;
 using System.IO;
+using System.Collections;
 
 namespace Model
 {
@@ -762,8 +763,13 @@ namespace Model
             }
             IOrderedEnumerable<KeyValuePair<ModelGoogleSearchResult,double>> ordered =
                 highestResults.OrderByDescending(x => x.Value);
-            
-            return OrderedSimilarityResults(highestResults);
+            LinkedList<ModelGoogleSearchResult> ordered_results = new LinkedList<ModelGoogleSearchResult>();
+            foreach (KeyValuePair<ModelGoogleSearchResult, double> res in ordered)
+            {
+                ordered_results.AddLast(res.Key);
+            }
+            return ordered_results;
+            //return OrderedSimilarityResults(highestResults);
         }
 
         /// <summary>
