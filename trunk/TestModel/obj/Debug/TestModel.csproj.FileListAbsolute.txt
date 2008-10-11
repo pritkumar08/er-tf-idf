@@ -12,3 +12,4 @@ D:\Project in advanced programming\TestModel\bin\Debug\GAPI.dll
 D:\Project in advanced programming\TestModel\bin\Debug\UrlHistoryLibrary.dll
 D:\Project in advanced programming\TestModel\bin\Debug\UrlHistoryLibrary.pdb
 D:\Project in advanced programming\TestModel\bin\Debug\GAPI.pdb
+D:\Project in advanced programming\TestModel\bin\Debug\Model.xml

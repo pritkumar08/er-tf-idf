@@ -185,7 +185,7 @@ namespace UI
 
             private void BW_DoSearchGoogle(object sender, DoWorkEventArgs e)
             {
-                if (e.Argument != null)
+                if (e.Argument == null)
                 {
                     e.Result = OnRequestForInformation(MainFormActions.Search_Web, 
                         new Object[] { tlstptxtSearch.Text });
@@ -467,7 +467,7 @@ namespace UI
                 foreach(Form frm in this.MdiChildren)
                 {
                     frm.Width = this.Width/this.MdiChildren.Length;
-                    frm.Left = location;
+                    frm.Location = new Point(location, 0);
                     location += frm.Width;
                 }
             }

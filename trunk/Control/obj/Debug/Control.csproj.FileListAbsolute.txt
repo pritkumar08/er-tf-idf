@@ -12,3 +12,5 @@ D:\Project in advanced programming\Control\bin\Debug\UrlHistoryLibrary.dll
 D:\Project in advanced programming\Control\bin\Debug\GAPI.dll
 D:\Project in advanced programming\Control\bin\Debug\UrlHistoryLibrary.pdb
 D:\Project in advanced programming\Control\bin\Debug\GAPI.pdb
+D:\Project in advanced programming\Control\bin\Debug\Model.xml
+D:\Project in advanced programming\Control\bin\Debug\Control.XML

@@ -137,6 +137,21 @@ namespace Control
                 }
             }
 
+            internal static Model.ModelManager.SortingMethod TranslateGUISorting(UI.SimilarityForm.SortingMethod u_method)
+            {
+                switch (u_method)
+                {
+                    case UI.SimilarityForm.SortingMethod.None:
+                        return Model.ModelManager.SortingMethod.None;
+                    case UI.SimilarityForm.SortingMethod.Maximum:
+                        return Model.ModelManager.SortingMethod.Maximum;
+                    case UI.SimilarityForm.SortingMethod.Summary:
+                        return Model.ModelManager.SortingMethod.Summary;
+                    default:
+                        return Model.ModelManager.SortingMethod.None;
+                }
+            }
+
             /// <summary>
             /// 
             /// </summary>
@@ -154,7 +169,6 @@ namespace Control
             }
 
         #endregion
-
 
     }
 }

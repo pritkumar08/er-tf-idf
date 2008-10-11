@@ -22,9 +22,6 @@ namespace Control
             {
                 model = new ModelManager();
                 bool is_empty = model.IsDBEmpty();
-                //model.CleanDB();
-                //model.ModelEvent += new ModelManager.ModelEventHandler(ModelEventHandler);
-
                 ui = new UIManager();
                 ui.GUIEvent += new UIManager.GUIEventHandler(GUIEventHandler);
                 ui.LoadGUIApplication(is_empty);
@@ -85,12 +82,6 @@ namespace Control
                 return null;
             }           
             
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <param name="action"></param>
-            /// <param name="parameters"></param>
-            /// <returns></returns>
             //public Object[] ModelEventHandler(ModelManager.ModelActions action, Object[] parameters)
             //{
             //    switch (action)
@@ -131,9 +122,11 @@ namespace Control
                 Model.ModelManager.SearchEngine m_engine = ObjectTranslator.TranslateGUIEngine(u_engine);
                 UI.SimilarityForm.SimilarityType u_type = (UI.SimilarityForm.SimilarityType)parameters[2];
                 Model.ModelManager.SimilarityType m_type = ObjectTranslator.TranslateGUISimilarity(u_type);
+                UI.SimilarityForm.SortingMethod u_method = (UI.SimilarityForm.SortingMethod)parameters[5];
+                Model.ModelManager.SortingMethod m_method = ObjectTranslator.TranslateGUISorting(u_method);
                 int pagesNumber = (int)parameters[3];
                 LinkedList<ModelGoogleSearchResult> ls =
-                           model.CheckSimilarity(searchLabel, m_type, m_engine, pagesNumber);
+                           model.CheckSimilarity(searchLabel, m_type, m_engine, pagesNumber, m_method);
                 return TranslateList(ls);
             }
 

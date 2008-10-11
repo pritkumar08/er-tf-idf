@@ -29,9 +29,7 @@ namespace Model
         #region ModelManager : Initialization
 
         public ModelManager()
-        {
-            DataSetPersistentModel.ConnectionString =
-                DataSetPersistentModel.TEST_CONNECTION_STRING;
+        {           
             persistent_model = DataSetPersistentModel.getInstance();
             m_WordsBags = Serializer.Deserialize();
             si = new PorterStemmer();
@@ -53,7 +51,14 @@ namespace Model
                 None = 0, 
                 Google = 1
             }
-            
+
+            public enum SortingMethod
+            {
+                None = 0,
+                Maximum = 1,
+                Summary = 2
+            };
+
         #endregion
 
         #region ModelManager : Methods
@@ -367,12 +372,13 @@ namespace Model
         /// <param name="engine"></param>
         /// <param name="pagesNumber"></param>
         /// <returns></returns>
-        public LinkedList<ModelGoogleSearchResult> CheckSimilarity(string searchLabel, SimilarityType type, SearchEngine engine, int pagesNumber)
+        public LinkedList<ModelGoogleSearchResult> CheckSimilarity(string searchLabel, SimilarityType type, SearchEngine engine, int pagesNumber, SortingMethod method)
         {
             switch (engine)
             {
                 case SearchEngine.Google:
-                    return CheckGoogleSimilarity(searchLabel, type, pagesNumber);
+                    return new LinkedList<ModelGoogleSearchResult>(
+                        CheckGoogleSimilarity(searchLabel, type, pagesNumber, method));
                 default:
                     return null;
             }
@@ -722,12 +728,13 @@ namespace Model
         /// <param name="type"></param>
         /// <param name="pagesNumber"></param>
         /// <returns></returns>
-        private LinkedList<ModelGoogleSearchResult> CheckGoogleSimilarity(string searchLabel, SimilarityType type, int pagesNumber)
+        private LinkedList<ModelGoogleSearchResult> CheckGoogleSimilarity(
+            string searchLabel, SimilarityType type, int pagesNumber,SortingMethod method)
         {
             int pages = 0;
             LinkedList<ModelGoogleSearchResult> originalResults = SearchWeb(searchLabel);
-            Dictionary<ModelGoogleSearchResult, Record<string, double>> highestResults = 
-                new Dictionary<ModelGoogleSearchResult, Record<string, double>>();
+            Dictionary<ModelGoogleSearchResult, double> highestResults = 
+                new Dictionary<ModelGoogleSearchResult, double>();
             foreach (ModelGoogleSearchResult result in originalResults)
             {
                 if (pages >= pagesNumber)
@@ -735,19 +742,27 @@ namespace Model
                 ModelDocument doc = ImportDocument(result.URL);
                 if (doc == null)
                     continue;
-                Record<string, double> rec = null;
+                double similarity = 0.0;
+                List<Record<string, double>> l = new List<Record<string,double>>();
                 switch (type)
                 {
                     case SimilarityType.L2_Norm:
-                        rec = GetMaxRecord(L2NormSimilarity(doc));
+                        l= L2NormSimilarity(doc);
                         break;
                     case SimilarityType.Min_Value:
-                        rec = GetMaxRecord(minValSimilarity(doc));
+                        l = minValSimilarity(doc);
                         break;
                 }
-                highestResults.Add(result, rec);
+                if (method.Equals(SortingMethod.Maximum) && l.Count > 0)
+                    similarity = (from r in l select r.second).Max();
+                else if (method.Equals(SortingMethod.Summary) && l.Count > 0)
+                    similarity = (from r in l select r.second).Sum();
+                highestResults.Add(result, similarity);
                 pages++;
             }
+            IOrderedEnumerable<KeyValuePair<ModelGoogleSearchResult,double>> ordered =
+                highestResults.OrderByDescending(x => x.Value);
+            
             return OrderedSimilarityResults(highestResults);
         }
 
@@ -756,7 +771,8 @@ namespace Model
         /// </summary>
         /// <param name="highestResults"></param>
         /// <returns></returns>
-        private LinkedList<ModelGoogleSearchResult> OrderedSimilarityResults(Dictionary<ModelGoogleSearchResult, Record<string, double>> highestResults)
+        private LinkedList<ModelGoogleSearchResult> OrderedSimilarityResults(
+            Dictionary<ModelGoogleSearchResult, double> highestResults)
         {
             if (highestResults == null)
                 return null;
@@ -770,7 +786,7 @@ namespace Model
             {
                 foreach (ModelGoogleSearchResult res2 in orderedResults)
                 {
-                    if ((res1 != res2) && (highestResults[res1].second <= highestResults[res2].second))
+                    if ((res1 != res2) && (highestResults[res1] <= highestResults[res2]))
                     {
                         orderedResults.AddBefore(orderedResults.Find(res2), res1);
                         break;

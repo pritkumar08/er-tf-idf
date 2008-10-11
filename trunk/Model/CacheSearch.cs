@@ -80,15 +80,13 @@ namespace Model
                 Dictionary<string, string> addDic = new Dictionary<string, string>();
                 UrlHistoryWrapperClass urlHistory = new UrlHistoryWrapperClass();
                 UrlHistoryWrapperClass.STATURLEnumerator enumerator = urlHistory.GetEnumerator();
-                int i = 0;
-                while (enumerator.MoveNext() && i < 10)
+                while (enumerator.MoveNext())
                 {
                     if ((!addDic.Keys.Contains(enumerator.Current.URL)) && 
                         (enumerator.Current.URL.StartsWith("http")) && 
                         (!(enumerator.Current.URL.EndsWith(".exe"))))
                     {
                         addDic.Add(enumerator.Current.URL, enumerator.Current.Title);
-                        i++;
                     }                        
                 }
                 return addDic;

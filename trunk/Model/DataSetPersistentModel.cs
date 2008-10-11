@@ -19,12 +19,13 @@ namespace Model
         private DataSet dataset = new DataSet();
         //private erpDataSet dataset = new erpDataSet();
         Dictionary<string, OleDbDataAdapter> adapters = new Dictionary<string, OleDbDataAdapter>();
-        public static string ConnectionString;
+        private static string ConnectionString;
 
-        public const string TEST_CONNECTION_STRING = 
+        private const string TEST_CONNECTION_STRING = 
             "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\\Project in advanced programming\\Control\\erp.mdb;Persist Security Info=True";
-        public const string RELATIVE_CONNECTION_STRING =
-        "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|erp.mdb;Persist Security Info=True";
+        private const string RELATIVE_CONNECTION_STRING =
+                "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|Application Folder|erp.mdb;Persist Security Info=True";
+            //"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|erp.mdb;Persist Security Info=True";
         private static string ALL = "";
         private static string WEIGHTS_TABLE_PREFIX = "Weights_";
         
@@ -58,6 +59,10 @@ namespace Model
        
         public static DataSetPersistentModel getInstance()
         {
+            //AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+            string application_folder = System.Environment.CurrentDirectory;                
+            ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" +
+            application_folder + "\\" +"erp.mdb;Persist Security Info=True";
             connection = new OleDbConnection(ConnectionString);
             if (instance == null)
             {
@@ -374,63 +379,6 @@ namespace Model
         private void createTables()
         {
             createWeightTables();
-            /*
-            foreach (string prefix in Enum.GetNames(typeof(WEIGHTS_Segments)))
-            {
-                if (TableExists(WEIGHTS_TABLE_PREFIX + prefix))
-                    continue;
-                DataTable weights_table = new DataTable(WEIGHTS_TABLE_PREFIX + prefix);
-                DataColumn c;
-                //word column
-                c = new DataColumn();
-                c.DataType = System.Type.GetType("System.String");
-                c.ColumnName = "Word";
-                c.Caption = "Word";
-                c.ReadOnly = true;
-                c.Unique = true;
-                weights_table.Columns.Add(c);
-
-                //FileName column
-                c = new DataColumn();
-                c.DataType = System.Type.GetType("System.String");
-                c.ColumnName = "FileName";
-                c.Caption = "FileName";
-                c.ReadOnly = true;
-                c.Unique = true;
-                weights_table.Columns.Add(c);
-
-                //Location column
-                c = new DataColumn();
-                c.DataType = System.Type.GetType("System.Int32");
-                c.ColumnName = "Location";
-                c.Caption = "Location";
-                c.ReadOnly = true;
-                c.Unique = true;
-                weights_table.Columns.Add(c);
-
-                //Weight column
-                c = new DataColumn();
-                c.DataType = System.Type.GetType("System.Double");
-                c.ColumnName = "Weight";
-                c.Caption = "Weight";
-                weights_table.Columns.Add(c);
-
-                //wCount column
-                c = new DataColumn();
-                c.DataType = System.Type.GetType("System.Int32");
-                c.ColumnName = "wCount";
-                c.Caption = "wCount";
-                weights_table.Columns.Add(c);
-
-                DataColumn[] PrimaryKeyColumns = new DataColumn[3];
-                PrimaryKeyColumns[0] = weights_table.Columns["Word"];
-                PrimaryKeyColumns[1] = weights_table.Columns["FileName"];
-                PrimaryKeyColumns[2] = weights_table.Columns["Location"];
-                weights_table.PrimaryKey = PrimaryKeyColumns;
-                
-                dataset.Tables.Add(weights_table);             
-            }
-           */
         }
 
         private void CreateKeys()
@@ -475,7 +423,6 @@ namespace Model
             return files_count;
         }
 
-        /*
         private static TF_IDF_Segments LetterToSegments(char letter)
         {
             switch (letter)
@@ -535,7 +482,7 @@ namespace Model
                 default:
                     return TF_IDF_Segments.None;
             }
-        }*/
+        }
 
         private static string getTableName(string word, Type tType)
         {
