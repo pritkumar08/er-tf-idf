@@ -4,6 +4,48 @@
         <name>Model</name>
     </assembly>
     <members>
+        <member name="T:ServiceRanking.Tokeniser">
+            <summary>
+            Summary description for Tokeniser.
+            Partition string into SUBwords
+            </summary>
+        </member>
+        <member name="T:ServiceRanking.NGram">
+            <summary>
+            Summary description for NGram.
+            </summary>
+        </member>
+        <member name="F:Model.Serializer.file_name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Model.Serializer.Serialize(Model.WordsBags)">
+            <summary>
+            
+            </summary>
+            <param name="bags"></param>
+        </member>
+        <member name="M:Model.Serializer.Deserialize">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Model.HTMLTranslator.GetHTMLFromSite(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="url"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Model.HTMLTranslator.StripHTML(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
         <member name="T:Model.IPersistentModel">
             <summary>
             General interface for each Persistent model implementation
@@ -83,15 +125,117 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:Model.PersistentModel.TF_IDF_Segments">
+        <member name="F:Model.ModelGoogleSearchResult.url">
             <summary>
-            prefixes for the td-idf tables
+            
             </summary>
         </member>
-        <member name="T:ServiceRanking.NGram">
+        <member name="F:Model.ModelGoogleSearchResult.title">
             <summary>
-            Summary description for NGram.
+            
             </summary>
+        </member>
+        <member name="F:Model.ModelGoogleSearchResult.content">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Model.ModelGoogleSearchResult.#ctor(System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="url"></param>
+            <param name="title"></param>
+            <param name="content"></param>
+        </member>
+        <member name="P:Model.ModelGoogleSearchResult.URL">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Model.ModelGoogleSearchResult.Title">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Model.ModelGoogleSearchResult.Content">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Model.XMLTranslator.ReadFromXML(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Model.XMLTranslator.WriteToXML(System.String,Model.ModelDocument)">
+            <summary>
+            
+            </summary>
+            <param name="path"></param>
+            <param name="doc"></param>
+        </member>
+        <member name="M:Model.XMLTranslator.AddReadParagraphsNodes(System.Xml.XmlNode,Model.ModelParagraph@)">
+            <summary>
+            
+            </summary>
+            <param name="nodes"></param>
+            <param name="par"></param>
+        </member>
+        <member name="M:Model.XMLTranslator.AddReadHeaderNodes(System.Xml.XmlNode,Model.ModelParagraph@)">
+            <summary>
+            
+            </summary>
+            <param name="nodes"></param>
+            <param name="par"></param>
+        </member>
+        <member name="M:Model.XMLTranslator.AddWritenParagraphNodes(System.Xml.XmlTextWriter@,System.Collections.Generic.LinkedList{Model.ModelDocumentItem})">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="items"></param>
+        </member>
+        <member name="T:ServiceRanking.StopWordsHandler">
+            <summary>
+            Stop words are frequently occurring, insignificant words words 
+            that appear in a database record, article or web page. 
+            Common stop words include
+            </summary>
+        </member>
+        <member name="T:Stemming.StemmerInterface">
+            <summary>
+            
+            
+            </summary>
+        </member>
+        <member name="M:Stemming.PorterStemmer.setto(System.String)">
+            setto(s) sets (j+1),...k to the characters in the string s, readjusting
+        </member>
+        <member name="T:ServiceRanking.TFIDFMeasure">
+            <summary>
+            Summary description for TF_IDFLib.
+            </summary>
+        </member>
+        <member name="F:Model.GoogleSearch.TOTAL_RESULT_NUMBER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Model.GoogleSearch.PerformGoogleSearch(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="label"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Model.CacheSearch.CacheWebAddresses">
+            <summary>
+            
+            </summary>
+            <returns></returns>
         </member>
         <member name="F:Model.ModelDocumentItem.text">
             <summary>
@@ -189,79 +333,6 @@
             </summary>
         </member>
         <member name="P:Model.ModelDocument.Title">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Stemming.StemmerInterface">
-            <summary>
-            
-            
-            </summary>
-        </member>
-        <member name="M:Stemming.PorterStemmer.setto(System.String)">
-            setto(s) sets (j+1),...k to the characters in the string s, readjusting
-        </member>
-        <member name="T:ServiceRanking.Tokeniser">
-            <summary>
-            Summary description for Tokeniser.
-            Partition string into SUBwords
-            </summary>
-        </member>
-        <member name="T:ServiceRanking.StopWordsHandler">
-            <summary>
-            Stop words are frequently occurring, insignificant words words 
-            that appear in a database record, article or web page. 
-            Common stop words include
-            </summary>
-        </member>
-        <member name="M:Model.HTMLTranslator.GetHTMLFromSite(System.String)">
-            <summary>
-            
-            </summary>
-            <param name="url"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Model.HTMLTranslator.StripHTML(System.String)">
-            <summary>
-            
-            </summary>
-            <param name="source"></param>
-            <returns></returns>
-        </member>
-        <member name="F:Model.GoogleSearch.TOTAL_RESULT_NUMBER">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Model.GoogleSearch.PerformGoogleSearch(System.String)">
-            <summary>
-            
-            </summary>
-            <param name="label"></param>
-            <returns></returns>
-        </member>
-        <member name="F:Model.ModelManager.persistent_model">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Model.ModelManager.si">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Model.ModelManager.total_square_sum">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Model.ModelManager.m_WordsBags">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Model.ModelManager.#ctor">
             <summary>
             
             </summary>
@@ -541,126 +612,10 @@
             <param name="highestResults"></param>
             <returns></returns>
         </member>
-        <member name="P:Model.ModelManager.WordsBags">
+        <member name="T:Model.PersistentModel.TF_IDF_Segments">
             <summary>
-            
+            prefixes for the td-idf tables
             </summary>
-        </member>
-        <member name="T:Model.ModelManager.SimilarityType">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Model.ModelManager.SearchEngine">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Model.ModelManager.SortingMethod">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Model.ModelGoogleSearchResult.url">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Model.ModelGoogleSearchResult.title">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Model.ModelGoogleSearchResult.content">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Model.ModelGoogleSearchResult.#ctor(System.String,System.String,System.String)">
-            <summary>
-            
-            </summary>
-            <param name="url"></param>
-            <param name="title"></param>
-            <param name="content"></param>
-        </member>
-        <member name="P:Model.ModelGoogleSearchResult.URL">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Model.ModelGoogleSearchResult.Title">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Model.ModelGoogleSearchResult.Content">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:ServiceRanking.TFIDFMeasure">
-            <summary>
-            Summary description for TF_IDFLib.
-            </summary>
-        </member>
-        <member name="M:Model.XMLTranslator.ReadFromXML(System.String)">
-            <summary>
-            
-            </summary>
-            <param name="path"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Model.XMLTranslator.WriteToXML(System.String,Model.ModelDocument)">
-            <summary>
-            
-            </summary>
-            <param name="path"></param>
-            <param name="doc"></param>
-        </member>
-        <member name="M:Model.XMLTranslator.AddReadParagraphsNodes(System.Xml.XmlNode,Model.ModelParagraph@)">
-            <summary>
-            
-            </summary>
-            <param name="nodes"></param>
-            <param name="par"></param>
-        </member>
-        <member name="M:Model.XMLTranslator.AddReadHeaderNodes(System.Xml.XmlNode,Model.ModelParagraph@)">
-            <summary>
-            
-            </summary>
-            <param name="nodes"></param>
-            <param name="par"></param>
-        </member>
-        <member name="M:Model.XMLTranslator.AddWritenParagraphNodes(System.Xml.XmlTextWriter@,System.Collections.Generic.LinkedList{Model.ModelDocumentItem})">
-            <summary>
-            
-            </summary>
-            <param name="writer"></param>
-            <param name="items"></param>
-        </member>
-        <member name="F:Model.Serializer.file_name">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Model.Serializer.Serialize(Model.WordsBags)">
-            <summary>
-            
-            </summary>
-            <param name="bags"></param>
-        </member>
-        <member name="M:Model.Serializer.Deserialize">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Model.CacheSearch.CacheWebAddresses">
-            <summary>
-            
-            </summary>
-            <returns></returns>
         </member>
     </members>
 </doc>
