@@ -13,10 +13,15 @@ namespace Model
 
         #region Header : Initialization
 
-        public ModelHeader(string title, double weight)
-            : base(title,weight)
-            {
-            }
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="title"></param>
+            /// <param name="weight"></param>
+            public ModelHeader(string title, double weight)
+                : base(title,weight)
+                {
+                }
 
         #endregion
 

@@ -9,7 +9,10 @@ namespace Model
     class GoogleSearch
     {
         #region GoogleSearch : Members & Consts
-
+            
+            /// <summary>
+            /// 
+            /// </summary>
             private const int TOTAL_RESULT_NUMBER = 200;
 
         #endregion
@@ -28,6 +31,11 @@ namespace Model
 
         #region GoogleSearch : Methods
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="label"></param>
+            /// <returns></returns>
             internal static LinkedList<ModelGoogleSearchResult> PerformGoogleSearch(string label)
             {
                 LinkedList<ModelGoogleSearchResult> resultList = new LinkedList<ModelGoogleSearchResult>();

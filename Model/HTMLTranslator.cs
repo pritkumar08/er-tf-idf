@@ -29,6 +29,11 @@ namespace Model
 
         #region HTMLTranslator : Methods
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="url"></param>
+            /// <returns></returns>
             internal static string GetHTMLFromSite(string url)
             {
                 System.Net.WebClient oClient = new System.Net.WebClient();
@@ -43,6 +48,11 @@ namespace Model
                 
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="source"></param>
+            /// <returns></returns>
             internal static string StripHTML(string source)
             {
                 try

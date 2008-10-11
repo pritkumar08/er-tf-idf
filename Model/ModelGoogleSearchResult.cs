@@ -8,15 +8,30 @@ namespace Model
     public class ModelGoogleSearchResult : ModelItem
     {
         #region ModelGoogleSearchResult : Members & Consts
-            
+
+            /// <summary>
+            /// 
+            /// </summary>
             private string url;
+            /// <summary>
+            /// 
+            /// </summary>
             private string title;
+            /// <summary>
+            /// 
+            /// </summary>
             private string content;
 
         #endregion
 
         #region ModelGoogleSearchResult : Initialization
             
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="url"></param>
+            /// <param name="title"></param>
+            /// <param name="content"></param>
             public ModelGoogleSearchResult(string url, string title, string content)
             {
                 this.url = url;
@@ -28,6 +43,9 @@ namespace Model
 
         #region ModelGoogleSearchResult : Properties
 
+            /// <summary>
+            /// 
+            /// </summary>
             public string URL
             {
                 get
@@ -35,7 +53,9 @@ namespace Model
                     return this.url;
                 }
             }
-
+            /// <summary>
+            /// 
+            /// </summary>
             public string Title
             {
                 get
@@ -43,7 +63,9 @@ namespace Model
                     return this.title;
                 }
             }
-
+            /// <summary>
+            /// 
+            /// </summary>
             public string Content
             {
                 get
