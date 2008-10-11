@@ -9,7 +9,15 @@ namespace Model
 {
     public static class Serializer
     {
+        /// <summary>
+        /// 
+        /// </summary>
         private const string file_name = "info.ser";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bags"></param>
         public static void Serialize(WordsBags bags)
         {
             Stream stream = File.Open(file_name, FileMode.Create);
@@ -18,6 +26,10 @@ namespace Model
             stream.Close();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static WordsBags Deserialize()
         {
             try

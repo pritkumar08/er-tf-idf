@@ -10,14 +10,28 @@ namespace Model
           
         #region DocumentItem : Members & Consts
 
+            /// <summary>
+            /// 
+            /// </summary>
             private string text = "";
+            /// <summary>
+            /// 
+            /// </summary>
             private int location = 0;
+            /// <summary>
+            /// 
+            /// </summary>
             private double weight = 0.0;
 
         #endregion
 
         #region DocumentItem : Initialization
-
+            
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="title"></param>
+            /// <param name="weight"></param>
             public ModelDocumentItem(string title,double weight)
             {
                 this.text = title;
@@ -28,6 +42,9 @@ namespace Model
 
         #region DocumentItem : Properties
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Text 
         { 
             get 
@@ -40,6 +57,9 @@ namespace Model
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public int Location 
         { 
             get 
@@ -52,6 +72,9 @@ namespace Model
             } 
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public double Weight 
         { 
             get 
@@ -76,11 +99,20 @@ namespace Model
 
         #region DocumentItem : Methods
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="word"></param>
+            /// <returns></returns>
             public virtual bool Contains(string word)
             {
                 return this.Text.Contains(word);
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <returns></returns>
             public virtual List<RawWord> getWords()
             {
                 List<RawWord> words = new List<RawWord>();

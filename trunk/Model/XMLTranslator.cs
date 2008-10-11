@@ -30,6 +30,11 @@ namespace Model
 
         #region XMLTranslator : Methods
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="path"></param>
+            /// <returns></returns>
             internal static ModelDocument ReadFromXML(String path)
             {
                 try
@@ -57,6 +62,11 @@ namespace Model
                 }
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="path"></param>
+            /// <param name="doc"></param>
             internal static void WriteToXML(String path, ModelDocument doc)
             {
                 try
@@ -77,6 +87,11 @@ namespace Model
                 }
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="nodes"></param>
+            /// <param name="par"></param>
             private static void AddReadParagraphsNodes(XmlNode nodes,ref ModelParagraph par)
             {
                 foreach (XmlNode node in nodes.SelectNodes("paragraph"))
@@ -92,6 +107,11 @@ namespace Model
                 }
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="nodes"></param>
+            /// <param name="par"></param>
             private static void AddReadHeaderNodes(XmlNode nodes, ref ModelParagraph par)
             {
                 foreach (XmlNode node in nodes.SelectNodes("header"))
@@ -104,7 +124,11 @@ namespace Model
                 }
             }
 
-
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="items"></param>
             private static void AddWritenParagraphNodes(ref XmlTextWriter writer, LinkedList<ModelDocumentItem> items)
             {
                 foreach (ModelDocumentItem item in items)

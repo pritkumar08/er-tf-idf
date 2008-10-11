@@ -87,7 +87,7 @@ namespace Model
                         (!(enumerator.Current.URL.EndsWith(".exe"))))
                     {
                         addDic.Add(enumerator.Current.URL, enumerator.Current.Title);
-                    }                        
+                    }
                 }
                 return addDic;
             }
