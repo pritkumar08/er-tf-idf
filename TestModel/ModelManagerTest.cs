@@ -88,7 +88,7 @@ namespace TestModel
         [TestMethod()]
         public void InsertDocumentTest()
         {
-            DataSetPersistentModel.ConnectionString = DataSetPersistentModel.TEST_CONNECTION_STRING;
+            //DataSetPersistentModel.ConnectionString = DataSetPersistentModel.TEST_CONNECTION_STRING;
             ModelManager target = new ModelManager(); // TODO: Initialize to an appropriate value
             target.CleanDB();
             List<string> words = target.getWords();

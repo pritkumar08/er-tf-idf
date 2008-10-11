@@ -172,6 +172,7 @@ namespace TestModel
         public void WordAndFileExistTest()
         {
             //PersistentModel_Accessor target = new PersistentModel_Accessor();
+            /*
             string word = "HOME";
             string path = "file1";
             string tableName = "Weights_H";
@@ -179,12 +180,11 @@ namespace TestModel
             object[] resultExpected = null; // TODO: Initialize to an appropriate value
             bool expected = false; // TODO: Initialize to an appropriate value
             bool actual;
-            /*
             actual = model_instance.WordAndFileExistTest(word, path, tableName, out result);
             Assert.AreEqual(resultExpected, result);
             Assert.AreEqual(expected, actual);
             Assert.Inconclusive("Verify the correctness of this test method.");
-             */
+            */
         }
 
         /// <summary>
@@ -265,7 +265,6 @@ namespace TestModel
             double weight = 2.345; // TODO: Initialize to an appropriate value
             int counter = 2; // TODO: Initialize to an appropriate value
             model_instance.UpdateWordWeightTest(tableName, word, path, locationID, weight, counter);
-            object[] result;            
             /*
             model_instance.WordAndFileExistTest(word, path, tableName, out result);
             Assert.AreEqual(word.ToUpper(), result[0]);

@@ -41,6 +41,8 @@
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.lblSearchTitle = new System.Windows.Forms.Label();
             this.chckViewGoogleSearch = new System.Windows.Forms.CheckBox();
+            this.cmbxSortingMethod = new System.Windows.Forms.ComboBox();
+            this.lblSotingMehod = new System.Windows.Forms.Label();
             this.grpSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmudPages)).BeginInit();
             this.SuspendLayout();
@@ -48,7 +50,7 @@
             // btnReorder
             // 
             this.btnReorder.Enabled = false;
-            this.btnReorder.Location = new System.Drawing.Point(275, 204);
+            this.btnReorder.Location = new System.Drawing.Point(275, 232);
             this.btnReorder.Name = "btnReorder";
             this.btnReorder.Size = new System.Drawing.Size(75, 23);
             this.btnReorder.TabIndex = 0;
@@ -58,7 +60,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(360, 204);
+            this.btnCancel.Location = new System.Drawing.Point(360, 232);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
@@ -68,6 +70,8 @@
             // 
             // grpSettings
             // 
+            this.grpSettings.Controls.Add(this.cmbxSortingMethod);
+            this.grpSettings.Controls.Add(this.lblSotingMehod);
             this.grpSettings.Controls.Add(this.nmudPages);
             this.grpSettings.Controls.Add(this.lblResultsNumber);
             this.grpSettings.Controls.Add(this.cmbxSimilarity);
@@ -78,7 +82,7 @@
             this.grpSettings.Controls.Add(this.lblSearchTitle);
             this.grpSettings.Location = new System.Drawing.Point(12, 13);
             this.grpSettings.Name = "grpSettings";
-            this.grpSettings.Size = new System.Drawing.Size(423, 156);
+            this.grpSettings.Size = new System.Drawing.Size(423, 189);
             this.grpSettings.TabIndex = 2;
             this.grpSettings.TabStop = false;
             this.grpSettings.Text = "Configure Similarity Check";
@@ -86,7 +90,7 @@
             // nmudPages
             // 
             this.nmudPages.Enabled = false;
-            this.nmudPages.Location = new System.Drawing.Point(148, 120);
+            this.nmudPages.Location = new System.Drawing.Point(148, 154);
             this.nmudPages.Maximum = new decimal(new int[] {
             50,
             0,
@@ -101,7 +105,7 @@
             // lblResultsNumber
             // 
             this.lblResultsNumber.AutoSize = true;
-            this.lblResultsNumber.Location = new System.Drawing.Point(12, 122);
+            this.lblResultsNumber.Location = new System.Drawing.Point(12, 156);
             this.lblResultsNumber.Name = "lblResultsNumber";
             this.lblResultsNumber.Size = new System.Drawing.Size(135, 13);
             this.lblResultsNumber.TabIndex = 6;
@@ -170,19 +174,42 @@
             // chckViewGoogleSearch
             // 
             this.chckViewGoogleSearch.AutoSize = true;
-            this.chckViewGoogleSearch.Location = new System.Drawing.Point(12, 180);
+            this.chckViewGoogleSearch.Location = new System.Drawing.Point(12, 208);
             this.chckViewGoogleSearch.Name = "chckViewGoogleSearch";
             this.chckViewGoogleSearch.Size = new System.Drawing.Size(199, 17);
             this.chckViewGoogleSearch.TabIndex = 8;
             this.chckViewGoogleSearch.Text = "View Original Google Search Results";
             this.chckViewGoogleSearch.UseVisualStyleBackColor = true;
             // 
+            // cmbxSortingMethod
+            // 
+            this.cmbxSortingMethod.Enabled = false;
+            this.cmbxSortingMethod.FormattingEnabled = true;
+            this.cmbxSortingMethod.Items.AddRange(new object[] {
+            "By Maximum",
+            "By Summary"});
+            this.cmbxSortingMethod.Location = new System.Drawing.Point(148, 119);
+            this.cmbxSortingMethod.Name = "cmbxSortingMethod";
+            this.cmbxSortingMethod.Size = new System.Drawing.Size(133, 21);
+            this.cmbxSortingMethod.TabIndex = 9;
+            this.cmbxSortingMethod.Text = "Choose Method...";
+            this.cmbxSortingMethod.SelectedIndexChanged += new System.EventHandler(this.cmbxSortingMethod_SelectedIndexChanged);
+            // 
+            // lblSotingMehod
+            // 
+            this.lblSotingMehod.AutoSize = true;
+            this.lblSotingMehod.Location = new System.Drawing.Point(12, 122);
+            this.lblSotingMehod.Name = "lblSotingMehod";
+            this.lblSotingMehod.Size = new System.Drawing.Size(82, 13);
+            this.lblSotingMehod.TabIndex = 8;
+            this.lblSotingMehod.Text = "Sorting Method:";
+            // 
             // SimilarityForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(447, 232);
+            this.ClientSize = new System.Drawing.Size(447, 263);
             this.Controls.Add(this.chckViewGoogleSearch);
             this.Controls.Add(this.grpSettings);
             this.Controls.Add(this.btnCancel);
@@ -215,5 +242,7 @@
         private System.Windows.Forms.NumericUpDown nmudPages;
         private System.Windows.Forms.Label lblResultsNumber;
         private System.Windows.Forms.CheckBox chckViewGoogleSearch;
+        private System.Windows.Forms.ComboBox cmbxSortingMethod;
+        private System.Windows.Forms.Label lblSotingMehod;
     }
 }

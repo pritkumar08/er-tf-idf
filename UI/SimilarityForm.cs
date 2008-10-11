@@ -16,6 +16,8 @@ namespace UI
 
             private SimilarityType sType = SimilarityType.None;
 
+            private SortingMethod sMethod = SortingMethod.None;
+
         #endregion
 
         #region SimilarityForm : Initialization
@@ -44,6 +46,13 @@ namespace UI
                 None = 0,
                 L2_Norm = 1,
                 Min_Val = 2
+            };
+
+            public enum SortingMethod
+            {
+                None = 0,
+                Maximum = 1,
+                Summary = 2
             };
 
         #endregion
@@ -81,7 +90,9 @@ namespace UI
             private void btnCheck_Click(object sender, EventArgs e)
             {
                 this.Visible = false;
-                OnRequestForInformation(SimilarityFormActions.Reorder, new Object[] {txtSearch.Text ,engine, sType, (int)nmudPages.Value ,chckViewGoogleSearch.Checked});
+                OnRequestForInformation(SimilarityFormActions.Reorder, 
+                    new Object[] {txtSearch.Text ,engine, sType, 
+                        (int)nmudPages.Value ,chckViewGoogleSearch.Checked, sMethod});
                 this.Close();
             }
 
@@ -92,7 +103,7 @@ namespace UI
 
             private void cmbxSimilarity_SelectedIndexChanged(object sender, EventArgs e)
             {
-                nmudPages.Enabled = true;
+                cmbxSortingMethod.Enabled = true;
                 switch (cmbxSimilarity.SelectedItem.ToString())
                 {
                     case "L2 Norm":
@@ -100,6 +111,20 @@ namespace UI
                         break;
                     case "Minimum Value":
                         sType = SimilarityType.Min_Val;
+                        break;
+                }
+            }
+
+            private void cmbxSortingMethod_SelectedIndexChanged(object sender, EventArgs e)
+            {
+                nmudPages.Enabled = true;
+                switch (cmbxSortingMethod.SelectedItem.ToString())
+                {
+                    case "By Maximum":
+                        sMethod = SortingMethod.Maximum;
+                        break;
+                    case "By Summary":
+                        sMethod = SortingMethod.Summary;
                         break;
                 }
             }
