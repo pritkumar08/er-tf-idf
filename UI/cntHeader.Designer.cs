@@ -67,7 +67,7 @@
             // 
             // richTextBody
             // 
-            this.richTextBody.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.richTextBody.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.richTextBody.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.richTextBody.Location = new System.Drawing.Point(16, 41);
             this.richTextBody.Name = "richTextBody";
@@ -101,6 +101,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.chkbxHeaderRemove);
             this.Controls.Add(this.numudWeight);

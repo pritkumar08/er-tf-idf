@@ -9,14 +9,25 @@ namespace UI
 
         #region GUIDocumentItem : Members & Consts
 
+            /// <summary>
+            /// 
+            /// </summary>
             protected string text = "";
 
+            /// <summary>
+            /// 
+            /// </summary>
             protected double weight = 0.0; 
 
         #endregion
 
         #region GUIDocumentItem : Initialization
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="text"></param>
+            /// <param name="weight"></param>
             public GUIDocumentItem(string text, double weight)
             {
                 this.text = text;
@@ -27,6 +38,9 @@ namespace UI
 
         #region GUIDocumentItem : Properties
 
+            /// <summary>
+            /// 
+            /// </summary>
             public string GUIDocumentItemText
             {
                 get
@@ -39,6 +53,9 @@ namespace UI
                 }
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
             public double GUIDocumentItemWeight
             {
                 get

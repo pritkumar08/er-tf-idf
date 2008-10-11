@@ -13,6 +13,11 @@ namespace UI
 
         #region GUIHeader : Initialization
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="title"></param>
+            /// <param name="weight"></param>
             public GUIHeader(String title, double weight)
                 : base(title, weight)
             {

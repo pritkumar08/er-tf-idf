@@ -14,15 +14,30 @@ namespace UI
         #region DocumentForm : Members & Consts
 
             #region DocumentForm : Members
-
+                
+                /// <summary>
+                /// 
+                /// </summary>
                 private bool IsFileChanged = false;
 
+                /// <summary>
+                /// 
+                /// </summary>
                 private int paragraphID = 1;
 
+                /// <summary>
+                /// 
+                /// </summary>
                 private int totalControlsHeight = 5;
 
+                /// <summary>
+                /// 
+                /// </summary>
                 private string fileName = "";
-
+                
+                /// <summary>
+                /// 
+                /// </summary>
                 private GUIDocument savedDocument = null;
 
             #endregion
@@ -39,6 +54,11 @@ namespace UI
 
         #region DocumentForm : Initialization
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="document"></param>
+            /// <param name="fileName"></param>
             public DocumentForm(GUIDocument document, string fileName)
             {
                 InitializeComponent();
@@ -50,6 +70,9 @@ namespace UI
 
         #region DocumentForm : Enums
 
+            /// <summary>
+            /// 
+            /// </summary>
             public enum DocumentFormActions
             {
                 Document_Focus = 0,
@@ -61,6 +84,10 @@ namespace UI
         #endregion
 
         #region DocumentForm : Properties
+            
+            /// <summary>
+            /// 
+            /// </summary>
             internal bool FileChanged
             {
                 get
@@ -72,18 +99,32 @@ namespace UI
 
         #region DocumentForm : Delegates
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="action"></param>
+            /// <param name="parameters"></param>
+            /// <returns></returns>
             public delegate Object[] DocumentFormEventHandler(DocumentFormActions action, Object[] parameters);
 
         #endregion
 
         #region DocumentForm : Events
             
+            /// <summary>
+            ///
+            /// </summary>
             public event DocumentFormEventHandler DocumentFormEvent;
 
         #endregion
 
         #region DocumentForm : EventHandlers
-
+            
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void DocumentForm_Load(object sender, EventArgs e)
             {
                 this.Text = "";
@@ -104,6 +145,12 @@ namespace UI
                 }
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="action"></param>
+            /// <param name="parameters"></param>
+            /// <returns></returns>
             protected virtual Object[] OnRequestForInformation(DocumentFormActions action, Object[] parameters)
             {
                 if (DocumentFormEvent != null)
@@ -111,6 +158,12 @@ namespace UI
                 return null;
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="action"></param>
+            /// <param name="parameter"></param>
+            /// <returns></returns>
             private Object[] ParagraphHandler(cntParagraph.CntParagraphActions action, Object[] parameter)
             {
                 switch (action)
@@ -131,6 +184,11 @@ namespace UI
                 return null;
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void DocumentForm_Resize(object sender, EventArgs e)
             {
                 pnlMain.Width = this.Width - 2 * WIDTH_DIFFERENCE;
@@ -139,13 +197,23 @@ namespace UI
                     cnt.Width = pnlMain.Width - cnt.Left - 40;
                 }
             }
-
+            
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void DocumentForm_Activated(object sender, EventArgs e)
             {
                 OnRequestForInformation(DocumentFormActions.Document_Focus,
                                                        new Object[] { this.Tag });
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void DocumentForm_FormClosed(object sender, FormClosedEventArgs e)
             {
                 OnRequestForInformation(DocumentFormActions.Document_Close,
@@ -158,6 +226,9 @@ namespace UI
 
         #region DocumentForm : Methods
 
+            /// <summary>
+            /// 
+            /// </summary>
             private void OpenNewDocument()
             {
                 pnlMain.Controls.Clear();
@@ -174,6 +245,9 @@ namespace UI
                 paragraphID = 1;
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
             internal void RemoveDocumentItems()
             {
                 try
@@ -212,6 +286,12 @@ namespace UI
                 }
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="left"></param>
+            /// <param name="parentId"></param>
+            /// <param name="par"></param>
             internal void AddParagraph(int left, int parentId, GUIParagraph par)
             {
                 cntParagraph paragraph = null;
@@ -232,6 +312,12 @@ namespace UI
                 IsFileChanged = true;
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="left"></param>
+            /// <param name="parentID"></param>
+            /// <param name="head"></param>
             private void AddHeader(int left, int parentID, GUIHeader head)
             {
                 cntHeader header = null;
@@ -248,7 +334,11 @@ namespace UI
                 IsFileChanged = true;
             }
 
-
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="id"></param>
+            /// <param name="i"></param>
             private void RemoveChildrenCotrols(int id, ref int i)
             {
                 try
@@ -288,6 +378,11 @@ namespace UI
                 }
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="i"></param>
+            /// <param name="height"></param>
             private void SetComponentsHeight(int i, int height)
             {
                 for (int x = i + 1; x < pnlMain.Controls.Count; x++)
@@ -298,6 +393,10 @@ namespace UI
                 }
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <returns></returns>
             public GUIDocument GenerateDocument()
             {
                 GUIDocument doc = new GUIDocument();
@@ -318,6 +417,11 @@ namespace UI
                 return doc;
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="par"></param>
+            /// <param name="index"></param>
             private void AddParagraphItems(ref GUIParagraph par, int index)
             {
                 for (int i = index; i < pnlMain.Controls.Count; i++)
@@ -343,6 +447,10 @@ namespace UI
                 }
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="doc"></param>
             private void InitializeDocumentComponents(GUIDocument doc)
             {
                 OpenNewDocument();
@@ -354,6 +462,12 @@ namespace UI
                 pnlMain.Visible = true;
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="left"></param>
+            /// <param name="parentId"></param>
+            /// <param name="par"></param>
             private void AddParagraphToScreenFromDocument(int left, int parentId, GUIParagraph par)
             {
                 foreach (GUIDocumentItem item in par.GUIParagraphItems)
@@ -370,6 +484,9 @@ namespace UI
                 }
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
             internal void InsertDocumentInDatabase()
             {
                 try
@@ -399,6 +516,9 @@ namespace UI
                 }
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
             internal void ExitFromFile()
             {
                 DialogResult res = MessageBox.Show("Are you sure you want to exit the application?", "Text Comparer", MessageBoxButtons.YesNoCancel);
@@ -422,8 +542,6 @@ namespace UI
             }
 
         #endregion
-
-
-            
+         
     }
 }

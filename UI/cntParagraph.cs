@@ -12,20 +12,36 @@ namespace UI
     {
         #region cntParagraph : Members & Consts
 
+            /// <summary>
+            /// 
+            /// </summary>
             private GUIParagraph paragraph = null;
+            /// <summary>
+            /// 
+            /// </summary>
             private int parentParagraphID;
 
         #endregion
 
         #region cntParagraph : Initialization
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="id"></param>
+            /// <param name="parentID"></param>
             public cntParagraph(int id, int parentID)
             {
                 InitializeComponent();
                 paragraph = new GUIParagraph("", id, 0.00000);
                 this.parentParagraphID = parentID;
             }
-
+            
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="paragraph"></param>
+            /// <param name="parentID"></param>
             internal cntParagraph(GUIParagraph paragraph, int parentID)
             {
                 InitializeComponent();
@@ -37,6 +53,9 @@ namespace UI
 
         #region cntParagraph : Enums
             
+            /// <summary>
+            /// 
+            /// </summary>
             public enum CntParagraphActions
             {
                 Add_Paragraph = 0,
@@ -49,6 +68,9 @@ namespace UI
 
         #region cntParagraph : Properties
 
+            /// <summary>
+            /// 
+            /// </summary>
             internal GUIParagraph ControlParagraph
             {
                 get
@@ -63,6 +85,9 @@ namespace UI
                 }
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
             internal bool RemoveMe
             {
                 get
@@ -71,6 +96,9 @@ namespace UI
                 }
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
             internal int ParentID
             {
                 get
@@ -83,18 +111,33 @@ namespace UI
 
         #region cntParagraph : Delegates
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="action"></param>
+            /// <param name="parameters"></param>
+            /// <returns></returns>
             public delegate Object[] CntParagraphEventHandler(CntParagraphActions action, Object[] parameters);
 
         #endregion
 
         #region cntParagraph : Events
 
+            /// <summary>
+            /// 
+            /// </summary>
             public event CntParagraphEventHandler CntParagraphEvent;
 
         #endregion
 
         #region cntParagraph : EventHandlers
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="action"></param>
+            /// <param name="parameters"></param>
+            /// <returns></returns>
             protected virtual Object[] OnMakingAction(CntParagraphActions action, Object[] parameters)
             {
                 if (CntParagraphEvent != null)
@@ -102,6 +145,11 @@ namespace UI
                 return null;
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void cntParagraph_Load(object sender, EventArgs e)
             {
                 if (paragraph != null)
@@ -112,16 +160,31 @@ namespace UI
                 }
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void btnAddHeader_Click(object sender, EventArgs e)
             {
                 OnMakingAction(CntParagraphActions.Add_Header, new Object[] {this.Left,this.paragraph.GUIParagraphID });
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void btnAddParagraph_Click(object sender, EventArgs e)
             {
                 OnMakingAction(CntParagraphActions.Add_Paragraph, new Object[] {this.Left, this.paragraph.GUIParagraphID});
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void cntParagraph_Resize(object sender, EventArgs e)
             {
                 richTextBody.Width = this.Width - 70;

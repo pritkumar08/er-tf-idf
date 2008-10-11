@@ -15,11 +15,17 @@ namespace UI
 
         #region UIManager : Initialization
 
+            /// <summary>
+            /// The UIManager constructor.
+            /// </summary>
             public UIManager()
             {
                 InitializeComponents();
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
             private void InitializeComponents()
             {
                 Application.EnableVisualStyles();
@@ -30,6 +36,9 @@ namespace UI
 
         #region UIManager : Enums
 
+            /// <summary>
+            /// 
+            /// </summary>
             public enum GUIAction
             {
                 Open_Text_File = 0,
@@ -46,18 +55,34 @@ namespace UI
         #endregion
 
         #region UIManager : Delegates
-
+            
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="action"></param>
+            /// <param name="parameters"></param>
+            /// <returns></returns>
             public delegate Object[] GUIEventHandler(GUIAction action, Object[] parameters);
         
         #endregion
 
         #region UIManager : Events
-
+            
+            /// <summary>
+            /// 
+            /// </summary>
             public event GUIEventHandler GUIEvent;  
         
         #endregion
 
         #region UIManager : EventHandlers
+
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="action"></param>
+            /// <param name="parameters"></param>
+            /// <returns></returns>
             protected virtual Object[] OnGetInformation(GUIAction action, Object[] parameters)
             {
                 if (GUIEvent != null)
@@ -65,6 +90,12 @@ namespace UI
                 return null;
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="action"></param>
+            /// <param name="parameters"></param>
+            /// <returns></returns>
             private Object[] MainFormEventHandler(MainForm.MainFormActions action, Object[] parameters)
             {
                 switch (action)
@@ -98,6 +129,10 @@ namespace UI
 
         #region UIManager : Methods
             
+            /// <summary>
+            /// Loading new main form.
+            /// </summary>
+            /// <param name="is_db_empty">Was the database initialized.</param>
             public void LoadGUIApplication(bool is_db_empty)
             {
                 frmMain = new MainForm(is_db_empty);

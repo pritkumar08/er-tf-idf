@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace UI
 {
@@ -14,6 +15,9 @@ namespace UI
 
             #region "MainForm : Members"
 
+                /// <summary>
+                /// List of document currently open.
+                /// </summary>
                 private LinkedList<DocumentForm> documents;
                 
                 private int documentKeyCounter = 0;
@@ -31,17 +35,25 @@ namespace UI
 
         #region "MainForm : Initialization"
 
+            /// <summary>
+            /// The main form constructor.
+            /// </summary>
+            /// <param name="is_db_empty">was the database already initialize</param>
             public MainForm(bool is_db_empty)
             {
                 InitializeComponent();
                 SetDBEmpty(is_db_empty);
                 documents = new LinkedList<DocumentForm>();
+                EnableSave(false);
             }
 
         #endregion
 
         #region "MainForm : Enums"
 
+            /// <summary>
+            /// This enum is in charge over the functionality of the main form
+            /// </summary>
             public enum MainFormActions
             {
                 Open_Document = 0,
@@ -64,6 +76,12 @@ namespace UI
 
         #region "MainForm : Delegates"
 
+            /// <summary>
+            /// The delegate for the events of the main form.
+            /// </summary>
+            /// <param name="action">What action is taken</param>
+            /// <param name="parameters">What are the parameter to send with the event</param>
+            /// <returns></returns>
             public delegate Object[] MainFormEventHandler(MainFormActions action, Object[] parameters);
 
         #endregion
@@ -76,22 +94,41 @@ namespace UI
 
         #region "MainForm : EventHandlers"
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void newToolStripButton_Click(object sender, EventArgs e)
             {
                 CreateNewDocumentForm(null, "");
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void openToolStripButton_Click(object sender, EventArgs e)
             {
                 OpenFile();
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void saveToolStripButton_Click(object sender, EventArgs e)
             {
                 SaveFile("");
             }
 
-
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void importToolStripMenuItem_Click(object sender, EventArgs e)
             {
                 ImportWebDocumentForm importForm = new ImportWebDocumentForm();
@@ -100,21 +137,42 @@ namespace UI
                 importForm.ShowDialog();
             }
             
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void tlsbtnAddParagraph_Click(object sender, EventArgs e)
             {
                 GetDocumentForm(currentDocument).AddParagraph(0, 0, null);
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void tlstpbtnRemove_Click(object sender, EventArgs e)
             {
                 GetDocumentForm(currentDocument).RemoveDocumentItems();
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void tlstpbtnInsertFile_Click(object sender, EventArgs e)
             {
                 GetDocumentForm(currentDocument).InsertDocumentInDatabase();
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="action"></param>
+            /// <param name="parameter"></param>
+            /// <returns></returns>
             protected virtual Object[] OnRequestForInformation(MainFormActions action, Object[] parameter)
             {
                 if (MainFormEvent != null)
@@ -122,13 +180,22 @@ namespace UI
                 return null;
             }
 
-
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
             {
                 AboutForm about = new AboutForm();
                 about.ShowDialog();
             }
-
+            
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void exitToolStripMenuItem_Click(object sender, EventArgs e)
             {
                 foreach (DocumentForm docForm in documents)
@@ -138,6 +205,12 @@ namespace UI
                 OnRequestForInformation(MainFormActions.Exit_Application, null);
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="action"></param>
+            /// <param name="parameters"></param>
+            /// <returns></returns>
             private Object[] DocumentFormHandler(DocumentForm.DocumentFormActions action, Object[] parameters)
             {
                 switch (action)
@@ -159,6 +232,12 @@ namespace UI
                 }
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="action"></param>
+            /// <param name="parameters"></param>
+            /// <returns></returns>
             private Object[] ImportWebDocumentHandler(ImportWebDocumentForm.ImportWebDocumentFormActions action, Object[] parameters)
             {
                 switch (action)
@@ -171,6 +250,12 @@ namespace UI
                 }
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="action"></param>
+            /// <param name="parameters"></param>
+            /// <returns></returns>
             private Object[] SimilarityFormHandler(SimilarityForm.SimilarityFormActions action, Object[] parameters)
             {
                 switch (action)
@@ -183,6 +268,11 @@ namespace UI
                 }
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void BW_DoSearchGoogle(object sender, DoWorkEventArgs e)
             {
                 if (e.Argument == null)
@@ -197,6 +287,11 @@ namespace UI
                 }
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void BW_SearchGoogleCompleted(object sender, RunWorkerCompletedEventArgs e)
             {
                 waitForm.Close();
@@ -205,23 +300,42 @@ namespace UI
                 ShowSearchResults(SimilarityForm.SimilarityType.None, (LinkedList<GUIGoogleSearchResult>)objects[0]);
             }
 
-
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void BW_DoCreateCacheDB(object sender, DoWorkEventArgs e)
             {
                 OnRequestForInformation(MainFormActions.Create_Cache_Database, null);
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void BW_CreateCacheDBCompleted(object sender, RunWorkerCompletedEventArgs e)
             {
                 waitForm.Close();
                 waitForm = null;
             }
-
+            
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void BW_DoFindSimilarity(object sender, DoWorkEventArgs e)
             {
                 e.Result = OnRequestForInformation(MainFormActions.Check_Similarity, (Object[]) e.Argument);
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void BW_FindSimilarityCompleted(object sender, RunWorkerCompletedEventArgs e)
             {
                 waitForm.Close();
@@ -232,6 +346,11 @@ namespace UI
                 ShowSearchResults((SimilarityForm.SimilarityType)objects[1], orderedResults);
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void tlstpbtnSearchGoogle_Click(object sender, EventArgs e)
             {
                 AsyncWorkerOperation(BW_DoSearchGoogle,BW_SearchGoogleCompleted,"Searching Google...",
@@ -247,6 +366,11 @@ namespace UI
                 //}
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void tlstpbtnCacheImporter_Click(object sender, EventArgs e)
             {
                 Object[] objects =
@@ -256,11 +380,21 @@ namespace UI
                 dataForm.Show();
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void tlstpbtnCacheDatabase_Click(object sender, EventArgs e)
             {
                 CreateCacheDatabase();
             }
-
+            
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void tlstpbtnSimilarity_Click(object sender, EventArgs e)
             {
                 SimilarityForm similar = new SimilarityForm();
@@ -268,28 +402,68 @@ namespace UI
                 similar.MdiParent = this;
                 similar.Show();
             }
-
+                
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void tlstpbtnClearDB_Click(object sender, EventArgs e)
             {
                 ClearCacheDatabase();
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void tlstptxtSearch_Click(object sender, EventArgs e)
             {
                 if (tlstptxtSearch.Text == "Search Google...")
                     tlstptxtSearch.Text = "";
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void tlstpbtnOrganizeForms_Click(object sender, EventArgs e)
             {
                 ReorderWindows();
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
+            private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+            {
+                SaveFile("");
+            }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
+            private void contentsToolStripMenuItem_Click(object sender, EventArgs e)
+            {
+                Process p = new Process();
+                p.StartInfo.FileName = System.Environment.CurrentDirectory + "\\Documentation.chm";
+                p.Start();
+            }
         #endregion
 
         #region "MainForm : Methods"
-
+            
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="document"></param>
+            /// <param name="fileName"></param>
             private void CreateNewDocumentForm(GUIDocument document, string fileName)
             {
                 DocumentForm docForm = new DocumentForm(document, fileName);
@@ -299,8 +473,12 @@ namespace UI
                 docForm.WindowState = FormWindowState.Maximized;
                 documents.AddFirst(docForm);
                 docForm.Show();
+                EnableSave(true);
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
             private void OpenFile()
             {
                 DialogResult res = openFileDialog1.ShowDialog();
@@ -309,10 +487,15 @@ namespace UI
                     string fileName = openFileDialog1.FileName;
                     Object[] objects =
                         OnRequestForInformation(MainFormActions.Open_Document, new Object[] { fileName });
-                    CreateNewDocumentForm((GUIDocument)objects[0],fileName); 
+                    CreateNewDocumentForm((GUIDocument)objects[0],fileName);
+                    EnableSave(true);
                 }
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="fileName"></param>
             private void SaveFile(string fileName)
             {
                 if (fileName == "")
@@ -320,13 +503,19 @@ namespace UI
                     DialogResult res = saveFileDialog1.ShowDialog();
                     if (res == DialogResult.OK)
                         fileName = saveFileDialog1.FileName;
+                    if (res == DialogResult.Cancel)
+                        return;
 
                 }  
                 OnRequestForInformation
                         (MainFormActions.Save_Document,
                             new Object[] { fileName, GetDocumentForm(currentDocument).GenerateDocument() });
             }
-
+    
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="tag"></param>
             private void RemoveFile(int tag)
             {
                 foreach (DocumentForm doc in documents)
@@ -334,11 +523,22 @@ namespace UI
                     if (tag == (int)doc.Tag)
                     {
                         documents.Remove(doc);
+                        if (documents.Count == 0)
+                        {
+                            documentToolStripMenuItem.Enabled = false;
+                            tlsbtnAddParagraph.Enabled = false;
+                            tlstpbtnRemove.Enabled = false;
+                            EnableSave(false);
+                        }
                         return;
                     }
                 }
             }
-
+    
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="documentTag"></param>
             private void SetCurrentDocument(int documentTag)
             {
                 currentDocument = documentTag;
@@ -349,11 +549,21 @@ namespace UI
                 documentToolStripMenuItem.Enabled = true;
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="fileName"></param>
+            /// <param name="doc"></param>
             private void InsertToDatabase(string fileName, GUIDocument doc)
             {
                 OnRequestForInformation(MainFormActions.Insert_File_To_Database, new Object[] { fileName, doc });
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="tag"></param>
+            /// <returns></returns>
             private DocumentForm GetDocumentForm(int tag)
             {
                 foreach (DocumentForm doc in documents)
@@ -364,6 +574,11 @@ namespace UI
                 return null;
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="type"></param>
+            /// <param name="searchList"></param>
             private void ShowSearchResults(SimilarityForm.SimilarityType type, LinkedList<GUIGoogleSearchResult> searchList)
             {
                 string caption = "Google Search Results ";
@@ -381,6 +596,9 @@ namespace UI
                 search.Show();
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
             private void CreateCacheDatabase()
             {
                 AsyncWorkerOperation(BW_DoCreateCacheDB,BW_CreateCacheDBCompleted,"Creating database",
@@ -397,6 +615,11 @@ namespace UI
                 //}
             }
 
+
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="parameters"></param>
             private void FindSimilarity(object[] parameters)
             {
                 AsyncWorkerOperation(BW_DoFindSimilarity,BW_FindSimilarityCompleted,"Finding Similarity",
@@ -417,6 +640,14 @@ namespace UI
                 //}
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="doWork"></param>
+            /// <param name="workCompleted"></param>
+            /// <param name="caption"></param>
+            /// <param name="text"></param>
+            /// <param name="parameters"></param>
             private void AsyncWorkerOperation(DoWorkEventHandler doWork, RunWorkerCompletedEventHandler workCompleted, 
                          string caption, string text, Object[] parameters)
             {
@@ -432,6 +663,9 @@ namespace UI
                 }
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
             private void ClearCacheDatabase()
             {
                 DialogResult res = MessageBox.Show(this, "You are about to clear the cache database. \nIt is an irreversible operation, would you like to continue with the operation?", "Information", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
@@ -441,7 +675,11 @@ namespace UI
                     SetDBEmpty(true);
                 }
             }
-
+            
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="address"></param>
             private void ImportWebDocument(string address)
             {
                 Object[] objects =
@@ -449,6 +687,10 @@ namespace UI
                 CreateNewDocumentForm((GUIDocument)objects[0], address); 
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="is_db_empty"></param>
             private void SetDBEmpty(bool is_db_empty)
             {
                 tlstpbtnCacheDatabase.Enabled = is_db_empty;
@@ -461,6 +703,9 @@ namespace UI
                 clearCacheDatabaseToolStripMenuItem.Enabled = !is_db_empty;
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
             private void ReorderWindows()
             {
                 int location = 0;
@@ -471,7 +716,19 @@ namespace UI
                     location += frm.Width;
                 }
             }
+    
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="enable"></param>
+            private void EnableSave(bool enable)
+            {
+                saveToolStripMenuItem.Enabled = enable;
+                saveAsToolStripMenuItem.Enabled = enable;
+                saveToolStripButton.Enabled = enable;
+            }
 
         #endregion
+
     }
 }

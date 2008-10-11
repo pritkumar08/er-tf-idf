@@ -9,13 +9,25 @@ namespace UI
  
         #region GUIParagraph : Members & Consts
             
+            /// <summary>
+            /// 
+            /// </summary>
             private int id;
+            /// <summary>
+            /// 
+            /// </summary>
             private LinkedList<GUIDocumentItem> items;
 
         #endregion
 
         #region GUIParagraph : Initialization
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="body"></param>
+            /// <param name="id"></param>
+            /// <param name="weight"></param>
             public GUIParagraph(String body, int id, double weight)
                 : base(body, weight)
             {
@@ -27,6 +39,9 @@ namespace UI
 
         #region GUIParagraph : Properties
 
+            /// <summary>
+            /// 
+            /// </summary>
             public int GUIParagraphID
             {
                 get
@@ -39,6 +54,9 @@ namespace UI
                 }
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
             public LinkedList<GUIDocumentItem> GUIParagraphItems
             {
                 get
@@ -59,6 +77,10 @@ namespace UI
 
         #region GUIParagraph : Methods
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="item"></param>
             public void AddNewElementToParagraph(GUIDocumentItem item)
             {
                 if (!(items.Contains(item)))
@@ -67,6 +89,10 @@ namespace UI
                 }
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="item"></param>
             public void RemoveElementFromParagraph(GUIDocumentItem item)
             {
                 if (items.Contains(item))

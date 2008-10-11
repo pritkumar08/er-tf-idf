@@ -74,9 +74,9 @@ namespace UI
             this.tlstpbtnCacheDatabase = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.tlstpbtnSimilarity = new System.Windows.Forms.ToolStripButton();
+            this.tlstpbtnOrganizeForms = new System.Windows.Forms.ToolStripButton();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.tlstpbtnOrganizeForms = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1.SuspendLayout();
             this.tlstpMain.SuspendLayout();
             this.SuspendLayout();
@@ -158,6 +158,7 @@ namespace UI
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
             this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.saveAsToolStripMenuItem.Text = "Save &As";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
@@ -299,6 +300,7 @@ namespace UI
             this.contentsToolStripMenuItem.Name = "contentsToolStripMenuItem";
             this.contentsToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.contentsToolStripMenuItem.Text = "&Contents";
+            this.contentsToolStripMenuItem.Click += new System.EventHandler(this.contentsToolStripMenuItem_Click);
             // 
             // toolStripSeparator7
             // 
@@ -492,6 +494,16 @@ namespace UI
             this.tlstpbtnSimilarity.ToolTipText = "Reorganize Search Results";
             this.tlstpbtnSimilarity.Click += new System.EventHandler(this.tlstpbtnSimilarity_Click);
             // 
+            // tlstpbtnOrganizeForms
+            // 
+            this.tlstpbtnOrganizeForms.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tlstpbtnOrganizeForms.Image = ((System.Drawing.Image)(resources.GetObject("tlstpbtnOrganizeForms.Image")));
+            this.tlstpbtnOrganizeForms.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tlstpbtnOrganizeForms.Name = "tlstpbtnOrganizeForms";
+            this.tlstpbtnOrganizeForms.Size = new System.Drawing.Size(23, 22);
+            this.tlstpbtnOrganizeForms.ToolTipText = "Organize Windows";
+            this.tlstpbtnOrganizeForms.Click += new System.EventHandler(this.tlstpbtnOrganizeForms_Click);
+            // 
             // saveFileDialog1
             // 
             this.saveFileDialog1.DefaultExt = "erp";
@@ -504,16 +516,6 @@ namespace UI
             this.openFileDialog1.DefaultExt = "erp";
             this.openFileDialog1.Filter = "Text Comparer Files(*.erp)|*.erp";
             this.openFileDialog1.RestoreDirectory = true;
-            // 
-            // tlstpbtnOrganizeForms
-            // 
-            this.tlstpbtnOrganizeForms.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tlstpbtnOrganizeForms.Image = ((System.Drawing.Image)(resources.GetObject("tlstpbtnOrganizeForms.Image")));
-            this.tlstpbtnOrganizeForms.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tlstpbtnOrganizeForms.Name = "tlstpbtnOrganizeForms";
-            this.tlstpbtnOrganizeForms.Size = new System.Drawing.Size(23, 22);
-            this.tlstpbtnOrganizeForms.ToolTipText = "Organize Windows";
-            this.tlstpbtnOrganizeForms.Click += new System.EventHandler(this.tlstpbtnOrganizeForms_Click);
             // 
             // MainForm
             // 

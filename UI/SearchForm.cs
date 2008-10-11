@@ -13,18 +13,32 @@ namespace UI
        
         #region GUIParagraph : Members & Consts
 
+            /// <summary>
+            /// 
+            /// </summary>
             private LinkedList<GUIGoogleSearchResult> googleResults;
+            /// <summary>
+            /// 
+            /// </summary>
             private int currentIndex = 0;
-
+            /// <summary>
+            /// 
+            /// </summary>
             private const int LEFT_POSITION = 10;
+            /// <summary>
+            /// 
+            /// </summary>
             private const int RESULTS_PER_PAGE = 10;
             
         #endregion
 
         #region GUIParagraph : Initialization
 
-
-
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="googleResults"></param>
+            /// <param name="formCaption"></param>
             public SearchForm(LinkedList<GUIGoogleSearchResult> googleResults, string formCaption)
             {
                 InitializeComponent();
@@ -46,11 +60,43 @@ namespace UI
         #endregion
 
         #region GUIParagraph : Event Handlers
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
+            private void btnNext_Click(object sender, EventArgs e)
+            {
+                PrintResult(currentIndex + RESULTS_PER_PAGE);
+                currentIndex += RESULTS_PER_PAGE;
+                btnPrev.Enabled = true;
+                if (currentIndex + RESULTS_PER_PAGE > googleResults.Count)
+                    btnNext.Enabled = false;
+            }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
+            private void btnPrev_Click(object sender, EventArgs e)
+            {
+                PrintResult(currentIndex - RESULTS_PER_PAGE);
+                currentIndex -= RESULTS_PER_PAGE;
+                if (currentIndex == 0)
+                    btnPrev.Enabled = false;
+                if (currentIndex < googleResults.Count)
+                    btnNext.Enabled = true;
+            }
 
         #endregion
 
         #region GUIParagraph : Methods
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="index"></param>
             private void PrintResult(int index)
             {
                 int i = 0, height = 10;
@@ -96,6 +142,11 @@ namespace UI
                 }
             }
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="text"></param>
+            /// <returns></returns>
             private string RemoveTags(string text)
             {
                 string s = text.Replace("<b>", "");
@@ -105,25 +156,7 @@ namespace UI
 
         #endregion
 
-            private void btnNext_Click(object sender, EventArgs e)
-            {
-                PrintResult(currentIndex + RESULTS_PER_PAGE);
-                currentIndex += RESULTS_PER_PAGE;
-                btnPrev.Enabled = true;
-                if (currentIndex + RESULTS_PER_PAGE > googleResults.Count)
-                    btnNext.Enabled = false;
-            }
-
-            private void btnPrev_Click(object sender, EventArgs e)
-            {
-                PrintResult(currentIndex - RESULTS_PER_PAGE);
-                currentIndex -= RESULTS_PER_PAGE;
-                if (currentIndex == 0)
-                    btnPrev.Enabled = false;
-                if (currentIndex < googleResults.Count)
-                    btnNext.Enabled = true;
-            }
-
+            
            
     }
 }
