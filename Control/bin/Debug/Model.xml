@@ -1,0 +1,666 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Model</name>
+    </assembly>
+    <members>
+        <member name="T:Model.IPersistentModel">
+            <summary>
+            General interface for each Persistent model implementation
+            </summary>
+        </member>
+        <member name="M:Model.IPersistentModel.CleanDB">
+            <summary>
+            Deletes all DB content
+            </summary>   
+        </member>
+        <member name="M:Model.IPersistentModel.UpdateDB">
+            <summary>
+            commits all changes to the DB
+            </summary>
+        </member>
+        <member name="M:Model.IPersistentModel.InsertWord(System.String,System.String,System.Int32,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="word"></param>
+            <param name="path"></param>
+            <param name="locationID"></param>
+            <param name="weight"></param>
+        </member>
+        <member name="M:Model.IPersistentModel.GetTotalWeight(System.String,System.String)">
+            <summary>
+            returns the total weight of word in the file describes in path
+            </summary>
+            <param name="word"></param>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Model.IPersistentModel.GetTotalWeights(System.String)">
+            <summary>
+            returns the total weight of all the words in the file describes in path
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Model.IPersistentModel.CountFilesContains(System.String)">
+            <summary>
+            returns the number of files contains word with total_weight > 0
+            </summary>
+            <param name="word"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Model.IPersistentModel.FilesCount">
+            <summary>
+            returns the number of files in the DB
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Model.IPersistentModel.getFileWords(System.String)">
+            <summary>
+            returns all words in the specified file as a list of <code>RawWord</code> 
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Model.IPersistentModel.getWordLocations(System.String)">
+            <summary>
+            a list of locations (location = file name,location id and the weight 
+            of the word in that location) of a given word
+            </summary>
+            <param name="w"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Model.IPersistentModel.getWords">
+            <summary>
+            all the words (notice: normalized form !) in the database
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Model.IPersistentModel.getFiles">
+            <summary>
+            all file names in the database
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Model.PersistentModel.TF_IDF_Segments">
+            <summary>
+            prefixes for the td-idf tables
+            </summary>
+        </member>
+        <member name="T:ServiceRanking.NGram">
+            <summary>
+            Summary description for NGram.
+            </summary>
+        </member>
+        <member name="F:Model.ModelDocumentItem.text">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Model.ModelDocumentItem.location">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Model.ModelDocumentItem.weight">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Model.ModelDocumentItem.#ctor(System.String,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="title"></param>
+            <param name="weight"></param>
+        </member>
+        <member name="M:Model.ModelDocumentItem.Contains(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="word"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Model.ModelDocumentItem.getWords">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Model.ModelDocumentItem.Text">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Model.ModelDocumentItem.Location">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Model.ModelDocumentItem.Weight">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Model.ModelHeader.#ctor(System.String,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="title"></param>
+            <param name="weight"></param>
+        </member>
+        <member name="F:Model.ModelDocument.paragraphs">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Model.ModelDocument.title">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Model.ModelDocument.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Model.ModelDocument.AddParagraph(Model.ModelParagraph)">
+            <summary>
+            
+            </summary>
+            <param name="par"></param>
+        </member>
+        <member name="M:Model.ModelDocument.RemoveParagraph(Model.ModelParagraph)">
+            <summary>
+            
+            </summary>
+            <param name="par"></param>
+        </member>
+        <member name="M:Model.ModelDocument.getWords">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Model.ModelDocument.Paragraphs">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Model.ModelDocument.Title">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Stemming.StemmerInterface">
+            <summary>
+            
+            
+            </summary>
+        </member>
+        <member name="M:Stemming.PorterStemmer.setto(System.String)">
+            setto(s) sets (j+1),...k to the characters in the string s, readjusting
+        </member>
+        <member name="T:ServiceRanking.Tokeniser">
+            <summary>
+            Summary description for Tokeniser.
+            Partition string into SUBwords
+            </summary>
+        </member>
+        <member name="T:ServiceRanking.StopWordsHandler">
+            <summary>
+            Stop words are frequently occurring, insignificant words words 
+            that appear in a database record, article or web page. 
+            Common stop words include
+            </summary>
+        </member>
+        <member name="M:Model.HTMLTranslator.GetHTMLFromSite(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="url"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Model.HTMLTranslator.StripHTML(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Model.GoogleSearch.TOTAL_RESULT_NUMBER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Model.GoogleSearch.PerformGoogleSearch(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="label"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Model.ModelManager.persistent_model">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Model.ModelManager.si">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Model.ModelManager.total_square_sum">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Model.ModelManager.m_WordsBags">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Model.ModelManager.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Model.ModelManager.InsertDocument(System.String)">
+            <summary>
+            a method to insert an XML file content into the Database.
+            this method inserts the XML content after normalizing its content
+            (the words - using stop list and word normalization), i.e the
+            database holds information only on the normalized form of each word
+            </summary>
+            <param name="path"> XML file to read</param>
+        </member>
+        <member name="M:Model.ModelManager.InsertNewDocumentToDatabase(System.String,Model.ModelDocument)">
+            <summary>
+            almost the same functionality as InsertDocument,except that 
+            the XML file hasn't been created yet 
+            </summary>
+            <param name="fileName"></param>
+            <param name="doc"></param>
+        </member>
+        <member name="M:Model.ModelManager.SaveDocument(System.String,Model.ModelDocument)">
+            <summary>
+            Stores a ModelDocument object as an XML file
+            </summary>
+            <param name="path">path of XML file for writing</param>
+            <param name="document">a ModelDocument object to read</param>
+        </member>
+        <member name="M:Model.ModelManager.OpenDocument(System.String)">
+            <summary>
+            a method to strictly read an XML file and construct 
+            from it a ModelDocument object
+            </summary>
+            <param name="path">an XML file to read</param>
+            <returns>a ModelDocument object represents the xml file</returns>
+        </member>
+        <member name="M:Model.ModelManager.ImportDocument(System.String)">
+            <summary>
+            generates a ModelDocument object from content of the given url
+            </summary>
+            <param name="url"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Model.ModelManager.GetInversionList">
+            <summary>
+            
+            </summary>
+            <returns> a list of word object - 
+            each word contains (in addition to the word itself) its location,
+            and the word's weight in that location</returns>
+        </member>
+        <member name="M:Model.ModelManager.getWordsBag(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="path">an already exist file that its content has been
+            processed to the database</param>
+            <returns>if file exists in the database - a new bag representing the file 
+            content,otherwise an empty list</returns>
+        </member>
+        <member name="M:Model.ModelManager.getWordsBag">
+            <summary>
+            
+            </summary>
+            <returns> a list of words bag - a bag for each file in the database
+            empty files have an empty words bag</returns>
+        </member>
+        <member name="M:Model.ModelManager.evaluateSimilarity(System.String,System.Func{Model.WordsBag,Model.WordsBag,System.Double})">
+            <summary>
+            comparing a new well-formed xml file (according to the system's DTD)
+            to all other files in the database.        
+            </summary>
+            <param name="path"></param>
+            <param name="f">an inner product function pointer to evaluate the 
+            similarity between two bags of words</param>
+            <returns>a vector with all non-zero similarities values between the new file 
+            and the rest of the database</returns>
+        </member>
+        <member name="M:Model.ModelManager.evaluateSimilarity(Model.ModelDocument,System.Func{Model.WordsBag,Model.WordsBag,System.Double})">
+            <summary>
+            comparing a new well-formed xml file (according to the system's DTD)
+            to all other files in the database.        
+            </summary>
+            <param name="path"></param>
+            <param name="f">an inner product function pointer to evaluate the 
+            similarity between two bags of words</param>
+            <returns>a vector with all non-zero similarities values between the new file 
+            and the rest of the database</returns>
+        </member>
+        <member name="M:Model.ModelManager.createWordsBag(System.String)">
+            <summary>
+            creating a new words bag for a file not included in the database.
+            all the idf values are taken according the current information in the database.
+            </summary>
+            <param name="path">an existing XML file name</param>
+            <returns>a list of bagWord representing all non-stop-words upper-cased
+            <paramref name="path"/> and in normalized form</returns>
+        </member>
+        <member name="M:Model.ModelManager.createWordsBag(Model.ModelDocument)">
+            <summary>
+            same as <code>createWordsBag(string)</code> but gets directly 
+            the <code>ModelDocument</code> object as a paramenter
+            </summary>
+            <param name="doc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Model.ModelManager.L2NormSimilarity(System.String)">
+            <summary>
+            computing the similarity vector using the L2 norm as the similarity
+            function between two bag of words,i.e:
+            f(b1,b2) = sigma(b1i.tf_idf*b2i.tf_idf)/sum_of_all_squares
+            </summary>
+            <param name="path">an existing XML file name</param>
+            <returns></returns>
+        </member>
+        <member name="M:Model.ModelManager.L2NormSimilarity(Model.ModelDocument)">
+            <summary>
+            same as <code>L2NormSimilarity(string path)</code> but gets directly the 
+            <code>ModelDocument</code> object as parameter
+            </summary>
+            <param name="doc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Model.ModelManager.minValSimilarity(System.String)">
+            <summary>
+            computing the similarity vector using the min value as the similarity
+            function between two bag of words,i.e:
+            f(b1,b2) = sigma(min(b1i.tf_idf,b2i.tf_idf))/sum_of_all_squares
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Model.ModelManager.minValSimilarity(Model.ModelDocument)">
+            <summary>
+            same as <code>minValSimilarity(string path)</code> but gets directly the 
+            <code>ModelDocument</code> object as parameter
+            </summary>
+            <param name="doc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Model.ModelManager.ImportCacheData">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Model.ModelManager.getWords">
+            <summary>
+            retrieves all the words in the system's DB
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Model.ModelManager.CreateCacheDatabase">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Model.ModelManager.CheckSimilarity(System.String,Model.ModelManager.SimilarityType,Model.ModelManager.SearchEngine,System.Int32,Model.ModelManager.SortingMethod)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <param name="engine"></param>
+            <param name="pagesNumber"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Model.ModelManager.CleanDB">
+            <summary>
+            Deletes all DB content
+            </summary>
+        </member>
+        <member name="M:Model.ModelManager.tf_idf(System.String,System.String)">
+            <summary>
+            direct calculating of the tf_idf funcion for a word in a file
+            existing in the database
+            </summary>
+            <param name="word"></param>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Model.ModelManager.TranslateStripHTMLToDocument(System.String)">
+            <summary>
+            translating a stripped HTML document into a ModelDocument object,
+            trying to force the ModelDocument structure over the HTML doc
+            </summary>
+            <param name="html">a string representing the stripped HTML document content</param>
+            <returns></returns>
+        </member>
+        <member name="M:Model.ModelManager.TranslateHTMLToDocument(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="html"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Model.ModelManager.GetTextTillTagStarts(System.String,System.Int32@)">
+            <summary>
+            
+            </summary>
+            <param name="html"></param>
+            <param name="j"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Model.ModelManager.isPlainText(System.Int32,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="j"></param>
+            <param name="html"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Model.ModelManager.GetHeaderTextTillTagStarts(System.String,System.Int32@)">
+            <summary>
+            
+            </summary>
+            <param name="html"></param>
+            <param name="j"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Model.ModelManager.InsertDocument_aux(System.String,Model.ModelDocument)">
+            <summary>
+            inserts the file's contetnt (the d parameter) into the database
+            </summary>
+            <param name="path"></param>
+            <param name="d">the file's (raw) content</param>
+        </member>
+        <member name="M:Model.ModelManager.createBag(System.Collections.Generic.List{Model.RawWord})">
+            <summary>
+            creates a new bag,each word in the bag has it tf-idf value
+            according the database
+            </summary>
+            <param name="words"></param>
+            <returns>a bag for a given list of raw words</returns>
+        </member>
+        <member name="M:Model.ModelManager.generateSimilarityFunction(System.Func{System.Double,System.Double,System.Double})">
+            <summary>
+            generates the inner-product function pointer 
+            </summary>
+            <param name="f">the o operation between two elements in the inner-product
+            e.g (1)f(x,y) = x*y ,(2) f(x,y) = x*y/sqrt(x^2+y^2)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Model.ModelManager.getTotalSquaresSum">
+            <summary>
+            
+            </summary>
+            <returns>the total square sum of all the tf-ifds in the system,i.e
+            sum for each words bag represents a file sums all tf-idf^2</returns>
+        </member>
+        <member name="M:Model.ModelManager.normalize(System.String)">
+            <summary>
+            if !StopList.contains(word) returns a normalized form of word 
+            else returns an empty string
+            </summary>
+            <param name="word"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Model.ModelManager.GetMaxRecord(System.Collections.Generic.List{Model.Record{System.String,System.Double}})">
+            <summary>
+            
+            </summary>
+            <param name="records"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Model.ModelManager.CheckGoogleSimilarity(System.String,Model.ModelManager.SimilarityType,System.Int32,Model.ModelManager.SortingMethod)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <param name="pagesNumber"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Model.ModelManager.OrderedSimilarityResults(System.Collections.Generic.Dictionary{Model.ModelGoogleSearchResult,System.Double})">
+            <summary>
+            
+            </summary>
+            <param name="highestResults"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Model.ModelManager.WordsBags">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Model.ModelManager.SimilarityType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Model.ModelManager.SearchEngine">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Model.ModelManager.SortingMethod">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Model.ModelGoogleSearchResult.url">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Model.ModelGoogleSearchResult.title">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Model.ModelGoogleSearchResult.content">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Model.ModelGoogleSearchResult.#ctor(System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="url"></param>
+            <param name="title"></param>
+            <param name="content"></param>
+        </member>
+        <member name="P:Model.ModelGoogleSearchResult.URL">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Model.ModelGoogleSearchResult.Title">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Model.ModelGoogleSearchResult.Content">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ServiceRanking.TFIDFMeasure">
+            <summary>
+            Summary description for TF_IDFLib.
+            </summary>
+        </member>
+        <member name="M:Model.XMLTranslator.ReadFromXML(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Model.XMLTranslator.WriteToXML(System.String,Model.ModelDocument)">
+            <summary>
+            
+            </summary>
+            <param name="path"></param>
+            <param name="doc"></param>
+        </member>
+        <member name="M:Model.XMLTranslator.AddReadParagraphsNodes(System.Xml.XmlNode,Model.ModelParagraph@)">
+            <summary>
+            
+            </summary>
+            <param name="nodes"></param>
+            <param name="par"></param>
+        </member>
+        <member name="M:Model.XMLTranslator.AddReadHeaderNodes(System.Xml.XmlNode,Model.ModelParagraph@)">
+            <summary>
+            
+            </summary>
+            <param name="nodes"></param>
+            <param name="par"></param>
+        </member>
+        <member name="M:Model.XMLTranslator.AddWritenParagraphNodes(System.Xml.XmlTextWriter@,System.Collections.Generic.LinkedList{Model.ModelDocumentItem})">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="items"></param>
+        </member>
+        <member name="F:Model.Serializer.file_name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Model.Serializer.Serialize(Model.WordsBags)">
+            <summary>
+            
+            </summary>
+            <param name="bags"></param>
+        </member>
+        <member name="M:Model.Serializer.Deserialize">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Model.CacheSearch.CacheWebAddresses">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
