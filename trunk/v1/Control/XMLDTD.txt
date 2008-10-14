@@ -1,0 +1,10 @@
+<! ELEMENT header (# PCDATA)>
+<! ATTLIST header
+	weight CDATA #REQUIRED>
+<! ELEMENT paragraph (# PCDATA,(header|paragraph)*)>
+<! ATTLIST paragraph
+	pid ID #REQUIRED
+	weight CDATA #REQUIRED>
+<! ELEMENT document (paragraph)*>
+<! ATTLIST 
+	name CDATA #REQUIRED>
